@@ -1,0 +1,45 @@
+{
+  "extends": [
+    "stylelint-config-standard"
+  ],
+  "customSyntax": "postcss-styled-syntax",
+  "rules": {
+    "selector-class-pattern": null,
+    "declaration-property-unit-allowed-list": {
+      "/^border|box-shadow/": [
+        "px",
+        "%"
+      ],
+      "/^padding|^gap|^margin|font-size/": [
+        "rem",
+        "%"
+      ],
+      "/width|height|top|left|right|bottom|line-height/": [
+        "rem",
+        "vh",
+        "%"
+      ]
+    },
+    "unit-allowed-list": [
+      "%",
+      "px",
+      "rem",
+      "ms",
+      "s",
+      "vh",
+      "deg"
+    ],
+    "comment-empty-line-before": "always",
+    "rule-empty-line-before": "always",
+    "at-rule-empty-line-before": "always",
+    "declaration-empty-line-before": null,
+    "color-hex-length": null,
+    "font-family-name-quotes": null,
+    "media-feature-name-allowed-list": [
+      "max-width"
+    ],
+    "at-rule-disallowed-list": [
+      "keyframes"
+    ]
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "standard-with-typescript",
+    "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "overrides": [],
+  "parserOptions": {
+    "project": "tsconfig.json",
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "prettier", "simple-import-sort"],
+  "rules": {
+    "no-console": "warn",
+    "prettier/prettier": "error",
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "interface",
+        "format": ["PascalCase"],
+        "prefix": ["I"]
+      },
+      {
+        "selector": "typeAlias",
+        "format": ["PascalCase"],
+        "suffix": ["Type"]
+      },
+      {
+        "selector": ["variable", "parameter"],
+        "format": ["camelCase", "PascalCase"]
+      },
+      {
+        "selector": ["function"],
+        "format": ["camelCase", "PascalCase"]
+      }
+    ],
+    "simple-import-sort/exports": "error",
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          // React related packages.
+          ["^react$"],
+          // Packages
+          ["^@?\\w"],
+          // Internal packages. Add new folders here.
+          ["^(@|assets|components|constants|hooks|tokens|utils)(/.*|$)"],
+          ["^(@|data)(/.*|$)"],
+          ["^(@|presentation)(/.*|$)"],
+          ["^(@|shared)(/.*|$)"],
+          // Side effect imports.
+          ["^\\u0000"],
+          // Parent imports. Put `..` last.
+          ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+          // Other relative imports. Put same-folder imports and `.` last.
+          ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+          // Types imports.
+          ["^.+types$"],
+          // Style imports.
+          ["^.+styles$"]
+        ]
+      }
+    ],
+    "import/newline-after-import": "error",
+    "consistent-return": "off",
+    "camelcase": "off",
+    "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/array-type": "off",
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/consistent-type-assertions": "off",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/no-misused-promises": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}

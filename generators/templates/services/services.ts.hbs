@@ -1,0 +1,27 @@
+
+import { api } from "service/server";
+
+export interface I{{pascalCase name}} {}
+
+export const =  {{pascalCase name}} {
+
+  get{{pascalCase name}}s: async (): Promise<I{{pascalCase name}}[]> => {
+    return (await api.get("/{{pascalCase name}}")).data;
+  },
+
+  get{{pascalCase name}}: async (id: string): Promise<I{{pascalCase name}}> => {
+    return (await api.get(`/{{pascalCase name}}/${id}`)).data;
+  },
+
+  update{{pascalCase name}}: async (id: string, data: I{{pascalCase name}}): Promise<boolean> => {
+    return await api.put(`/{{pascalCase name}}/${id}`, data);
+  },
+
+  delete{{pascalCase name}}: async (id: string): Promise<boolean> => {
+    return await api.delete(`/{{pascalCase name}}/${id}`);
+  },
+
+  create{{pascalCase name}}: async (data: I{{pascalCase name}}): Promise<boolean> => {
+    return await api.post("/{{pascalCase name}}", data);
+  },
+}
