@@ -1,6 +1,6 @@
 import { api } from "service/server";
 
-export interface IUser { }
+import { type IUser } from "global/user.types";
 
 export const User = {
   getUsers: async (): Promise<IUser[]> => {
