@@ -2,17 +2,6 @@ function plopFunction(plop) {
   plop.setGenerator('test', {
     prompts: [
       {
-        type: 'list',
-        name: 'type',
-        message: `Qual tipo de componente deseja criar?`,
-        choices: ['base', 'global', 'outro']
-      },
-      {
-        type: 'input',
-        name: 'path',
-        message: 'Caso tenha selecionado a opção "outro", em qual caminho o componente deve ficar?'
-      },
-      {
         type: 'input',
         name: 'name',
         message: 'Qual o nome do componente?'
@@ -34,7 +23,7 @@ function plopFunction(plop) {
         actions.push(
           {
             type: 'add',
-            path: `${path}{{type}}/{{pascalCase name}}/{{pascalCase name}}.component.tsx`,
+            path: `${path}/{{pascalCase name}}/{{pascalCase name}}.component.tsx`,
             templateFile: './component.tsx.hbs'
           }
         );
@@ -42,7 +31,7 @@ function plopFunction(plop) {
         if (data.files[0] === 'index') {
           actions.push({
             type: 'add',
-            path: `${path}{{type}}/{{pascalCase name}}/index.ts`,
+            path: `${path}/{{pascalCase name}}/index.ts`,
             templateFile: './index.ts.hbs'
           })
         }
@@ -50,7 +39,7 @@ function plopFunction(plop) {
         if (data.files[1] === 'styles') {
           actions.push({
             type: 'add',
-            path: `${path}{{type}}/{{pascalCase name}}/{{pascalCase name}}.styles.ts`,
+            path: `${path}/{{pascalCase name}}/{{pascalCase name}}.styles.ts`,
             templateFile: './styles.ts.hbs'
           })
         }
@@ -58,7 +47,7 @@ function plopFunction(plop) {
         if (data.files[2] === 'types') {
           actions.push({
             type: 'add',
-            path: `${path}{{type}}/{{pascalCase name}}/{{pascalCase name}}.types.ts`,
+            path: `${path}/{{pascalCase name}}/{{pascalCase name}}.types.ts`,
             templateFile: './types.ts.hbs'
           })
         }
