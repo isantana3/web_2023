@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "userType": "ADMINISTRADOR",
+      "name": "Samuel Vasconcelos",
+      "email": "smvasconcelos11@gmail.com",
+      "token": "AsaSDoskpD123daskop",
+      "status": "ATIVO"
+    }
+  ],
+  "infra":[
+    {
+      "id": 1,
+      "name": "Samuel Vasconcelos",
+      "description": "lorem impsum"
+    }
+  ],
+  "calendar":[
+    {
+      "id": 1,
+      "time": 1050
+    }
+  ],
+  "laboratory": [
+    {
+      "id": 1,
+      "label": "Samuel Vasconcelos",
+      "location": "Samuel Vasconcelos",
+      "description": "lorem impsum",
+      "infraIds": [1]
+    }
+  ]
+}

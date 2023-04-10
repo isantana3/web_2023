@@ -2,7 +2,6 @@ import { Icons } from "global/icons.constants";
 import { useAuth } from "store/slices/auth/useAuth";
 
 import { Form } from "components/Form";
-import { Input } from "components/Input";
 
 import { DashboardSchema } from "./example.schema";
 

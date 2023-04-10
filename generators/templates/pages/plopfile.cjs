@@ -26,14 +26,14 @@ function plopFunction(plop) {
 
       actions.push({
         type: 'add',
-        path: `${path}{{context}}/{{pascalCase name}}/{{pascalCase name}}.page.tsx`,
+        path: `${path}/{{pascalCase name}}/{{pascalCase name}}.page.tsx`,
         templateFile: './page.tsx.hbs'
       });
 
       if (data.files[0] === 'index') {
         actions.push({
           type: 'add',
-          path: `${path}{{context}}/{{pascalCase name}}/index.ts`,
+          path: `${path}/{{pascalCase name}}/index.ts`,
           templateFile: './index.ts.hbs'
         });
       }
@@ -41,7 +41,7 @@ function plopFunction(plop) {
       if (data.files[1] === 'styles') {
         actions.push({
           type: 'add',
-          path: `${path}{{context}}/{{pascalCase name}}/{{pascalCase name}}.styles.ts`,
+          path: `${path}/{{pascalCase name}}/{{pascalCase name}}.styles.ts`,
           templateFile: './styles.ts.hbs'
         });
       }
@@ -49,7 +49,7 @@ function plopFunction(plop) {
       if (data.files[2] === 'types') {
         actions.push({
           type: 'add',
-          path: `${path}{{context}}/{{pascalCase name}}/{{pascalCase name}}.types.ts`,
+          path: `${path}/{{pascalCase name}}/{{pascalCase name}}.types.ts`,
           templateFile: './types.ts.hbs'
         });
       }

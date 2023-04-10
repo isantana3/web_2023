@@ -11,12 +11,12 @@ const slice = createSlice({
   name: "infra",
   initialState,
   reducers: {
-    setinfra: (state, action: { payload: IInfraSlice }) => {
+    setInfra: (state, action: { payload: IInfraSlice }) => {
       state.infra = action.payload.infra;
     },
   },
 });
 
-export const { setinfra } = slice.actions;
+export const { setInfra } = slice.actions;
 
 export default slice.reducer;

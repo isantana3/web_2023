@@ -13,7 +13,8 @@
     "generate:page": "yarn plop --plopfile ./generators/templates/pages/plopfile.cjs",
     "generate:util": "yarn plop --plopfile ./generators/templates/utils/plopfile.cjs",
     "generate:service": "yarn plop --plopfile ./generators/templates/services/plopfile.cjs",
-    "generate:component": "yarn plop --plopfile ./generators/templates/components/plopfile.cjs"
+    "generate:component": "yarn plop --plopfile ./generators/templates/components/plopfile.cjs",
+    "server": "json-server --watch db.json"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",

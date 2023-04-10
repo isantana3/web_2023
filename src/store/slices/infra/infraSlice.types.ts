@@ -5,5 +5,5 @@ export interface IInfraSlice {
 }
 
 export interface IUseInfra extends IInfraSlice {
-  setinfra: (payload: IInfraSlice) => void;
+  setInfra: (payload: IInfraSlice) => void;
 }
