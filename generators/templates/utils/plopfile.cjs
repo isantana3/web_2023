@@ -3,11 +3,6 @@ function plopFunction(plop) {
     prompts: [
       {
         type: 'input',
-        name: 'path',
-        message: `Em qual caminho deseja criar?`
-      },
-      {
-        type: 'input',
         name: 'name',
         message: 'Qual o nome do arquivo?'
       }
@@ -19,7 +14,7 @@ function plopFunction(plop) {
 
       actions.push({
         type: 'add',
-        path: `${path}/{{path}}/{{camelCase name}}.util.ts`,
+        path: `${path}/{{camelCase name}}.util.ts`,
         templateFile: './utils.ts.hbs'
       });
 
