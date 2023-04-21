@@ -1,8 +1,4 @@
-import { useEffect } from "react";
-
 import { Login } from "pages/Login/Login.page";
-import { NotAuthorized } from "pages/NotAuthorized/NotAuthorized.page";
-import { NotFound } from "pages/NotFound/NotFound.page";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useAuth } from "store/slices/auth/useAuth";
 

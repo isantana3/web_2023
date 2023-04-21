@@ -2,6 +2,4 @@ import styled from "styled-components";
 
 export const Container = styled.div``;
 
-export const ErrorMessage = styled.span`
-  color: red;
-`;
+export const InputComponent = styled.input``;

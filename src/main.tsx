@@ -6,11 +6,11 @@ import { AppRoutes } from "routes/index.routes";
 import store from "store/store";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "styles/GlobalStyles";
-import { PrimaryTheme } from "styles/Themes";
+import { Theme } from "styles/Themes";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <ThemeProvider theme={PrimaryTheme}>
+    <ThemeProvider theme={Theme}>
       <Provider store={store}>
         <GlobalStyles />
         <AppRoutes />

@@ -1,8 +1,9 @@
 import { Icons } from "global/icons.constants";
 import { useAuth } from "store/slices/auth/useAuth";
 
-import { Form } from "components/Form";
-import { Modal } from "components/Modal";
+import { Form } from "components/Form/Form";
+import { Input } from "components/Form/Input";
+import { Select } from "components/Form/Select";
 import { useModal } from "hooks/modals.hook";
 
 import { DashboardSchema } from "./example.schema";
@@ -14,24 +15,32 @@ export function Dashboard(): JSX.Element {
   const signInModal = useModal();
 
   function onSubmit(data: any): void {
+    console.log("data");
     console.log(data);
   }
 
+  const options = [
+    { value: "chocolate", label: "Chocolate" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" },
+  ];
+
   return (
     <Wrapper>
-      <Modal {...signInModal}>
+      {/* <Modal {...signInModal}>
         <h1>helou</h1>
         <h1>helou</h1>
-      </Modal>
+      </Modal> */}
       <h1 onClick={signInModal.toggleModal}>
         <Icons.HomeIcon color="#2cca1b" width={20} height={20} />
         Welcome {user.name}
-        <Form onSubmit={onSubmit} schema={DashboardSchema}>
-          <input placeholder="email@email.com" type="text" name="email" />
-          <input placeholder="********" type="password" name="password" />
-          <button type="submit">submit</button>
-        </Form>
       </h1>
+      <Form onSubmit={onSubmit} schema={DashboardSchema}>
+        <Input placeholder="email@email.com" type="text" name="email" />
+        <Input placeholder="********" type="password" name="password" />
+        <Select name="opcoes" options={options} />
+        <button type="submit">SUBMIT</button>
+      </Form>
     </Wrapper>
   );
 }

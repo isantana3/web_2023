@@ -14,7 +14,6 @@ export const GlobalStyles = createGlobalStyle`
     background-color: #fafafafa;
     height: 100vh;
     font-family: 'Inter', sans-serif;
-    color: #fafafafa;
 
     // 1920px and UP - Full HD
     font-size: 10px;

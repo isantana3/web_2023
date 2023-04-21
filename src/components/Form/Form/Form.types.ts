@@ -4,5 +4,5 @@ import { type AnyObject, type ObjectSchema } from "yup";
 export interface IFormProps {
   onSubmit: SubmitHandler<FieldValues>;
   schema: ObjectSchema<any, AnyObject, any, "">;
-  children: JSX.Element[];
+  children: JSX.Element[] | JSX.Element;
 }
