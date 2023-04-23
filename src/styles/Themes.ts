@@ -26,9 +26,20 @@ const Navbar = {
   stroke: "#d1d9e2",
 };
 
+const Components = {
+  table: {
+    background: "#D4E1F4",
+    label: "#2E3646",
+    action: "#314CA5",
+    subLabel: "#5F6D7E",
+    stroke: "#D1D9E2",
+  },
+};
+
 export const Theme = {
   PrimaryTheme,
   Sidebar,
   Dashboard,
   Navbar,
+  Components,
 };

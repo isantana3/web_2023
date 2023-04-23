@@ -11,7 +11,9 @@ export const Wrapper = styled.div`
   padding: 4rem;
 `;
 
-export const Header = styled.div``;
+export const Header = styled.div`
+  margin-bottom: 4rem;
+`;
 
 export const Title = styled.h2`
   font-family: "Montserrat";
