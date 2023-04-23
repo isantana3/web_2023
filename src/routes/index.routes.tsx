@@ -16,7 +16,7 @@ export function AppRoutes(): JSX.Element {
   useEffect(() => {
     WebFont.load({
       google: {
-        families: ["Inter, n4, i4, n7", "Montserrat, n4, i4, n7"],
+        families: ["Inter, n4, i4, n7, 500", "Montserrat, n4, i4, n7, 500"],
       },
     });
   }, []);

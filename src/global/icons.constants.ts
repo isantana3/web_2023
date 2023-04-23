@@ -7,6 +7,7 @@ import { ReactComponent as CloseIcon } from "assets/icons/close.svg";
 import { ReactComponent as ConfigIcon } from "assets/icons/config.svg";
 import { ReactComponent as ConfirmIcon } from "assets/icons/confirm.svg";
 import { ReactComponent as DashboardIcon } from "assets/icons/dashboard.svg";
+import { ReactComponent as DotsIcon } from "assets/icons/dots.svg";
 import { ReactComponent as EditIcon } from "assets/icons/edit.svg";
 import { ReactComponent as HomeIcon } from "assets/icons/home.svg";
 import { ReactComponent as LaboratoryIcon } from "assets/icons/laboratory.svg";
@@ -30,4 +31,5 @@ export const Icons = {
   ConfirmIcon,
   LaboratoryIcon,
   PendingIcon,
+  DotsIcon,
 };
