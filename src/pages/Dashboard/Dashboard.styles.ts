@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Theme } from "styles/Themes";
 
 export const Wrapper = styled.div`
   height: 100vh;
@@ -7,6 +8,23 @@ export const Wrapper = styled.div`
   color: #000;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding: 4rem;
+`;
+
+export const Header = styled.div``;
+
+export const Title = styled.h2`
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  color: ${Theme.Dashboard.title};
+`;
+
+export const SubTitle = styled.h4`
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  color: ${Theme.Dashboard.subTitle};
 `;

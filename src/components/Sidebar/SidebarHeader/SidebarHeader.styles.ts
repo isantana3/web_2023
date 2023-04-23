@@ -25,7 +25,7 @@ export const IconContainer = styled.div`
 `;
 
 export const EditButon = styled.button`
-  border: 1px solid ${Theme.Sidebar.stroke};
+  border: 1px solid ${Theme.Sidebar.fontBlue};
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
@@ -35,7 +35,8 @@ export const EditButon = styled.button`
   gap: 6px;
   background: #e6e9ec;
   border-radius: 6px;
-  color: ${Theme.Sidebar.font};
+  color: ${Theme.Sidebar.fontBlue};
+  background-color: ${Theme.Sidebar.backgroundBlue};
 `;
 
 export const Label = styled.p`

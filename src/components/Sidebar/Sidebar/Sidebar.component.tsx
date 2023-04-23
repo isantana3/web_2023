@@ -25,10 +25,10 @@ export function Sidebar({
         </SidebarTrigger>
         <SidebarHeader />
         <SidebarContent>
-          <SidebarItem active label="Home" icon="HomeIcon" />
-          <SidebarItem label="Home" icon="HomeIcon" />
-          <SidebarItem label="Home" icon="HomeIcon" />
-          <SidebarItem label="Home" icon="HomeIcon" />
+          <SidebarItem active label="Inicio" icon="DashboardIcon" />
+          <SidebarItem label="Configuração" icon="ConfigIcon" />
+          <SidebarItem label="Suas Reservas" icon="BulletinIcon" />
+          <SidebarItem label="Gestão" icon="Managementcon" />
         </SidebarContent>
       </SidebarWrapper>
     </Container>

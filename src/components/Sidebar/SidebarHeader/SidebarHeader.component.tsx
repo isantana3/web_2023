@@ -14,11 +14,13 @@ export function SidebarHeader(): JSX.Element {
   return (
     <Container>
       <IconContainer>
-        <Icons.HomeIcon color="#fff" />
+        <Icons.UserIcon color="#fff" />
       </IconContainer>
       <Label>Samuel Vasconcelos</Label>
       <Label>Admin</Label>
-      <EditButon>Editar perfil</EditButon>
+      <EditButon>
+        <Icons.EditIcon /> Editar perfil
+      </EditButon>
     </Container>
   );
 }
