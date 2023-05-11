@@ -1,4 +1,6 @@
 import { Icons } from "global/icons.constants";
+import { type IRoutes, routes } from "global/routes.constants";
+import { useAuth } from "store/slices/auth/useAuth";
 
 import { SidebarContent } from "../SidebarContent";
 import { SidebarHeader } from "../SidebarHeader";
@@ -12,6 +14,14 @@ export function Sidebar({
   isCollapsed,
   setIsCollapsed,
 }: ISidebarProps): JSX.Element {
+  const { user } = useAuth();
+
+  const validateRoute = (route: IRoutes): boolean => {
+    if (route.users === "ALL") return true;
+
+    return route.users.includes(user.userType);
+  };
+
   return (
     <Container isCollapsed={isCollapsed}>
       <SidebarWrapper>
@@ -25,10 +35,18 @@ export function Sidebar({
         </SidebarTrigger>
         <SidebarHeader />
         <SidebarContent>
-          <SidebarItem active label="Inicio" icon="DashboardIcon" />
-          <SidebarItem label="Configuração" icon="ConfigIcon" />
-          <SidebarItem label="Suas Reservas" icon="BulletinIcon" />
-          <SidebarItem label="Gestão" icon="Managementcon" />
+          {user &&
+            routes.map(
+              (route, id) =>
+                validateRoute(route) && (
+                  <SidebarItem
+                    key={`Route-${id}`}
+                    active={window.location.pathname === route.path}
+                    label={route.name}
+                    icon={route.icon}
+                  />
+                )
+            )}
         </SidebarContent>
       </SidebarWrapper>
     </Container>

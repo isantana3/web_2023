@@ -16,8 +16,8 @@ export function SidebarHeader(): JSX.Element {
       <IconContainer>
         <Icons.UserIcon color="#fff" />
       </IconContainer>
-      <Label>Samuel Vasconcelos</Label>
-      <Label>Admin</Label>
+      <Label>{user.name}</Label>
+      <Label>{user.userType}</Label>
       <EditButon>
         <Icons.EditIcon /> Editar perfil
       </EditButon>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { Login } from "pages/Login/Login.page";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -10,9 +10,6 @@ import { RoutesTemplate } from "components/RoutesTemplate";
 
 import { AdminRoutes } from "./admin.routes";
 import { UserRoutes } from "./user.routes";
-
-import { type IUser } from "global/user.types";
-import { type IUseAuthUser } from "store/slices/auth/authSlice.types";
 
 export function AppRoutes(): JSX.Element {
   const { user, authenticate } = useAuth();

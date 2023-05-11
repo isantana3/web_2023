@@ -25,7 +25,7 @@ export function Dashboard(): JSX.Element {
   return (
     <Wrapper>
       <Header>
-        <Title>Olá, Isabelle!</Title>
+        <Title>Olá, {user.name}!</Title>
         <SubTitle>
           Welcome back to your all in Dashboard and more text here!
         </SubTitle>
