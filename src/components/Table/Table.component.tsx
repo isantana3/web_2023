@@ -24,14 +24,16 @@ export function Table({
       {title && <Title>{title}</Title>}
       <TableContainer>
         <TableHeader>
-          {header.map((item) => (
-            <TableTitle key={`th-${item}`}>{item}</TableTitle>
-          ))}
-          {actions ? (
-            <TableTitle>
-              <Icons.DotsIcon />{" "}
-            </TableTitle>
-          ) : undefined}
+          <Row key={`th-0`}>
+            {header.map((item, row) => (
+              <TableTitle key={`th-${item}`}>{item}</TableTitle>
+            ))}
+            {actions ? (
+              <TableTitle>
+                <Icons.DotsIcon />{" "}
+              </TableTitle>
+            ) : undefined}
+          </Row>
         </TableHeader>
         <TableBody>
           {row.map((rowItems, row) => (
