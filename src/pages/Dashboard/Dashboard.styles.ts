@@ -16,7 +16,7 @@ export const Header = styled.div`
 `;
 
 export const Title = styled.h2`
-  font-family: "Montserrat";
+  font-family: "Montserrat", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 28px;
@@ -24,7 +24,7 @@ export const Title = styled.h2`
 `;
 
 export const SubTitle = styled.h4`
-  font-family: "Montserrat";
+  font-family: "Montserrat", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;

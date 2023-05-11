@@ -18,7 +18,7 @@ export const Title = styled.div`
   flex-direction: row;
   justify-content: space-between;
 
-  font-family: "Montserrat";
+  font-family: "Montserrat", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -31,7 +31,7 @@ export const Row = styled.tr``;
 
 export const Cell = styled.td`
   padding: 16px 24px;
-  font-family: "Montserrat";
+  font-family: "Montserrat", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -45,7 +45,7 @@ export const TableHeader = styled.thead``;
 
 export const TableTitle = styled.th`
   padding: 16px 24px;
-  font-family: "Montserrat";
+  font-family: "Montserrat", sans-serif;
   font-style: normal;
   font-weight: 500;
   text-align: left;

@@ -15,7 +15,7 @@ export const PageButton = styled.button`
   display: flex;
   flex-direction: row;
   gap: 10px;
-  font-family: "Montserrat";
+  font-family: "Montserrat", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 14px;

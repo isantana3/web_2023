@@ -1,5 +1,7 @@
+import { Icons } from "global/icons.constants";
 import { useAuth } from "store/slices/auth/useAuth";
 
+import { Button } from "components/Button";
 import { Pagination } from "components/Pagination";
 import { Table } from "components/Table";
 
@@ -10,13 +12,13 @@ export function Dashboard(): JSX.Element {
 
   const Actions = (rowId: string): JSX.Element => {
     return (
-      <button
-        onClick={() => {
+      <Button
+        callback={() => {
           alert(rowId);
         }}
-      >
-        Reservar
-      </button>
+        label="Reservar"
+        icon={<Icons.BulletinNewIcon />}
+      />
     );
   };
 
