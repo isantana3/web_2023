@@ -1,4 +1,7 @@
+import { useEffect } from "react";
+
 import { Icons } from "global/icons.constants";
+import { toast } from "react-toastify";
 import { useAuth } from "store/slices/auth/useAuth";
 
 import { Button } from "components/Button";
@@ -21,6 +24,10 @@ export function Dashboard(): JSX.Element {
       />
     );
   };
+
+  useEffect(() => {
+    toast.success("Bem vindo " + user.name);
+  }, []);
 
   return (
     <Wrapper>

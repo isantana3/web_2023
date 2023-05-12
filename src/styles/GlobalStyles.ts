@@ -49,4 +49,10 @@ export const GlobalStyles = createGlobalStyle`
   table {
     border-collapse: collapse;
   }
+
+  .toastBody {
+    font-family: "Atlas Grotesk Web", Arial, Helvetica, sans-serif;
+    color: #10171D; /* #10171D */
+    font-size: 1.5rem !important;
+  }
 `;
