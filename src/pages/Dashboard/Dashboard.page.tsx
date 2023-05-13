@@ -11,9 +11,9 @@ import { Modal } from "components/Modal";
 import { ModalFooter } from "components/Modal/Modal.styles";
 import { Pagination } from "components/Pagination";
 import { Table } from "components/Table";
+import { Tabs } from "components/Tabs";
 import { Tooltip } from "components/Tooltip";
 import { useModal } from "hooks/modals.hook";
-import { common } from "utils/common.utils";
 
 import { DashboardSchema } from "./example.schema";
 
@@ -76,20 +76,48 @@ export function Dashboard(): JSX.Element {
           Welcome back to your all in Dashboard and more text here!
         </SubTitle>
       </Header>
-      <Table
-        title="Suas reservas"
-        header={["Laboratório", "Data", "Horario"]}
-        actions={Actions}
-        row={[
-          ["Lab 6A", "Oct, 03, 2022", "13:30 - 18:30"],
-          ["Lab 6A", "Oct, 03, 2022", "13:30 - 18:30"],
-          ["Lab 6A", "Oct, 03, 2022", "13:30 - 18:30"],
-          ["Lab 6A", "Oct, 03, 2022", "13:30 - 18:30"],
-          ["Lab 6A", "Oct, 03, 2022", "13:30 - 18:30"],
-          ["Lab 6A", "Oct, 03, 2022", "13:30 - 18:30"],
-          ["Lab 6A", "Oct, 03, 2022", "13:30 - 18:30"],
+      <Tabs
+        items={[
+          <Table
+            title="Laboratórios"
+            header={["Laboratório", "Data", "Horario"]}
+            actions={Actions}
+            row={[["Lab 6A", "Oct, 03, 2022", "13:30 - 18:30"]]}
+          />,
+          <Table
+            title="Agendamentos"
+            header={["Laboratório", "Data", "Horario"]}
+            actions={Actions}
+            row={[
+              ["Lab 6A", "Oct, 03, 2022", "13:30 - 18:30"],
+              ["Lab 6A", "Oct, 03, 2022", "13:30 - 18:30"],
+            ]}
+          />,
+          <Table
+            title="Horarios"
+            header={["Laboratório", "Data", "Horario"]}
+            actions={Actions}
+            row={[
+              ["Lab 6A", "Oct, 03, 2022", "13:30 - 18:30"],
+              ["Lab 6A", "Oct, 03, 2022", "13:30 - 18:30"],
+              ["Lab 6A", "Oct, 03, 2022", "13:30 - 18:30"],
+            ]}
+          />,
+          <Table
+            title="Usuários"
+            header={["Laboratório", "Data", "Horario"]}
+            actions={Actions}
+            row={[
+              ["Lab 6A", "Oct, 03, 2022", "13:30 - 18:30"],
+              ["Lab 6A", "Oct, 03, 2022", "13:30 - 18:30"],
+              ["Lab 6A", "Oct, 03, 2022", "13:30 - 18:30"],
+              ["Lab 6A", "Oct, 03, 2022", "13:30 - 18:30"],
+            ]}
+          />,
         ]}
+        headers={["Laboratório", "Agendamentos", "Horarios", "Usuários"]}
       />
+
       <Pagination
         currentPage={10}
         totalPages={20}

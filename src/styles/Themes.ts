@@ -37,6 +37,10 @@ const Components = {
   input: {
     stroke: "#D0D5DD",
   },
+  tab: {
+    color: "#2e3646",
+    active: "#314CA5",
+  },
 };
 
 export const Theme = {
