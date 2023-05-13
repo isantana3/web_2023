@@ -55,4 +55,20 @@ export const GlobalStyles = createGlobalStyle`
     color: #10171D; /* #10171D */
     font-size: 1.5rem !important;
   }
+
+  .ReactModal__Overlay {
+    opacity: 0;
+    transform: translateY(-100px);
+    transition: all 200ms ease-in-out;
+  }
+
+  .ReactModal__Overlay--after-open {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+
+  .ReactModal__Overlay--before-close {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
 `;

@@ -4,9 +4,14 @@ import { ErrorMessage } from "../ErrorMessage";
 
 import { type IInputProps } from "./Input.types";
 
-import { Container, InputComponent } from "./Input.styles";
+import { Container, InputComponent, Label } from "./Input.styles";
 
-export function Input({ name, type, placeholder }: IInputProps): JSX.Element {
+export function Input({
+  name,
+  type,
+  placeholder,
+  label,
+}: IInputProps): JSX.Element {
   const {
     register,
     formState: { errors },
@@ -14,6 +19,7 @@ export function Input({ name, type, placeholder }: IInputProps): JSX.Element {
 
   return (
     <Container>
+      <Label>{label}</Label>
       <InputComponent
         {...register(name)}
         type={type}

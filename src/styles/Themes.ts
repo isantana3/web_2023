@@ -34,6 +34,9 @@ const Components = {
     subLabel: "#5F6D7E",
     stroke: "#D1D9E2",
   },
+  input: {
+    stroke: "#D0D5DD",
+  },
 };
 
 export const Theme = {

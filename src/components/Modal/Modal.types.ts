@@ -3,6 +3,5 @@ export interface IModalProps {
   toggleModal: () => void;
   title?: string;
   children: JSX.Element[] | JSX.Element;
-  onSave?: () => void;
-  onCancel?: () => void;
+  actions?: JSX.Element[] | JSX.Element;
 }
