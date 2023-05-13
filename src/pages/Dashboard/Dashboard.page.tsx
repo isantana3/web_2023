@@ -8,6 +8,7 @@ import { useAuth } from "store/slices/auth/useAuth";
 import { Button } from "components/Button";
 import { Form } from "components/Form/Form";
 import { Input } from "components/Form/Input";
+import { LaboratoryTag } from "components/LaboratoryTag";
 import { Modal } from "components/Modal";
 import { ModalFooter } from "components/Modal/Modal.styles";
 import { Pagination } from "components/Pagination";
@@ -37,7 +38,7 @@ export function Dashboard(): JSX.Element {
 
   useEffect(() => {
     toast.success("Bem vindo " + user.name);
-  }, []);
+  }, [user.name]);
 
   const { isVisible, toggleModal } = useModal();
 
@@ -51,6 +52,7 @@ export function Dashboard(): JSX.Element {
         <Form
           schema={DashboardSchema}
           onSubmit={(data) => {
+            // eslint-disable-next-line no-console
             console.log(data);
           }}
         >
@@ -74,8 +76,10 @@ export function Dashboard(): JSX.Element {
           <Title onClick={toggleModal}>Olá, {user.name}!</Title>
         </Tooltip>
         <SubTitle>
-          Welcome back to your all in Dashboard and more text here!
+          Welcome back to your all in Dashboard and more text here!{" "}
+          <LaboratoryTag status="REJECTED" label="Confirmado" />
         </SubTitle>
+        <Icons.BulletinNewIcon />
       </Header>
       <Tabs
         items={[
@@ -123,6 +127,7 @@ export function Dashboard(): JSX.Element {
         currentPage={10}
         totalPages={20}
         setPage={(id: number) => {
+          // eslint-disable-next-line no-console
           console.log(id);
         }}
       />
