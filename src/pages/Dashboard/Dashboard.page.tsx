@@ -11,6 +11,7 @@ import { Modal } from "components/Modal";
 import { ModalFooter } from "components/Modal/Modal.styles";
 import { Pagination } from "components/Pagination";
 import { Table } from "components/Table";
+import { Tooltip } from "components/Tooltip";
 import { useModal } from "hooks/modals.hook";
 import { common } from "utils/common.utils";
 
@@ -60,7 +61,7 @@ export function Dashboard(): JSX.Element {
           />
           <Input
             label="Senha"
-            type="password"
+            type="textarea"
             name="password"
             placeholder="*******"
           />
@@ -68,7 +69,9 @@ export function Dashboard(): JSX.Element {
         </Form>
       </Modal>
       <Header>
-        <Title onClick={toggleModal}>Olá, {user.name}!</Title>
+        <Tooltip label="Clique para abrir o modal" position="right">
+          <Title onClick={toggleModal}>Olá, {user.name}!</Title>
+        </Tooltip>
         <SubTitle>
           Welcome back to your all in Dashboard and more text here!
         </SubTitle>
