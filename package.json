@@ -14,7 +14,8 @@
     "generate:util": "yarn plop --plopfile ./generators/templates/utils/plopfile.cjs",
     "generate:service": "yarn plop --plopfile ./generators/templates/services/plopfile.cjs",
     "generate:component": "yarn plop --plopfile ./generators/templates/components/plopfile.cjs",
-    "server": "json-server --watch db.json"
+    "server": "json-server --watch db.json",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
@@ -66,7 +67,7 @@
     "eslint-typescript": "^1.1.0",
     "husky": "^8.0.3",
     "jsdom": "^21.1.1",
-    "lint-staged": "^13.2.0",
+    "lint-staged": "^13.2.2",
     "plop": "^3.1.2",
     "postcss-styled-syntax": "^0.4.0",
     "prettier": "^2.8.7",
@@ -81,6 +82,7 @@
     "src/**/*.@(js|jsx|ts|tsx|html|css)": "prettier --write --max-warnings=0",
     "src/**/*.@(js|jsx|ts|tsx)": [
       "eslint --max-warnings=0"
-    ]
+    ],
+    "*.js": "eslint --cache --fix"
   }
 }

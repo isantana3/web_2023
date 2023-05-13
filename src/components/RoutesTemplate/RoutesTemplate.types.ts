@@ -1,4 +1,4 @@
-import { type ISidebarProps } from "components/Sidebar/Sidebar.types";
+import { type ISidebarProps } from "components/Sidebar/Sidebar/Sidebar.types";
 
 export interface IRoutesTemplateProps {
   children: JSX.Element;
