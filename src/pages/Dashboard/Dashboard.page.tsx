@@ -93,10 +93,7 @@ export function Dashboard(): JSX.Element {
             title="Agendamentos"
             header={["Laboratório", "Data", "Horario"]}
             actions={Actions}
-            row={[
-              ["Lab 6A", "Oct, 03, 2022", "13:30 - 18:30"],
-              ["Lab 6A", "Oct, 03, 2022", "13:30 - 18:30"],
-            ]}
+            row={[["Lab 6A", "Oct, 03, 2022", "13:30 - 18:30"]]}
           />,
           <Table
             title="Horarios"
