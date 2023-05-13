@@ -41,6 +41,12 @@ const Components = {
     color: "#2e3646",
     active: "#314CA5",
   },
+  laboratoryTag: {
+    pending: "#9C5D42",
+    confirmed: "#20875C",
+    rejected: "#F2D400",
+    label: "#fff",
+  },
 };
 
 export const Theme = {
