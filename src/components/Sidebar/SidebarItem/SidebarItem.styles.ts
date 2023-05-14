@@ -18,8 +18,8 @@ export const Container = styled.a<SidebarStylesType>`
   background-color: ${Theme.Sidebar.default};
   color: ${Theme.Sidebar.font};
 
-  ${({ active }) =>
-    active &&
+  ${({ isActive }) =>
+    isActive &&
     css`
       &::before {
         content: "";
@@ -35,8 +35,8 @@ export const Container = styled.a<SidebarStylesType>`
       color: ${Theme.Sidebar.fontDarker};
     `};
 
-  ${({ active }) =>
-    !active &&
+  ${({ isActive }) =>
+    !isActive &&
     css`
       &:hover {
         background-color: ${Theme.Sidebar.active};

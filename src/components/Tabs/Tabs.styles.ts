@@ -28,8 +28,8 @@ export const HeaderItem = styled(Tab)<TabsStyleType>`
   color: ${Theme.Components.tab.color};
   cursor: pointer;
 
-  ${({ active }) =>
-    active
+  ${({ $active }) =>
+    $active
       ? css`
           > span {
             width: 100%;

@@ -4,5 +4,5 @@ export interface ITabsProps {
 }
 
 export type TabsStyleType = {
-  active: boolean;
+  $active: boolean;
 };

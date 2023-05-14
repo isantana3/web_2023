@@ -1,5 +1,6 @@
 import { Icons } from "global/icons.constants";
 import { type IRoutes, routes } from "global/routes.constants";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "store/slices/auth/useAuth";
 
 import { SidebarContent } from "../SidebarContent";
@@ -22,6 +23,8 @@ export function Sidebar({
     return route.users.includes(user.userType);
   };
 
+  const navigate = useNavigate();
+
   return (
     <Container isCollapsed={isCollapsed}>
       <SidebarWrapper>
@@ -41,9 +44,12 @@ export function Sidebar({
                 validateRoute(route) && (
                   <SidebarItem
                     key={`Route-${id}`}
-                    active={window.location.pathname === route.path}
+                    isActive={window.location.pathname === route.path}
                     label={route.name}
                     icon={route.icon}
+                    onClick={() => {
+                      navigate(route.path);
+                    }}
                   />
                 )
             )}

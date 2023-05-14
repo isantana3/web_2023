@@ -18,7 +18,7 @@ export function Tabs({ headers, items }: ITabsProps): JSX.Element {
     >
       <Header>
         {headers.map((title, idx) => (
-          <HeaderItem active={idx === tabIndex} key={title}>
+          <HeaderItem $active={idx === tabIndex} key={title}>
             {title}
             <Border />
           </HeaderItem>
