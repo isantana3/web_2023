@@ -1,5 +1,3 @@
-import { type FunctionComponent, type SVGProps } from "react";
-
 import { type Icons } from "./icons.constants";
 
 import { type UserType } from "global/user.types";
@@ -19,13 +17,7 @@ export const routes: IRoutes[] = [
     icon: "HomeIcon",
   },
   {
-    name: "Laboratórios",
-    path: "/laboratorios",
-    users: "ALL",
-    icon: "LaboratoryIcon",
-  },
-  {
-    name: "Suas Reservas",
+    name: "Reservas",
     path: "/reservas",
     users: "ALL",
     icon: "BulletinIcon",

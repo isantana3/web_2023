@@ -1,7 +1,7 @@
+import { Booking } from "pages/Booking";
+import { Bookings } from "pages/Bookings";
 import { Admin } from "pages/Configurations";
 import { Dashboard } from "pages/Dashboard";
-import { Laboratories } from "pages/Laboratories";
-import { Laboratory } from "pages/Laboratory";
 import { Management } from "pages/Management";
 import { Route, Routes } from "react-router-dom";
 
@@ -9,10 +9,10 @@ export function UserRoutes(): JSX.Element {
   return (
     <Routes>
       <Route path="*" element={<Dashboard />} />
-      <Route path="/config" element={<Admin />} />
-      <Route path="/laboratories" element={<Laboratories />} />
-      <Route path="/laboratory" element={<Laboratory />} />
-      <Route path="/management" element={<Management />} />
+      <Route path="/configuracoes" element={<Admin />} />
+      <Route path="/reservas" element={<Bookings />} />
+      <Route path="/reserva" element={<Booking />} />
+      <Route path="/cadastros" element={<Management />} />
     </Routes>
   );
 }

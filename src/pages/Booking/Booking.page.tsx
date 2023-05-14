@@ -1,13 +1,13 @@
 import { useParams } from "react-router-dom";
 
-import { Wrapper } from "./Laboratory.styles";
+import { Wrapper } from "./Booking.styles";
 
-export function Laboratory(): JSX.Element {
+export function Booking(): JSX.Element {
   const { id } = useParams();
 
   return (
     <Wrapper>
-      <h1>Laboratory {id}</h1>
+      <h1>Booking {id}</h1>
     </Wrapper>
   );
 }

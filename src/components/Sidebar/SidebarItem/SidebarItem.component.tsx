@@ -6,13 +6,14 @@ import { Container, Label } from "./SidebarItem.styles";
 
 export function SidebarItem({
   label,
-  active = false,
+  isActive = false,
   icon,
+  onClick,
 }: ISidebarItemProps): JSX.Element {
   const Icon = Icons[icon];
 
   return (
-    <Container active={active}>
+    <Container onClick={onClick} isActive={isActive}>
       <Icon />
       <Label>{label}</Label>
     </Container>

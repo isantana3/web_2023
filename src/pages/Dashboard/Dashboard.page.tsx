@@ -1,8 +1,6 @@
 /* eslint-disable react/jsx-key */
-import { useEffect } from "react";
 
 import { Icons } from "global/icons.constants";
-import { toast } from "react-toastify";
 import { useAuth } from "store/slices/auth/useAuth";
 
 import { Button } from "components/Button";
@@ -35,10 +33,6 @@ export function Dashboard(): JSX.Element {
     );
   };
 
-  useEffect(() => {
-    toast.success("Bem vindo " + user.name);
-  }, []);
-
   const { isVisible, toggleModal } = useModal();
 
   return (
@@ -48,12 +42,7 @@ export function Dashboard(): JSX.Element {
         isVisible={isVisible}
         toggleModal={toggleModal}
       >
-        <Form
-          schema={DashboardSchema}
-          onSubmit={(data) => {
-            console.log(data);
-          }}
-        >
+        <Form schema={DashboardSchema} onSubmit={(data) => {}}>
           <Input
             label="Email"
             type="text"
@@ -89,10 +78,7 @@ export function Dashboard(): JSX.Element {
             title="Agendamentos"
             header={["Laboratório", "Data", "Horario"]}
             actions={Actions}
-            row={[
-              ["Lab 6A", "Oct, 03, 2022", "13:30 - 18:30"],
-              ["Lab 6A", "Oct, 03, 2022", "13:30 - 18:30"],
-            ]}
+            row={[["Lab 6A", "Oct, 03, 2022", "13:30 - 18:30"]]}
           />,
           <Table
             title="Horarios"
@@ -122,9 +108,7 @@ export function Dashboard(): JSX.Element {
       <Pagination
         currentPage={10}
         totalPages={20}
-        setPage={(id: number) => {
-          console.log(id);
-        }}
+        setPage={(id: number) => {}}
       />
     </Wrapper>
   );
