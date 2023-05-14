@@ -4,7 +4,6 @@ export const Container = styled.button`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
   padding: 8px 16px;
   gap: 6px;
   background: #314ca5;
@@ -19,6 +18,10 @@ export const Container = styled.button`
   svg {
     width: 20px;
     height: 20px;
+
+    * {
+      fill: #fff;
+    }
   }
 `;
 

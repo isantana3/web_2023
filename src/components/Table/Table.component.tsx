@@ -18,6 +18,7 @@ export function Table({
   row,
   actions,
   title,
+  keys,
 }: ITableProps): JSX.Element {
   return (
     <Container>
@@ -36,10 +37,10 @@ export function Table({
           </Row>
         </TableHeader>
         <TableBody>
-          {row.map((rowItems, row) => (
+          {row.map((cell, row) => (
             <Row key={`tr-${row}`}>
-              {rowItems.map((item, cell) => (
-                <Cell key={`cell-${row}-cell-${cell}`}>{item}</Cell>
+              {keys.map((key, index) => (
+                <Cell key={`td-${row}-${index}`}>{cell[key]}</Cell>
               ))}
               {actions ? <Cell>{actions(row)}</Cell> : undefined}
             </Row>

@@ -1,8 +1,8 @@
-import { type FunctionComponent } from "react";
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface ITableProps {
   header: string[];
-  row: string[][];
+  row: any[];
   title?: string;
+  keys: any[];
   actions?: (any: any) => JSX.Element;
 }

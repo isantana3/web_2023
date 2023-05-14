@@ -6,8 +6,8 @@ import { type ITabsProps } from "./Tabs.types";
 
 import { Border, Header, HeaderItem } from "./Tabs.styles";
 
-export function Tabs({ headers, items }: ITabsProps): JSX.Element {
-  const [tabIndex, setTabIndex] = useState(0);
+export function Tabs({ headers, items, defaultTab }: ITabsProps): JSX.Element {
+  const [tabIndex, setTabIndex] = useState(defaultTab ?? 0);
 
   return (
     <TabContainer
