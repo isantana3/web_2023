@@ -4,28 +4,28 @@ import { useEffect, useState } from "react";
 
 import { Icons } from "global/icons.constants";
 import { toast } from "react-toastify";
-import { Hours } from "service/hours/hours.service";
+import { Infra } from "service/infra/infra.service";
 
 import { Button } from "components/Button";
 import { Table } from "components/Table";
 import { Tabs } from "components/Tabs";
 
-import { type IHours } from "global/hours.types";
+import { type IInfra } from "global/infra.types";
 
 import { Header, SubTitle, Title, Wrapper } from "./Management.styles";
 
 export function Management(): JSX.Element {
-  const [hours, setHours] = useState<IHours[]>([]);
+  const [infra, setInfra] = useState<IInfra[]>([]);
 
   const Actions = (rowId: number): JSX.Element => {
     return (
       <Button
         callback={async () => {
           if (window.confirm("Realmente deseja deletar este horario ?")) {
-            const res = await Hours.deleteHours(hours[rowId].id);
+            const res = await Infra.deleteInfra(infra[rowId].id);
             if (res) {
-              setHours((prev) =>
-                prev.filter((item) => item.id !== hours[rowId].id)
+              setInfra((prev) =>
+                prev.filter((item) => item.id !== infra[rowId].id)
               );
             }
           }
@@ -37,12 +37,12 @@ export function Management(): JSX.Element {
   };
 
   useEffect(() => {
-    const getHours = async (): Promise<void> => {
-      const response = await Hours.getHours();
-      setHours(response);
+    const getInfras = async (): Promise<void> => {
+      const response = await Infra.getInfras();
+      setInfra(response);
     };
 
-    getHours().catch((e) => {
+    getInfras().catch((e) => {
       toast.error("Erro carregando os horarios.");
     });
   }, []);
@@ -71,21 +71,21 @@ export function Management(): JSX.Element {
             row={[]}
           />,
           <Table
-            title="Horarios Cadastrados"
-            header={["Hora"]}
+            title="Itens de infraestrutura"
+            header={["ID", "Código", "Nome"]}
             actions={Actions}
-            keys={["time"]}
-            row={hours}
+            keys={["id", "cod", "nome"]}
+            row={infra}
           />,
           <Table
             title="Usuários"
             header={["Laboratório", "Data", "Horario"]}
-            keys={["time"]}
+            keys={["id", "time"]}
             actions={Actions}
             row={[]}
           />,
         ]}
-        headers={["Laboratório", "Agendamentos", "Horarios", "Usuários"]}
+        headers={["Laboratório", "Agendamentos", "Infraestrutura", "Usuários"]}
       />
     </Wrapper>
   );
