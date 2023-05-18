@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Theme } from "styles/Themes";
 
 export const Container = styled.div`
   display: flex;
@@ -12,7 +11,7 @@ export const Container = styled.div`
 
 export const Title = styled.div`
   width: 100%;
-  background-color: ${Theme.Components.table.background};
+  background-color: ${({ theme }) => theme.Components.table.background};
   padding: 16px 20px;
   display: flex;
   flex-direction: row;
@@ -36,7 +35,7 @@ export const Cell = styled.td`
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
-  border-bottom: 1px solid ${Theme.Components.table.stroke};
+  border-bottom: 1px solid ${({ theme }) => theme.Components.table.stroke};
 `;
 
 export const TableBody = styled.tbody``;
@@ -51,5 +50,5 @@ export const TableTitle = styled.th`
   text-align: left;
   font-size: 14px;
   line-height: 20px;
-  border-bottom: 1px solid ${Theme.Components.table.stroke};
+  border-bottom: 1px solid ${({ theme }) => theme.Components.table.stroke};
 `;

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Theme } from "styles/Themes";
 
 export const Container = styled.div`
   padding: 2rem;
@@ -8,7 +7,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  border-bottom: 1px solid ${Theme.Sidebar.stroke};
+  border-bottom: 1px solid ${({ theme }) => theme.Sidebar.stroke};
   margin-bottom: 2rem;
 `;
 
@@ -21,11 +20,11 @@ export const IconContainer = styled.div`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: ${Theme.Sidebar.headerIcon};
+  background-color: ${({ theme }) => theme.Sidebar.headerIcon};
 `;
 
 export const EditButon = styled.button`
-  border: 1px solid ${Theme.Sidebar.fontBlue};
+  border: 1px solid ${({ theme }) => theme.Sidebar.fontBlue};
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
@@ -35,8 +34,8 @@ export const EditButon = styled.button`
   gap: 6px;
   background: #e6e9ec;
   border-radius: 6px;
-  color: ${Theme.Sidebar.fontBlue};
-  background-color: ${Theme.Sidebar.backgroundBlue};
+  color: ${({ theme }) => theme.Sidebar.fontBlue};
+  background-color: ${({ theme }) => theme.Sidebar.backgroundBlue};
 `;
 
 export const Label = styled.p`
@@ -45,5 +44,5 @@ export const Label = styled.p`
   font-size: 15px;
   line-height: 22px;
   text-align: center;
-  color: ${Theme.Sidebar.font};
+  color: ${({ theme }) => theme.Sidebar.font};
 `;

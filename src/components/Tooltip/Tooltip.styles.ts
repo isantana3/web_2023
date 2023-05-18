@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import { Theme } from "styles/Themes";
 
 import { type TooltipStylesType } from "./Tooltip.types";
 
@@ -20,7 +19,7 @@ export const Container = styled.div`
 
 export const Label = styled.span<TooltipStylesType>`
   position: absolute;
-  background: ${Theme.PrimaryTheme.primary};
+  background: ${({ theme }) => theme.PrimaryTheme.primary};
   color: #fff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
@@ -40,7 +39,7 @@ export const Label = styled.span<TooltipStylesType>`
     position: absolute;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 8px solid ${Theme.PrimaryTheme.primary};
+    border-bottom: 8px solid ${({ theme }) => theme.PrimaryTheme.primary};
     border-radius: 8px;
     transform: rotate(269deg);
   }

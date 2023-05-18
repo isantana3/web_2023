@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Theme } from "styles/Themes";
 
 import {
   LaboratoryTagColors,
@@ -21,5 +20,5 @@ export const Label = styled.span`
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 13px;
-  color: ${Theme.Components.laboratoryTag.label};
+  color: ${({ theme }) => theme.Components.laboratoryTag.label};
 `;

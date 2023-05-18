@@ -2,7 +2,7 @@ import React from "react";
 
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { AppRoutes } from "routes/index.routes";
 import store from "store/store";
 import { ThemeProvider } from "styled-components";

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Theme } from "styles/Themes";
 
 export const Container = styled.div`
   display: flex;
@@ -10,7 +9,7 @@ export const Container = styled.div`
 `;
 
 export const InputComponent = styled.input`
-  border: 1px solid ${Theme.Components.input.stroke};
+  border: 1px solid ${({ theme }) => theme.Components.input.stroke};
   padding: 10px 14px;
   box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
   border-radius: 8px;
