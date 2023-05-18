@@ -13,6 +13,7 @@ import { ReactComponent as HomeIcon } from "assets/icons/home.svg";
 import { ReactComponent as LaboratoryIcon } from "assets/icons/laboratory.svg";
 import { ReactComponent as Managementcon } from "assets/icons/management.svg";
 import { ReactComponent as PendingIcon } from "assets/icons/pending.svg";
+import { ReactComponent as RejectedIcon } from "assets/icons/rejected.svg";
 import { ReactComponent as UserIcon } from "assets/icons/user.svg";
 
 export const Icons = {
@@ -32,4 +33,5 @@ export const Icons = {
   LaboratoryIcon,
   PendingIcon,
   DotsIcon,
+  RejectedIcon,
 };

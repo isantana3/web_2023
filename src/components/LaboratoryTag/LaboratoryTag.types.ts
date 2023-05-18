@@ -11,7 +11,7 @@ export interface ILaboratoryTagProps {
 export const LaboratoryTagIcons: Record<LaboratoryTagType, keyof typeof Icons> =
   {
     CONFIRMED: "ConfirmIcon",
-    REJECTED: "ConfirmIcon",
+    REJECTED: "RejectedIcon",
     PENDING: "PendingIcon",
   };
 

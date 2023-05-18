@@ -44,7 +44,7 @@ const Components = {
   laboratoryTag: {
     pending: "#9C5D42",
     confirmed: "#20875C",
-    rejected: "#F2D400",
+    rejected: "#872020",
     label: "#fff",
   },
 };
