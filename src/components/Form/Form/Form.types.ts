@@ -1,8 +1,8 @@
-import { type FieldValues, type SubmitHandler } from "react-hook-form";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { type AnyObject, type ObjectSchema } from "yup";
 
 export interface IFormProps {
-  onSubmit: SubmitHandler<FieldValues>;
+  onSubmit: (data: any) => void;
   schema: ObjectSchema<any, AnyObject, any, "">;
   children: JSX.Element[] | JSX.Element;
 }

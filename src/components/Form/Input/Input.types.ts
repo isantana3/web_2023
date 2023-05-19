@@ -5,4 +5,9 @@ export interface IInputProps {
   type: HTMLInputTypeAttribute;
   placeholder: string;
   label: string;
+  defaultValue?: string;
+  width?: number;
+  disabled?: boolean;
 }
+
+export type InputStylesType = Pick<IInputProps, "width">;

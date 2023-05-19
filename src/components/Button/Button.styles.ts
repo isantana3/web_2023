@@ -1,13 +1,17 @@
 import styled from "styled-components";
 
-export const Container = styled.button`
+import { type IButtonStylesType } from "./Button.types";
+
+export const Container = styled.button<IButtonStylesType>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 8px 16px;
   gap: 6px;
-  background: #314ca5;
-  border: 1px solid #314ca5;
+  background: ${({ theme, color }) =>
+    theme.Components.button[color ?? "primary"]};
+  border: 1px solid
+    ${({ theme, color }) => theme.Components.button[color ?? "primary"]};
   border-radius: 6px;
   transition: all 100ms ease-in-out;
 
