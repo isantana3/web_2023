@@ -1,6 +1,10 @@
 {
-  "hello": {
-    "pt": "Olá",
-    "en": "Hello"
+  "title": {
+    "pt": "Configurações",
+    "en": ""
+  },
+  "subtitle": {
+    "pt": "Edite seus dados pessoais",
+    "en": ""
   }
 }

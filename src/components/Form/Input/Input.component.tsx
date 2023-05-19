@@ -11,6 +11,9 @@ export function Input({
   type,
   placeholder,
   label,
+  defaultValue,
+  width,
+  disabled = false,
 }: IInputProps): JSX.Element {
   const {
     register,
@@ -18,9 +21,11 @@ export function Input({
   } = useFormContext();
 
   return (
-    <Container>
+    <Container width={width}>
       <Label>{label}</Label>
       <InputComponent
+        disabled={disabled}
+        defaultValue={defaultValue}
         {...register(name)}
         type={type}
         placeholder={placeholder}
