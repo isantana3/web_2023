@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import { Theme } from "styles/Themes";
 
 import { type SidebarStylesType } from "./SidebarItem.types";
 
@@ -15,8 +14,8 @@ export const Container = styled.a<SidebarStylesType>`
   cursor: pointer;
   position: relative;
 
-  background-color: ${Theme.Sidebar.default};
-  color: ${Theme.Sidebar.font};
+  background-color: ${({ theme }) => theme.Sidebar.default};
+  color: ${({ theme }) => theme.Sidebar.font};
 
   ${({ isActive }) =>
     isActive &&
@@ -31,16 +30,16 @@ export const Container = styled.a<SidebarStylesType>`
 
         background: #5f6d7e;
       }
-      background-color: ${Theme.Sidebar.active};
-      color: ${Theme.Sidebar.fontDarker};
+      background-color: ${({ theme }) => theme.Sidebar.active};
+      color: ${({ theme }) => theme.Sidebar.fontDarker};
     `};
 
   ${({ isActive }) =>
     !isActive &&
     css`
       &:hover {
-        background-color: ${Theme.Sidebar.active};
-        color: ${Theme.Sidebar.fontDarker};
+        background-color: ${({ theme }) => theme.Sidebar.active};
+        color: ${({ theme }) => theme.Sidebar.fontDarker};
       }
     `};
 `;

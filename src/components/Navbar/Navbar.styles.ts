@@ -1,10 +1,9 @@
 import styled from "styled-components";
-import { Theme } from "styles/Themes";
 
 export const Container = styled.div`
   width: 100%;
   padding: 2rem;
-  border-bottom: 1px solid ${Theme.Navbar.stroke};
+  border-bottom: 1px solid ${({ theme }) => theme.Navbar.stroke};
   color: blue;
   display: flex;
   align-items: center;
@@ -17,5 +16,5 @@ export const Title = styled.h1`
   font-style: normal;
   font-weight: 700;
   font-size: 32px;
-  color: ${Theme.Navbar.font};
+  color: ${({ theme }) => theme.Navbar.font};
 `;

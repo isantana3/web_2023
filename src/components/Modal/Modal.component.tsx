@@ -1,8 +1,6 @@
-import { useState } from "react";
-
 import { Icons } from "global/icons.constants";
 import ModalComponent from "react-modal";
-import { Theme } from "styles/Themes";
+import { useTheme } from "styled-components";
 
 import { type IModalProps } from "./Modal.types";
 
@@ -20,6 +18,8 @@ export function Modal({
   children,
   actions = <></>,
 }: IModalProps): JSX.Element {
+  const theme = useTheme();
+
   return (
     <ModalComponent
       onRequestClose={toggleModal}
@@ -31,7 +31,7 @@ export function Modal({
       <ModalHeader>
         {title && <h2>{title}</h2>}
         <button onClick={toggleModal}>
-          <Icons.CloseIcon color={Theme.PrimaryTheme["primary-light"]} />
+          <Icons.CloseIcon color={theme.PrimaryTheme["primary-light"]} />
         </button>
       </ModalHeader>
       <ModalContent>{children}</ModalContent>

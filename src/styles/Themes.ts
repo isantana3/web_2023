@@ -19,6 +19,26 @@ const Sidebar = {
 const Dashboard = {
   title: "#2e3646",
   subTitle: "#5F6D7E",
+  background: "#fff",
+};
+
+const Configurations = {
+  title: "#2e3646",
+  subTitle: "#5F6D7E",
+  background: "#fff",
+  stroke: "#DBE1E8",
+};
+
+const Management = {
+  title: "#2e3646",
+  subTitle: "#5F6D7E",
+  background: "#fff",
+};
+
+const Bookings = {
+  title: "#2e3646",
+  subTitle: "#5F6D7E",
+  background: "#fff",
 };
 
 const Navbar = {
@@ -36,6 +56,8 @@ const Components = {
   },
   input: {
     stroke: "#D0D5DD",
+    disabled: "#D0D5DD",
+    color: "#2e3646",
   },
   tab: {
     color: "#2e3646",
@@ -44,8 +66,13 @@ const Components = {
   laboratoryTag: {
     pending: "#9C5D42",
     confirmed: "#20875C",
-    rejected: "#F2D400",
+    rejected: "#872020",
     label: "#fff",
+  },
+  button: {
+    primary: "#314CA5",
+    secondary: "transparent",
+    warning: "#DC3545",
   },
 };
 
@@ -55,4 +82,7 @@ export const Theme = {
   Dashboard,
   Navbar,
   Components,
+  Configurations,
+  Management,
+  Bookings,
 };

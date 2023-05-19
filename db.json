@@ -1,22 +1,37 @@
 {
   "users": [
     {
+      "position": "Professor",
+      "phone": "73991853222",
+      "registration": 201720307,
+      "organ": "DCET",
+      "name": "Samuel Vasconcelos",
       "id": 1,
       "userType": "ADMINISTRADOR",
-      "name": "Samuel Vasconcelos",
-      "email": "smvasconcelos11@gmail.com",
-      "token": "AsaSDoskpD123daskop",
-      "status": "ATIVO"
+      "token": "string",
+      "password": "string",
+      "status": "ATIVO",
+      "email": "samuel.vasconcelos@uesc.br"
     }
   ],
-  "infra":[
+  "infra": [
     {
       "id": 1,
-      "name": "Samuel Vasconcelos",
-      "description": "lorem impsum"
+      "cod": "dasdkpasda",
+      "nome": "Cadeira"
+    },
+    {
+      "id": 2,
+      "cod": "dasdkpasdXXXa",
+      "nome": "Mesa"
+    },
+    {
+      "id": 3,
+      "cod": "slalll",
+      "nome": "Datashow"
     }
   ],
-  "calendar":[
+  "calendar": [
     {
       "id": 1,
       "time": 1050
@@ -28,7 +43,9 @@
       "label": "Samuel Vasconcelos",
       "location": "Samuel Vasconcelos",
       "description": "lorem impsum",
-      "infraIds": [1]
+      "infraIds": [
+        1
+      ]
     }
   ]
 }

@@ -2,10 +2,16 @@ import { type IButtonProps } from "./Button.types";
 
 import { ButtonLabel, Container } from "./Button.styles";
 
-export function Button({ callback, icon, label }: IButtonProps): JSX.Element {
+export function Button({
+  callback,
+  icon,
+  label,
+  color,
+  type,
+}: IButtonProps): JSX.Element {
   return (
-    <Container onClick={callback}>
-      {icon}
+    <Container type={type} color={color} onClick={callback ?? undefined}>
+      {icon && icon}
       <ButtonLabel>{label}</ButtonLabel>
     </Container>
   );

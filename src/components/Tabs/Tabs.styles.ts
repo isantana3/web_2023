@@ -1,6 +1,5 @@
 import { Tab, TabList } from "react-tabs";
 import styled, { css } from "styled-components";
-import { Theme } from "styles/Themes";
 
 import { type TabsStyleType } from "./Tabs.types";
 
@@ -25,7 +24,7 @@ export const HeaderItem = styled(Tab)<TabsStyleType>`
   line-height: 38px;
   text-align: center;
   border-bottom: 2px solid transparent;
-  color: ${Theme.Components.tab.color};
+  color: ${({ theme }) => theme.Components.tab.color};
   cursor: pointer;
 
   ${({ $active }) =>
@@ -50,6 +49,6 @@ export const Border = styled.span`
   height: 3px;
   width: 0;
   transition: all 100ms ease-in-out;
-  background-color: ${Theme.Components.tab.color};
+  background-color: ${({ theme }) => theme.Components.tab.color};
   margin: 0 auto;
 `;

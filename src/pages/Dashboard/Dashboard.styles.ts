@@ -1,10 +1,9 @@
 import styled from "styled-components";
-import { Theme } from "styles/Themes";
 
 export const Wrapper = styled.div`
   height: 100vh;
   width: 100vw;
-  background: #fafafafa;
+  background: ${({ theme }) => theme.Dashboard.background};
   color: #000;
   display: flex;
   flex-direction: column;
@@ -20,7 +19,7 @@ export const Title = styled.h2`
   font-style: normal;
   font-weight: 600;
   font-size: 28px;
-  color: ${Theme.Dashboard.title};
+  color: ${({ theme }) => theme.Dashboard.title};
 `;
 
 export const SubTitle = styled.h4`
@@ -28,5 +27,5 @@ export const SubTitle = styled.h4`
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  color: ${Theme.Dashboard.subTitle};
+  color: ${({ theme }) => theme.Dashboard.subTitle};
 `;
