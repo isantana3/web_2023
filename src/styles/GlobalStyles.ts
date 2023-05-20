@@ -12,7 +12,7 @@ export const GlobalStyles = createGlobalStyle`
 
   html, body, #root {
     background-color: #fafafafa;
-    height: 100vh;
+    height: 100%;
     font-family: 'Inter', sans-serif;
 
     // 1920px and UP - Full HD
@@ -70,5 +70,27 @@ export const GlobalStyles = createGlobalStyle`
   .ReactModal__Overlay--before-close {
     opacity: 0;
     transform: translateY(-100px);
+  }
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: ${({ theme }) => theme.Components.scrollbar.width};
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: ${({ theme }) => theme.Components.scrollbar.background};
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.Components.scrollbar.track};
+    border-radius: 5px;
+    transition: background 100ms ease-in-out;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: ${({ theme }) => theme.Components.scrollbar.trackHover};
   }
 `;

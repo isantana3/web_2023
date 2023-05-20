@@ -73,6 +73,17 @@ const Components = {
     primary: "#314CA5",
     secondary: "transparent",
     warning: "#DC3545",
+    transparent: "transparent",
+  },
+  navbar: {
+    background: "#fff",
+  },
+  scrollbar: {
+    background: "transparent",
+    track: "#4563BF95",
+    handle: "#fff",
+    width: "10px",
+    trackHover: "#4563BF",
   },
 };
 

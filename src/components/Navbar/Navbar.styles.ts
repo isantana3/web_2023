@@ -9,6 +9,7 @@ export const Container = styled.div`
   align-items: center;
   gap: 2rem;
   padding-left: 12rem;
+  background-color: ${({ theme }) => theme.Components.navbar.background};
 `;
 
 export const Title = styled.h1`
