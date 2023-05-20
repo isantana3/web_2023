@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { type IButtonStylesType } from "./Button.types";
 
@@ -27,6 +27,20 @@ export const Container = styled.button<IButtonStylesType>`
       fill: #fff;
     }
   }
+
+  ${({ color }) =>
+    color === "transparent" &&
+    css`
+      svg {
+        * {
+          fill: ${({ theme }) => theme.Components.button.primary};
+        }
+      }
+
+      span {
+        color: ${({ theme }) => theme.Components.button.primary};
+      }
+    `}
 `;
 
 export const ButtonLabel = styled.span`

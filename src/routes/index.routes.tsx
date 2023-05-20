@@ -1,10 +1,11 @@
+/* eslint-disable no-console */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 
 import { Login } from "pages/Login/Login.page";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { User } from "service/user/user.service";
 import { useAuth } from "store/slices/auth/useAuth";
-import WebFont from "webfontloader";
 
 import { RoutesTemplate } from "components/RoutesTemplate";
 
@@ -19,12 +20,6 @@ export function AppRoutes(): JSX.Element {
       const res = await User.getUser("1");
       authenticate({ user: res });
     };
-
-    WebFont.load({
-      google: {
-        families: ["Inter, n4, i4, n7, 500", "Montserrat, n4, i4, n7, 500"],
-      },
-    });
 
     getUser().catch((e) => {
       console.log(e);

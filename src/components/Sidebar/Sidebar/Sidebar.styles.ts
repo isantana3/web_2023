@@ -13,7 +13,7 @@ export const Container = styled.div<ISidebarStylesType>`
   /* 80px */
   min-width: 8rem;
   transition: width 100ms ease-in-out;
-  min-height: 100vh;
+  min-height: 100%;
   border-right: 1px solid ${Theme.Sidebar.stroke};
 
   ${({ isCollapsed }) =>

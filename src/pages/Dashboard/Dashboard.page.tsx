@@ -9,26 +9,27 @@ import { Input } from "components/Form/Input";
 import { LaboratoryTag } from "components/LaboratoryTag";
 import { Modal } from "components/Modal";
 import { ModalFooter } from "components/Modal/Modal.styles";
+import { Table } from "components/Table";
 import { Tooltip } from "components/Tooltip";
 import { useModal } from "hooks/modals.hook";
 
 import { DashboardSchema } from "./example.schema";
 
-import { Header, SubTitle, Title, Wrapper } from "./Dashboard.styles";
+import {
+  Header,
+  LaboratoryItem,
+  LaboratoryItemSubTitle,
+  LaboratoryItemTitle,
+  SubTitle,
+  Title,
+  Wrapper,
+} from "./Dashboard.styles";
 
 export function Dashboard(): JSX.Element {
   const { user } = useAuth();
 
   const Actions = (rowId: string): JSX.Element => {
-    return (
-      <Button
-        callback={() => {
-          alert(rowId);
-        }}
-        label="Reservar"
-        icon={<Icons.BulletinNewIcon />}
-      />
-    );
+    return <Icons.EditIcon />;
   };
 
   const { isVisible, toggleModal } = useModal();
@@ -45,7 +46,7 @@ export function Dashboard(): JSX.Element {
             label="Email"
             type="text"
             name="email"
-            placeholder="smvasconcelos11@gmai.com"
+            placeholder="smvasconcelos11@gmail.com"
           />
           <Input
             label="Senha"
@@ -60,12 +61,79 @@ export function Dashboard(): JSX.Element {
         <Tooltip label="Clique para abrir o modal" position="right">
           <Title onClick={toggleModal}>Olá, {user.name}!</Title>
         </Tooltip>
-        <SubTitle>
-          Welcome back to your all in Dashboard and more text here!{" "}
-          <LaboratoryTag status="REJECTED" label="Confirmado" />
-        </SubTitle>
-        <Icons.BulletinNewIcon />
+        <SubTitle>Suas últimas atividades podem ser vistas abaixo </SubTitle>
       </Header>
+      <Table
+        title="Suas reservas"
+        header={["Laboratório", "Status", ""]}
+        actions={Actions}
+        keys={["laboratory", "status", "action"]}
+        row={[
+          {
+            laboratory: (
+              <LaboratoryItem>
+                <Icons.LaboratoryIcon />
+                <div>
+                  <LaboratoryItemTitle>Lab 4A</LaboratoryItemTitle>
+                  <LaboratoryItemSubTitle>
+                    Ter/Qui 9:10 - 10:50
+                  </LaboratoryItemSubTitle>
+                </div>
+              </LaboratoryItem>
+            ),
+            status: <LaboratoryTag status="REJECTED" label="Rejeitado" />,
+            action: (
+              <Button
+                label="Cancelar"
+                color="transparent"
+                icon={<Icons.CloseIcon />}
+              />
+            ),
+          },
+          {
+            laboratory: (
+              <LaboratoryItem>
+                <Icons.LaboratoryIcon />
+                <div>
+                  <LaboratoryItemTitle>Lab 4A</LaboratoryItemTitle>
+                  <LaboratoryItemSubTitle>
+                    Ter/Qui 9:10 - 10:50
+                  </LaboratoryItemSubTitle>
+                </div>
+              </LaboratoryItem>
+            ),
+            status: <LaboratoryTag status="PENDING" label="Pendente" />,
+            action: (
+              <Button
+                label="Cancelar"
+                color="transparent"
+                icon={<Icons.CloseIcon />}
+              />
+            ),
+          },
+          {
+            laboratory: (
+              <LaboratoryItem>
+                <Icons.LaboratoryIcon />
+                <div>
+                  <LaboratoryItemTitle>Lab 4A</LaboratoryItemTitle>
+                  <LaboratoryItemSubTitle>
+                    Ter/Qui 9:10 - 10:50
+                  </LaboratoryItemSubTitle>
+                </div>
+              </LaboratoryItem>
+            ),
+            status: <LaboratoryTag status="CONFIRMED" label="Aprovado" />,
+            action: (
+              <Button
+                label="Cancelar"
+                color="transparent"
+                icon={<Icons.CloseIcon />}
+              />
+            ),
+          },
+        ]}
+      />
     </Wrapper>
   );
 }
