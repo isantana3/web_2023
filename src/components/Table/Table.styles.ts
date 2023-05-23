@@ -16,20 +16,38 @@ export const Title = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
   font-family: "Montserrat", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
+
+  svg {
+    transition: all 100ms ease-in-out;
+
+    * {
+      fill: ${({ theme }) => theme.Feedback.success};
+      cursor: pointer;
+    }
+
+    ::hover {
+      opacity: 95%;
+    }
+  }
 `;
 
 export const TableContainer = styled.table``;
 
-export const Row = styled.tr``;
+export const Row = styled.tr`
+  transition: all 100ms ease-in-out;
+  &:hover {
+    cursor: pointer;
+    background-color: ${({ theme }) => theme.Components.table.background}55;
+  }
+`;
 
 export const Cell = styled.td`
-  padding: 16px 24px;
+  padding: 12px 24px;
   font-family: "Montserrat", sans-serif;
   font-style: normal;
   font-weight: 500;

@@ -2,7 +2,7 @@ import { api } from "service/server";
 
 import { type ILaboratory } from "global/laboratory.types";
 
-export const Laboratory = {
+export const laboratoryService = {
   getLaboratorys: async (): Promise<ILaboratory[]> => {
     return (await api.get("/laboratory")).data;
   },

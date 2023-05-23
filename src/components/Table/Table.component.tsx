@@ -19,10 +19,17 @@ export function Table({
   actions,
   title,
   keys,
+  headerIcon,
+  onClickRow,
 }: ITableProps): JSX.Element {
   return (
     <Container>
-      {title && <Title>{title}</Title>}
+      {title && (
+        <Title>
+          {title}
+          {headerIcon}
+        </Title>
+      )}
       <TableContainer>
         <TableHeader>
           <Row key={`th-0`}>
@@ -38,7 +45,14 @@ export function Table({
         </TableHeader>
         <TableBody>
           {row.map((cell, row) => (
-            <Row key={`tr-${row}`}>
+            <Row
+              onClick={() => {
+                if (onClickRow) {
+                  onClickRow(row);
+                }
+              }}
+              key={`tr-${row}`}
+            >
               {keys.map((key, index) => (
                 <Cell key={`td-${row}-${index}`}>{cell[key]}</Cell>
               ))}

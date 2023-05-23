@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { User as UserApi } from "service/user/user.service";
+import { userService } from "service/user/user.service";
 import { useAuth } from "store/slices/auth/useAuth";
 import { useLanguage } from "store/slices/lang/useLang";
 
@@ -26,7 +26,7 @@ export function User(): JSX.Element {
   const { user, authenticate } = useAuth();
 
   async function onSubmit(data: IUser): Promise<void> {
-    const response = await UserApi.updateUser(user.id, {
+    const response = await userService.updateUser(user.id, {
       ...user,
       ...data,
       email: user.email,

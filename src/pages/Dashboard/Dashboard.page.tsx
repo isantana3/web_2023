@@ -81,7 +81,7 @@ export function Dashboard(): JSX.Element {
                 </div>
               </LaboratoryItem>
             ),
-            status: <LaboratoryTag status="REJECTED" label="Rejeitado" />,
+            status: <LaboratoryTag status="REJECTED" label="Indisponível" />,
             action: (
               <Button
                 label="Cancelar"
@@ -123,7 +123,7 @@ export function Dashboard(): JSX.Element {
                 </div>
               </LaboratoryItem>
             ),
-            status: <LaboratoryTag status="CONFIRMED" label="Aprovado" />,
+            status: <LaboratoryTag status="CONFIRMED" label="Confirmado" />,
             action: (
               <Button
                 label="Cancelar"

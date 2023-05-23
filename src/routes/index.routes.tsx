@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 import { Login } from "pages/Login/Login.page";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { User } from "service/user/user.service";
+import { userService } from "service/user/user.service";
 import { useAuth } from "store/slices/auth/useAuth";
 
 import { RoutesTemplate } from "components/RoutesTemplate";
@@ -17,7 +17,7 @@ export function AppRoutes(): JSX.Element {
 
   useEffect(() => {
     const getUser = async (): Promise<void> => {
-      const res = await User.getUser("1");
+      const res = await userService.getUser("1");
       authenticate({ user: res });
     };
 

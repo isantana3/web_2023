@@ -1,3 +1,4 @@
+import { ReactComponent as AddIcon } from "assets/icons/add.svg";
 import { ReactComponent as LeftArrowIcon } from "assets/icons/arrow_left.svg";
 import { ReactComponent as RightArrowIcon } from "assets/icons/arrow_right.svg";
 import { ReactComponent as BulletinIcon } from "assets/icons/bulletin.svg";
@@ -34,4 +35,5 @@ export const Icons = {
   PendingIcon,
   DotsIcon,
   RejectedIcon,
+  AddIcon,
 };

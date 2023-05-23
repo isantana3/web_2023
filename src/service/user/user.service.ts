@@ -2,7 +2,7 @@ import { api } from "service/server";
 
 import { type IUser } from "global/user.types";
 
-export const User = {
+export const userService = {
   getUsers: async (): Promise<IUser[]> => {
     return (await api.get("/users")).data;
   },

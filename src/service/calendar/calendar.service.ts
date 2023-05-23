@@ -2,7 +2,7 @@ import { api } from "service/server";
 
 import { type ICalendar } from "global/calendar.types";
 
-export const Calendar = {
+export const calendarService = {
   getCalendars: async (): Promise<ICalendar[]> => {
     return (await api.get("/calendar")).data;
   },

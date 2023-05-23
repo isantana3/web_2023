@@ -5,4 +5,6 @@ export interface ITableProps {
   title?: string;
   keys: any[];
   actions?: (any: any) => JSX.Element;
+  headerIcon?: JSX.Element;
+  onClickRow?: (row: number) => void;
 }

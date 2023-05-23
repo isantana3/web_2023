@@ -13,7 +13,8 @@ export const Container = styled.a<SidebarStylesType>`
   line-height: 22px;
   cursor: pointer;
   position: relative;
-
+  transition: all 100ms ease-in-out;
+  font-weight: 600;
   background-color: ${({ theme }) => theme.Sidebar.default};
   color: ${({ theme }) => theme.Sidebar.font};
 
@@ -30,8 +31,10 @@ export const Container = styled.a<SidebarStylesType>`
 
         background: #5f6d7e;
       }
+
       background-color: ${({ theme }) => theme.Sidebar.active};
       color: ${({ theme }) => theme.Sidebar.fontDarker};
+      box-shadow: 0px 4px 7px rgba(0, 0, 0, 25%);
     `};
 
   ${({ isActive }) =>

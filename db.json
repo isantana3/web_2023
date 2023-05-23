@@ -16,24 +16,27 @@
   ],
   "infra": [
     {
-      "id": 1,
-      "cod": "dasdkpasda",
-      "nome": "Cadeira"
+      "code": "Cadeira Preta",
+      "roomId": "646233a1921a64b1f699s1ca9",
+      "label": "Cadeira",
+      "id": 1
     },
     {
-      "id": 2,
-      "cod": "dasdkpasdXXXa",
-      "nome": "Mesa"
+      "code": "Mesa Nova",
+      "roomId": "646233a1921a64b1f6991sca9",
+      "label": "Mesa",
+      "id": 2
     },
     {
-      "id": 3,
-      "cod": "slalll",
-      "nome": "Datashow"
+      "code": "Data Show Branco",
+      "roomId": "646233a1921a64b1f6s991ca9",
+      "label": "Datashow",
+      "id": 3
     }
   ],
   "calendar": [
     {
-      "id": 1,
+      "roomId": 1,
       "time": 1050
     }
   ],

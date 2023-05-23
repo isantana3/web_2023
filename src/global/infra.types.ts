@@ -1,5 +1,6 @@
 export interface IInfra {
-  id: string;
-  name: string;
-  description: string;
+  id?: string;
+  roomId: string;
+  label: string;
+  code: string;
 }

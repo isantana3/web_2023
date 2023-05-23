@@ -87,6 +87,12 @@ const Components = {
   },
 };
 
+const Feedback = {
+  success: "#20875C",
+  error: "#DC3545",
+  warning: "#9C5D42",
+};
+
 export const Theme = {
   PrimaryTheme,
   Sidebar,
@@ -96,4 +102,5 @@ export const Theme = {
   Configurations,
   Management,
   Bookings,
+  Feedback,
 };
