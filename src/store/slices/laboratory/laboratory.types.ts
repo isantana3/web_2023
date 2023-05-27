@@ -1,9 +1,9 @@
 import { type ILaboratory } from "global/laboratory.types";
 
 export interface ILaboratorySlice {
-  infra: ILaboratory;
+  laboratory: ILaboratory;
 }
 
 export interface IUseLaboratory extends ILaboratorySlice {
-  setlaboratory: (payload: ILaboratorySlice) => void;
+  setLaboratory: (payload: ILaboratorySlice) => void;
 }

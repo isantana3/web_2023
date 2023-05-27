@@ -42,13 +42,14 @@
   ],
   "laboratory": [
     {
-      "id": 1,
-      "label": "Samuel Vasconcelos",
-      "location": "Samuel Vasconcelos",
-      "description": "lorem impsum",
-      "infraIds": [
-        1
-      ]
+      "location": "Pavilhão batatinha",
+      "label": "6A",
+      "id": 1
+    },
+    {
+      "location": "Pavilhão 2",
+      "label": "6B",
+      "id": 2
     }
   ]
 }

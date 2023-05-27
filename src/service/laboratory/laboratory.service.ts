@@ -1,25 +1,53 @@
 import { api } from "service/server";
 
 import { type ILaboratory } from "global/laboratory.types";
+import { type IDefaultResponse } from "service/server.types";
 
 export const laboratoryService = {
-  getLaboratorys: async (): Promise<ILaboratory[]> => {
-    return (await api.get("/laboratory")).data;
+  getLaboratories: async (): Promise<IDefaultResponse<ILaboratory[]>> => {
+    const { status, data } = await api.get("/laboratory");
+    return {
+      status,
+      data,
+    };
   },
 
-  getLaboratory: async (id: string): Promise<ILaboratory> => {
-    return (await api.get(`/laboratory/${id}`)).data;
+  getLaboratory: async (id: string): Promise<IDefaultResponse<ILaboratory>> => {
+    const { status, data } = await api.get(`/laboratory/${id}`);
+    return {
+      status,
+      data,
+    };
   },
 
-  updateLaboratory: async (id: string, data: ILaboratory): Promise<boolean> => {
-    return await api.put(`/laboratory/${id}`, data);
+  updateLaboratory: async (
+    id: string,
+    lab: ILaboratory
+  ): Promise<IDefaultResponse<ILaboratory>> => {
+    const { status, data } = await api.put(`/laboratory/${id}`, lab);
+    return {
+      status,
+      data,
+    };
   },
 
-  deleteLaboratory: async (id: string): Promise<boolean> => {
-    return await api.delete(`/laboratory/${id}`);
+  deleteLaboratory: async (
+    id: string
+  ): Promise<IDefaultResponse<ILaboratory>> => {
+    const { status, data } = await api.delete(`/laboratory/${id}`);
+    return {
+      status,
+      data,
+    };
   },
 
-  createLaboratory: async (data: ILaboratory): Promise<boolean> => {
-    return await api.post("/laboratory", data);
+  createLaboratory: async (
+    lab: ILaboratory
+  ): Promise<IDefaultResponse<ILaboratory>> => {
+    const { status, data } = await api.post("/laboratory", lab);
+    return {
+      status,
+      data,
+    };
   },
 };

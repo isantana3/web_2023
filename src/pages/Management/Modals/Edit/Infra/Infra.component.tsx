@@ -34,7 +34,7 @@ export function Infra({
       return;
     }
 
-    toast.success("Item criado com sucesso");
+    toast.success("Item editado com sucesso");
     toggleModal();
     onSuccess(data);
   }

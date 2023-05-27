@@ -4,19 +4,19 @@ import { type ILaboratorySlice } from "./laboratory.types";
 import { type ILaboratory } from "global/laboratory.types";
 
 const initialState: ILaboratorySlice = {
-  infra: {} as ILaboratory,
+  laboratory: {} as ILaboratory,
 };
 
 const slice = createSlice({
   name: "laboratory",
   initialState,
   reducers: {
-    setinfra: (state, action: { payload: ILaboratorySlice }) => {
-      state.infra = action.payload.infra;
+    setLaboratory: (state, action: { payload: ILaboratorySlice }) => {
+      state.laboratory = action.payload.laboratory;
     },
   },
 });
 
-export const { setinfra } = slice.actions;
+export const { setLaboratory } = slice.actions;
 
 export default slice.reducer;

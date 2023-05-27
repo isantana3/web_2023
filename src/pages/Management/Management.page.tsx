@@ -3,7 +3,7 @@
 import { Table } from "components/Table";
 import { Tabs } from "components/Tabs";
 
-import { UseInfraCrud } from "./Modals";
+import { UseInfraCrud, UseLaboratoriesCrud } from "./Modals";
 
 import { Header, SubTitle, Title, Wrapper } from "./Management.styles";
 
@@ -14,24 +14,26 @@ export function Management(): JSX.Element {
     table: infraTable,
   } = UseInfraCrud();
 
+  const {
+    create: createLab,
+    edit: editLab,
+    table: labTable,
+  } = UseLaboratoriesCrud();
+
   return (
     <Wrapper>
       {editInfra.modal}
+      {editLab.modal}
       {createInfra.modal}
+      {createLab.modal}
       <Header>
         <Title>Gestão</Title>
         <SubTitle>Cadastre, edite e exclua os seus módulos</SubTitle>
       </Header>
       <Tabs
-        defaultTab={2}
+        defaultTab={0}
         items={[
-          // ! TODO
-          <Table
-            title="Laboratórios"
-            header={["Laboratório", "Data", "Horario"]}
-            keys={["time"]}
-            row={[]}
-          />,
+          labTable,
           // ! TODO
           <Table
             title="Agendamentos"
@@ -39,7 +41,6 @@ export function Management(): JSX.Element {
             keys={["time"]}
             row={[]}
           />,
-          // ? DOING
           infraTable,
           // ! TODO
           <Table
