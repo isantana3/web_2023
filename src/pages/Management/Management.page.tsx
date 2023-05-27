@@ -3,7 +3,7 @@
 import { Table } from "components/Table";
 import { Tabs } from "components/Tabs";
 
-import { UseInfraCrud, UseLaboratoriesCrud } from "./Modals";
+import { UseInfraCrud, UseLaboratoriesCrud, UseLocationsCrud } from "./Modals";
 
 import { Header, SubTitle, Title, Wrapper } from "./Management.styles";
 
@@ -20,12 +20,20 @@ export function Management(): JSX.Element {
     table: labTable,
   } = UseLaboratoriesCrud();
 
+  const {
+    create: createLocations,
+    edit: editLocations,
+    table: locationsTable,
+  } = UseLocationsCrud();
+
   return (
     <Wrapper>
       {editInfra.modal}
       {editLab.modal}
+      {editLocations.modal}
       {createInfra.modal}
       {createLab.modal}
+      {createLocations.modal}
       <Header>
         <Title>Gestão</Title>
         <SubTitle>Cadastre, edite e exclua os seus módulos</SubTitle>
@@ -49,13 +57,7 @@ export function Management(): JSX.Element {
             keys={["id", "time"]}
             row={[]}
           />,
-          // ! TODO
-          <Table
-            title="Localização"
-            header={["Laboratório", "Data", "Horario"]}
-            keys={["id", "time"]}
-            row={[]}
-          />,
+          locationsTable,
         ]}
         headers={[
           "Laboratórios",

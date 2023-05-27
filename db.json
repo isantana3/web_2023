@@ -34,10 +34,18 @@
       "id": 3
     }
   ],
-  "calendar": [
+  "location": [
     {
-      "roomId": 1,
-      "time": 1050
+      "label": "Pavilhão batata doce",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "label": "Pavilhão batata doce 2"
+    },
+    {
+      "label": "Pavilhão Marques de Menezes",
+      "id": 4
     }
   ],
   "laboratory": [

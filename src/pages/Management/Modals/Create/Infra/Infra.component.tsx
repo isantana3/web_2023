@@ -62,7 +62,7 @@ export function Infra({
             callback={toggleModal}
             type="button"
           />
-          <Button label="Salvar Item" color="primary" type="submit" />
+          <Button label="Salvar" color="primary" type="submit" />
         </ButtonWrapper>
       </Form>
     </Modal>

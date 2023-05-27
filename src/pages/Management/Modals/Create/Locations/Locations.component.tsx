@@ -1,52 +1,50 @@
 import { toast } from "react-toastify";
-import { laboratoryService } from "service/laboratory/laboratory.service";
+import { locationService } from "service/location/location.service";
 
 import { Button } from "components/Button";
 import { Form } from "components/Form/Form";
 import { Input } from "components/Form/Input";
 import { Modal } from "components/Modal";
 
-import { LaboratoriesSchema } from "./Laboratories.schema";
+import { LocationsSchema } from "./Locations.schema";
 
-import { type ILaboratoriesProps } from "./Laboratories.types";
-import { type ILaboratory } from "global/laboratory.types";
+import { type ILaboratoriesProps } from "./Locations.types";
+import { type ILocation } from "global/location.types";
 
-import { ButtonWrapper } from "./Laboratories.styles";
+import { ButtonWrapper } from "./Locations.styles";
 
-export function Laboratories({
+export function Locations({
   isVisible,
   toggleModal,
   onSuccess,
 }: ILaboratoriesProps): JSX.Element {
-  async function onSubmit(newData: ILaboratory): Promise<void> {
-    const { location, label } = newData;
-    const { data, status } = await laboratoryService.createLaboratory({
-      location,
+  async function onSubmit(newData: ILocation): Promise<void> {
+    const { label } = newData;
+    const { data, status } = await locationService.createLocation({
       label,
     });
 
     if (status !== 201) {
-      toast.error("Erro ao criar laboratório");
+      toast.error("Erro ao criar localização");
       return;
     }
 
-    toast.success("Laboratório editar com sucesso");
+    toast.success("Localização criada com sucesso");
     toggleModal();
     onSuccess(data);
   }
 
   return (
     <Modal
-      title={`Criando Laboratório`}
+      title={`Criando Localização`}
       isVisible={isVisible}
       toggleModal={toggleModal}
     >
-      <Form onSubmit={onSubmit} schema={LaboratoriesSchema}>
-        <Input placeholder="6A" label="Nome" name="label" type="text" />
+      <Form onSubmit={onSubmit} schema={LocationsSchema}>
         <Input
-          placeholder="Pav batatinha"
+          placeholder="Parvilhão de exatas"
           label="Localização"
-          name="location"
+          name="label"
           type="text"
         />
         <ButtonWrapper>
