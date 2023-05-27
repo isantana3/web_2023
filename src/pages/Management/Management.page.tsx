@@ -49,8 +49,21 @@ export function Management(): JSX.Element {
             keys={["id", "time"]}
             row={[]}
           />,
+          // ! TODO
+          <Table
+            title="Localização"
+            header={["Laboratório", "Data", "Horario"]}
+            keys={["id", "time"]}
+            row={[]}
+          />,
         ]}
-        headers={["Laboratório", "Agendamentos", "Infraestrutura", "Usuários"]}
+        headers={[
+          "Laboratórios",
+          "Agendamentos",
+          "Infraestrutura",
+          "Usuários",
+          "Localização",
+        ]}
       />
     </Wrapper>
   );
