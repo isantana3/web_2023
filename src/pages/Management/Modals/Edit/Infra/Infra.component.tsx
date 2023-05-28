@@ -10,6 +10,7 @@ import { Form } from "components/Form/Form";
 import { Input } from "components/Form/Input";
 import { Select } from "components/Form/Select";
 import { Modal } from "components/Modal";
+import { helpers } from "utils/helpers";
 
 import { InfraSchema } from "./Infra.schema";
 
@@ -55,6 +56,8 @@ export function Infra({
       toast.error(err.message);
     });
   }, []);
+
+  if (helpers.isObjectEmpty(infra)) return <></>;
 
   return (
     <Modal
