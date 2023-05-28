@@ -1,16 +1,21 @@
+import { useEffect, useState } from "react";
+
 import { toast } from "react-toastify";
 import { infraService } from "service/infra/infra.service";
+import { laboratoryService } from "service/laboratory/laboratory.service";
 import { useInfra } from "store/slices/infra/useInfra";
 
 import { Button } from "components/Button";
 import { Form } from "components/Form/Form";
 import { Input } from "components/Form/Input";
+import { Select } from "components/Form/Select";
 import { Modal } from "components/Modal";
 
 import { InfraSchema } from "./Infra.schema";
 
 import { type IInfraProps } from "./Infra.types";
 import { type IInfra } from "global/infra.types";
+import { type ILaboratory } from "global/laboratory.types";
 
 import { ButtonWrapper } from "./Infra.styles";
 
@@ -19,14 +24,15 @@ export function Infra({
   toggleModal,
   onSuccess,
 }: IInfraProps): JSX.Element {
+  const [laboratory, setLaboratory] = useState<ILaboratory[]>([]);
   const { infra } = useInfra();
 
   async function onSubmit(newData: IInfra): Promise<void> {
-    const { code, label } = newData;
-    const { data, status } = await infraService.updateInfra(infra.id ?? "", {
-      code: code ?? infra.code,
-      roomId: infra.roomId,
-      label: label ?? infra.label,
+    const { code, label, room } = newData;
+    const { data, status } = await infraService.updateInfra(infra._id ?? "", {
+      code,
+      room,
+      label,
     });
 
     if (status !== 200) {
@@ -38,6 +44,17 @@ export function Infra({
     toggleModal();
     onSuccess(data);
   }
+
+  const getLaboratories = async (): Promise<void> => {
+    const { data } = await laboratoryService.getLaboratories();
+    setLaboratory(data);
+  };
+
+  useEffect(() => {
+    getLaboratories().catch((err) => {
+      toast.error(err.message);
+    });
+  }, []);
 
   return (
     <Modal
@@ -59,6 +76,21 @@ export function Infra({
           name="label"
           type="text"
           defaultValue={infra.label}
+        />
+        <Select
+          label="Laboratório"
+          name="room"
+          defaultValue={{
+            label:
+              laboratory.find((c) => c._id === infra.room._id)?.label ?? "",
+            value: infra.label,
+          }}
+          options={laboratory.map((item) => {
+            return {
+              value: item._id,
+              label: item.label,
+            };
+          })}
         />
         <ButtonWrapper>
           <Button

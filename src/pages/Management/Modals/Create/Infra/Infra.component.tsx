@@ -1,15 +1,20 @@
+import { useEffect, useState } from "react";
+
 import { toast } from "react-toastify";
 import { infraService } from "service/infra/infra.service";
+import { laboratoryService } from "service/laboratory/laboratory.service";
 
 import { Button } from "components/Button";
 import { Form } from "components/Form/Form";
 import { Input } from "components/Form/Input";
+import { Select } from "components/Form/Select";
 import { Modal } from "components/Modal";
 
 import { InfraSchema } from "./Infra.schema";
 
 import { type IInfraProps } from "./Infra.types";
 import { type IInfra } from "global/infra.types";
+import { type ILaboratory } from "global/laboratory.types";
 
 import { ButtonWrapper } from "./Infra.styles";
 
@@ -18,11 +23,13 @@ export function Infra({
   toggleModal,
   onSuccess,
 }: IInfraProps): JSX.Element {
+  const [laboratory, setLaboratory] = useState<ILaboratory[]>([]);
+
   async function onSubmit(infra: IInfra): Promise<void> {
-    const { code, label } = infra;
+    const { code, label, room } = infra;
     const { data, status } = await infraService.createInfra({
       code,
-      roomId: "646233a1921a64b1f699s1ca9",
+      room,
       label,
     });
 
@@ -35,6 +42,17 @@ export function Infra({
     toggleModal();
     onSuccess(data);
   }
+
+  const getLaboratories = async (): Promise<void> => {
+    const { data } = await laboratoryService.getLaboratories();
+    setLaboratory(data);
+  };
+
+  useEffect(() => {
+    getLaboratories().catch((err) => {
+      toast.error(err.message);
+    });
+  }, []);
 
   return (
     <Modal
@@ -54,6 +72,16 @@ export function Infra({
           label="Nome"
           name="label"
           type="text"
+        />
+        <Select
+          label="Laboratório"
+          name="room"
+          options={laboratory.map((item) => {
+            return {
+              value: item._id,
+              label: item.label,
+            };
+          })}
         />
         <ButtonWrapper>
           <Button

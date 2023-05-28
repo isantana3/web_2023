@@ -46,7 +46,7 @@ export function Locations(): IUseLocations {
     return (
       <EditLocationsModal
         onSuccess={(data: ILocation) => {
-          setData((prev) => [...prev.filter((i) => i.id !== data.id), data]);
+          setData((prev) => [...prev.filter((i) => i._id !== data._id), data]);
         }}
         isVisible={isVisibleEditLocation}
         toggleModal={toggleEditLocation}
@@ -64,11 +64,11 @@ export function Locations(): IUseLocations {
             window.confirm(`Realmente deseja deletar ${data[rowId].label} ?`)
           ) {
             const { status } = await locationService.deleteLocation(
-              data[rowId].id ?? ""
+              data[rowId]._id
             );
             if (status === 200) {
               setData((prev) =>
-                prev.filter((item) => item.id !== data[rowId].id)
+                prev.filter((item) => item._id !== data[rowId]._id)
               );
               toast.success("Localização deletada com sucesso!");
             } else {
@@ -87,10 +87,10 @@ export function Locations(): IUseLocations {
     return (
       <Table
         headerIcon={<Icons.AddIcon onClick={toggleLocation} />}
-        title="Localizações"
-        header={["ID", "Nome"]}
+        title="Pavilhões"
+        header={["ID", "Pavilhão", "Descrição", "Observação"]}
         actions={Actions}
-        keys={["id", "label"]}
+        keys={["_id", "label", "description", "observation"]}
         row={data}
         onClickRow={(id: number) => {
           setLocation({ locations: data[id] });

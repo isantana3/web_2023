@@ -31,7 +31,7 @@ export const routes: IRoutes[] = [
   {
     name: "Cadastros",
     path: "/cadastros",
-    users: ["ADMINISTRADOR", "GESTOR"],
+    users: ["admin", "manager"],
     icon: "Managementcon",
   },
 ];

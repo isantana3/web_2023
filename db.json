@@ -14,50 +14,26 @@
       "email": "samuel.vasconcelos@uesc.br"
     }
   ],
-  "infra": [
-    {
-      "code": "Cadeira Preta",
-      "roomId": "646233a1921a64b1f699s1ca9",
-      "label": "Cadeira",
-      "id": 1
-    },
-    {
-      "code": "Mesa Nova",
-      "roomId": "646233a1921a64b1f6991sca9",
-      "label": "Mesa",
-      "id": 2
-    },
-    {
-      "code": "Data Show Branco",
-      "roomId": "646233a1921a64b1f6s991ca9",
-      "label": "Datashow",
-      "id": 3
-    }
-  ],
+  "infra": [],
   "location": [
     {
       "label": "Pavilhão batata doce",
+      "description": "Pavilhão de exatas",
+      "observation": "Não tem elevador",
       "id": 1
     },
     {
-      "id": 2,
-      "label": "Pavilhão batata doce 2"
-    },
-    {
-      "label": "Pavilhão Marques de Menezes",
-      "id": 4
+      "label": "Pavilhão batata doce 2",
+      "observation": "Não tem elevadx",
+      "description": "Pavilhão de batata",
+      "id": 2
     }
   ],
   "laboratory": [
     {
-      "location": "Pavilhão batatinha",
-      "label": "6A",
+      "location": "1",
+      "label": "5B",
       "id": 1
-    },
-    {
-      "location": "Pavilhão 2",
-      "label": "6B",
-      "id": 2
     }
   ]
 }

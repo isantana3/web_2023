@@ -19,32 +19,46 @@ export function Locations({
   onSuccess,
 }: ILaboratoriesProps): JSX.Element {
   async function onSubmit(newData: ILocation): Promise<void> {
-    const { label } = newData;
+    const { label, description, observation } = newData;
     const { data, status } = await locationService.createLocation({
       label,
+      description,
+      observation,
     });
 
     if (status !== 201) {
-      toast.error("Erro ao criar localização");
+      toast.error("Erro ao criar Pavilhão");
       return;
     }
 
-    toast.success("Localização criada com sucesso");
+    toast.success("Pavilhão criado com sucesso");
     toggleModal();
     onSuccess(data);
   }
 
   return (
     <Modal
-      title={`Criando Localização`}
+      title={`Criando Pavilhão`}
       isVisible={isVisible}
       toggleModal={toggleModal}
     >
       <Form onSubmit={onSubmit} schema={LocationsSchema}>
         <Input
-          placeholder="Parvilhão de exatas"
-          label="Localização"
+          placeholder="Parvilhão Marques ..."
+          label="Pavilhão"
           name="label"
+          type="text"
+        />
+        <Input
+          placeholder="Parvilhão de exatas"
+          label="Descrição"
+          name="description"
+          type="text"
+        />
+        <Input
+          placeholder="Não possui elevador ..."
+          label="Observação"
+          name="observation"
           type="text"
         />
         <ButtonWrapper>

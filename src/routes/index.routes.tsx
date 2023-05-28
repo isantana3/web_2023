@@ -17,8 +17,8 @@ export function AppRoutes(): JSX.Element {
 
   useEffect(() => {
     const getUser = async (): Promise<void> => {
-      const res = await userService.getUser("1");
-      authenticate({ user: res });
+      const { data } = await userService.getUser("64623504921a64b1f6991cd1");
+      authenticate({ user: data });
     };
 
     getUser().catch((e) => {
@@ -29,8 +29,8 @@ export function AppRoutes(): JSX.Element {
   return (
     <Router>
       {/* Auth Routes */}
-      {user.id ? (
-        user.userType === "ADMINISTRADOR" ? (
+      {user._id ? (
+        user.role === "admin" ? (
           <RoutesTemplate>
             <AdminRoutes />
           </RoutesTemplate>

@@ -5,7 +5,7 @@ import { type IDefaultResponse } from "service/server.types";
 
 export const infraService = {
   getInfras: async (): Promise<IDefaultResponse<IInfra[]>> => {
-    const { status, data } = await api.get("/infra");
+    const { status, data } = await api.get("/items");
     return {
       status,
       data,
@@ -13,7 +13,7 @@ export const infraService = {
   },
 
   getInfra: async (id: string): Promise<IDefaultResponse<IInfra>> => {
-    const { status, data } = await api.get(`/infra/${id}`);
+    const { status, data } = await api.get(`/items/${id}`);
     return {
       status,
       data,
@@ -22,9 +22,9 @@ export const infraService = {
 
   updateInfra: async (
     id: string,
-    infra: IInfra
+    infra: Omit<IInfra, "_id">
   ): Promise<IDefaultResponse<IInfra>> => {
-    const { status, data } = await api.put(`/infra/${id}`, infra);
+    const { status, data } = await api.patch(`/items/${id}`, infra);
     return {
       status,
       data,
@@ -32,15 +32,17 @@ export const infraService = {
   },
 
   deleteInfra: async (id: string): Promise<IDefaultResponse<IInfra>> => {
-    const { status, data } = await api.delete(`/infra/${id}`);
+    const { status, data } = await api.delete(`/items/${id}`);
     return {
       status,
       data,
     };
   },
 
-  createInfra: async (infra: IInfra): Promise<IDefaultResponse<IInfra>> => {
-    const { status, data } = await api.post("/infra", infra);
+  createInfra: async (
+    infra: Omit<IInfra, "_id">
+  ): Promise<IDefaultResponse<IInfra>> => {
+    const { status, data } = await api.post("/items", infra);
     return {
       status,
       data,

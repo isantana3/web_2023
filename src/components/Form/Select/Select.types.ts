@@ -6,4 +6,6 @@ export interface IOptions {
 export interface ISelectProps {
   options: IOptions[];
   name: string;
+  label: string;
+  defaultValue?: IOptions;
 }

@@ -1,15 +1,20 @@
+import { useEffect, useState } from "react";
+
 import { toast } from "react-toastify";
 import { laboratoryService } from "service/laboratory/laboratory.service";
+import { locationService } from "service/location/location.service";
 
 import { Button } from "components/Button";
 import { Form } from "components/Form/Form";
 import { Input } from "components/Form/Input";
+import { Select } from "components/Form/Select";
 import { Modal } from "components/Modal";
 
 import { LaboratoriesSchema } from "./Laboratories.schema";
 
 import { type ILaboratoriesProps } from "./Laboratories.types";
 import { type ILaboratory } from "global/laboratory.types";
+import { type ILocation } from "global/location.types";
 
 import { ButtonWrapper } from "./Laboratories.styles";
 
@@ -18,10 +23,12 @@ export function Laboratories({
   toggleModal,
   onSuccess,
 }: ILaboratoriesProps): JSX.Element {
+  const [locations, setLocations] = useState<ILocation[]>([]);
+
   async function onSubmit(newData: ILaboratory): Promise<void> {
-    const { location, label } = newData;
+    const { pavilion, label } = newData;
     const { data, status } = await laboratoryService.createLaboratory({
-      location,
+      pavilion,
       label,
     });
 
@@ -35,6 +42,17 @@ export function Laboratories({
     onSuccess(data);
   }
 
+  const getLocations = async (): Promise<void> => {
+    const { data } = await locationService.getLocations();
+    setLocations(data);
+  };
+
+  useEffect(() => {
+    getLocations().catch((err) => {
+      toast.error(err.message);
+    });
+  }, []);
+
   return (
     <Modal
       title={`Criando Laboratório`}
@@ -43,11 +61,15 @@ export function Laboratories({
     >
       <Form onSubmit={onSubmit} schema={LaboratoriesSchema}>
         <Input placeholder="6A" label="Nome" name="label" type="text" />
-        <Input
-          placeholder="Pav batatinha"
+        <Select
           label="Localização"
-          name="location"
-          type="text"
+          name="pavilion"
+          options={locations.map((item) => {
+            return {
+              value: item._id,
+              label: item.label,
+            };
+          })}
         />
         <ButtonWrapper>
           <Button

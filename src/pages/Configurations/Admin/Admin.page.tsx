@@ -26,7 +26,7 @@ export function Admin(): JSX.Element {
   const { user, authenticate } = useAuth();
 
   async function onSubmit(data: IUser): Promise<void> {
-    const response = await userService.updateUser(user.id, {
+    const response = await userService.updateUser(user._id, {
       ...user,
       ...data,
       email: user.email,
@@ -81,28 +81,13 @@ export function Admin(): JSX.Element {
               width={90}
             />
             <Input
-              label="Orgão"
+              label="Cargo"
               type="text"
-              name="organ"
-              placeholder="DCET"
-              defaultValue={user.organ}
-              width={10}
+              name="office"
+              placeholder="Professor"
+              defaultValue={user.office}
             />
           </InputRow>
-          <Input
-            label="Telefone"
-            type="text"
-            name="phone"
-            placeholder="+55 73 9 9123-3312"
-            defaultValue={user.phone.toString()}
-          />
-          <Input
-            label="Cargo"
-            type="text"
-            name="position"
-            placeholder="Professor"
-            defaultValue={user.position}
-          />
           <Footer>
             <Button color="warning" label={"Cancelar"} />
             <Button type="submit" label={"Salvar Alterações"} />

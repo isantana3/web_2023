@@ -1,4 +1,6 @@
 export interface ILocation {
-  id?: string;
+  _id: string;
   label: string;
+  description: string;
+  observation: string;
 }

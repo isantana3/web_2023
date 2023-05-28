@@ -45,7 +45,7 @@ export function Infra(): IUseInfra {
     return (
       <EditInfraModal
         onSuccess={(data: IInfra) => {
-          setData((prev) => [...prev.filter((i) => i.id !== data.id), data]);
+          setData((prev) => [...prev.filter((i) => i._id !== data._id), data]);
         }}
         isVisible={isVisibleEditInfra}
         toggleModal={toggleEditInfra}
@@ -63,11 +63,11 @@ export function Infra(): IUseInfra {
             window.confirm(`Realmente deseja deletar ${data[rowId].code} ?`)
           ) {
             const { status } = await infraService.deleteInfra(
-              data[rowId].id ?? ""
+              data[rowId]._id ?? ""
             );
             if (status === 200) {
               setData((prev) =>
-                prev.filter((item) => item.id !== data[rowId].id)
+                prev.filter((item) => item._id !== data[rowId]._id)
               );
               toast.success("Item deletado com sucesso!");
             } else {
@@ -87,9 +87,9 @@ export function Infra(): IUseInfra {
       <Table
         headerIcon={<Icons.AddIcon onClick={toggleInfra} />}
         title="Itens de infraestrutura"
-        header={["ID", "Código", "Nome"]}
+        header={["Código", "Laboratório", "Nome"]}
         actions={Actions}
-        keys={["roomId", "code", "label"]}
+        keys={["code", "room.label", "label"]}
         row={data}
         onClickRow={(id: number) => {
           setInfra({ infra: data[id] });

@@ -20,7 +20,7 @@ export function Sidebar({
   const validateRoute = (route: IRoutes): boolean => {
     if (route.users === "ALL") return true;
 
-    return route.users.includes(user.userType);
+    return route.users.includes(user.role);
   };
 
   const navigate = useNavigate();

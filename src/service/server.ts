@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "http://localhost:3000",
-  timeout: 1000,
+  baseURL: "https://henriqueserra.com.br/sgl-uesc/api/v1",
+  timeout: 10000,
   headers: {
     "Access-Control-Allow-Origin": "*",
     Accept: "application/json",

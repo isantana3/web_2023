@@ -5,7 +5,7 @@ import { type IDefaultResponse } from "service/server.types";
 
 export const laboratoryService = {
   getLaboratories: async (): Promise<IDefaultResponse<ILaboratory[]>> => {
-    const { status, data } = await api.get("/laboratory");
+    const { status, data } = await api.get("/rooms");
     return {
       status,
       data,
@@ -13,7 +13,7 @@ export const laboratoryService = {
   },
 
   getLaboratory: async (id: string): Promise<IDefaultResponse<ILaboratory>> => {
-    const { status, data } = await api.get(`/laboratory/${id}`);
+    const { status, data } = await api.get(`/rooms/${id}`);
     return {
       status,
       data,
@@ -22,9 +22,9 @@ export const laboratoryService = {
 
   updateLaboratory: async (
     id: string,
-    lab: ILaboratory
+    lab: Omit<ILaboratory, "_id">
   ): Promise<IDefaultResponse<ILaboratory>> => {
-    const { status, data } = await api.put(`/laboratory/${id}`, lab);
+    const { status, data } = await api.patch(`/rooms/${id}`, lab);
     return {
       status,
       data,
@@ -34,7 +34,7 @@ export const laboratoryService = {
   deleteLaboratory: async (
     id: string
   ): Promise<IDefaultResponse<ILaboratory>> => {
-    const { status, data } = await api.delete(`/laboratory/${id}`);
+    const { status, data } = await api.delete(`/rooms/${id}`);
     return {
       status,
       data,
@@ -42,9 +42,9 @@ export const laboratoryService = {
   },
 
   createLaboratory: async (
-    lab: ILaboratory
+    lab: Omit<ILaboratory, "_id">
   ): Promise<IDefaultResponse<ILaboratory>> => {
-    const { status, data } = await api.post("/laboratory", lab);
+    const { status, data } = await api.post("/rooms", lab);
     return {
       status,
       data,

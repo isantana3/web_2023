@@ -1,5 +1,7 @@
+import { type ILocation } from "./location.types";
+
 export interface ILaboratory {
-  id?: string;
+  _id: string;
   label: string;
-  location: string;
+  pavilion: ILocation;
 }

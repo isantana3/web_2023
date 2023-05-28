@@ -1,6 +1,8 @@
+import { type ILaboratory } from "./laboratory.types";
+
 export interface IInfra {
-  id?: string;
-  roomId: string;
+  _id: string;
+  room: ILaboratory;
   label: string;
   code: string;
 }

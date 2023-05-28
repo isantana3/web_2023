@@ -1,17 +1,11 @@
-export type UserType = "ADMINISTRADOR" | "USUARIO" | "GESTOR";
-
-export type UserStatusType = "INATIVO" | "ATIVO";
+export type UserType = "admin" | "user" | "manager";
 
 export interface IUser {
-  id: string;
-  userType: UserType;
+  _id: string;
+  role: UserType;
   name: string;
   email: string;
-  token: string;
   registration: number;
-  phone: number;
-  position: string;
-  organ: string;
+  office: string;
   password?: string;
-  status?: UserStatusType;
 }

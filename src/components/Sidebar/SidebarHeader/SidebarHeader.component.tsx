@@ -17,9 +17,9 @@ export function SidebarHeader(): JSX.Element {
         <Icons.UserIcon color="#fff" />
       </IconContainer>
       <Label>{user.name}</Label>
-      <Label>{user.userType}</Label>
+      <Label>{user.role}</Label>
       <EditButon>
-        <Icons.EditIcon /> Editar perfil
+        <Icons.EditIcon /> Edit r perfil
       </EditButon>
     </Container>
   );

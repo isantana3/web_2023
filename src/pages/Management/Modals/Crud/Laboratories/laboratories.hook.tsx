@@ -48,7 +48,7 @@ export function Laboratories(): IUseLaboratories {
     return (
       <EditLaboratoriesModal
         onSuccess={(data: ILaboratory) => {
-          setData((prev) => [...prev.filter((i) => i.id !== data.id), data]);
+          setData((prev) => [...prev.filter((i) => i._id !== data._id), data]);
         }}
         isVisible={isVisibleEditLaboratory}
         toggleModal={toggleEditLaboratory}
@@ -66,11 +66,11 @@ export function Laboratories(): IUseLaboratories {
             window.confirm(`Realmente deseja deletar ${data[rowId].label} ?`)
           ) {
             const { status } = await laboratoryService.deleteLaboratory(
-              data[rowId].id ?? ""
+              data[rowId]._id ?? ""
             );
             if (status === 200) {
               setData((prev) =>
-                prev.filter((item) => item.id !== data[rowId].id)
+                prev.filter((item) => item._id !== data[rowId]._id)
               );
               toast.success("Laboratório deletado com sucesso!");
             } else {
@@ -90,9 +90,9 @@ export function Laboratories(): IUseLaboratories {
       <Table
         headerIcon={<Icons.AddIcon onClick={toggleLaboratory} />}
         title="Laboratórios"
-        header={["ID", "Nome", "Localização"]}
+        header={["ID", "Nome", "Pavilhão"]}
         actions={Actions}
-        keys={["id", "label", "location"]}
+        keys={["_id", "label", "pavilion.label"]}
         row={data}
         onClickRow={(id: number) => {
           setLaboratory({ laboratory: data[id] });

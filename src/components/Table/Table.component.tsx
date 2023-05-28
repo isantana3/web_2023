@@ -1,3 +1,4 @@
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { Icons } from "global/icons.constants";
 
 import { type ITableProps } from "./Table.types";
@@ -22,6 +23,8 @@ export function Table({
   headerIcon,
   onClickRow,
 }: ITableProps): JSX.Element {
+  const [parent] = useAutoAnimate();
+
   return (
     <Container>
       {title && (
@@ -43,7 +46,7 @@ export function Table({
             ) : undefined}
           </Row>
         </TableHeader>
-        <TableBody>
+        <TableBody ref={parent}>
           {row.map((cell, row) => (
             <Row
               onClick={() => {
@@ -53,9 +56,15 @@ export function Table({
               }}
               key={`tr-${row}`}
             >
-              {keys.map((key, index) => (
-                <Cell key={`td-${row}-${index}`}>{cell[key]}</Cell>
-              ))}
+              {keys.map((key: string, index) =>
+                key.includes(".") ? (
+                  <Cell key={`td-${row}-${index}`}>
+                    {cell[key.split(".")[0]][key.split(".")[1]]}
+                  </Cell>
+                ) : (
+                  <Cell key={`td-${row}-${index}`}>{cell[key]}</Cell>
+                )
+              )}
               {actions ? <Cell>{actions(row)}</Cell> : undefined}
             </Row>
           ))}

@@ -22,37 +22,53 @@ export function Locations({
   const { locations } = useLocation();
 
   async function onSubmit(newData: ILocation): Promise<void> {
-    const { label } = newData;
+    const { label, description, observation } = newData;
     const { data, status } = await locationService.updateLocation(
-      locations.id ?? "",
+      locations._id,
       {
         label,
+        description,
+        observation,
       }
     );
 
     if (status !== 200) {
-      toast.error("Erro ao editar localização");
+      toast.error("Erro ao editar Pavilhão");
       return;
     }
 
-    toast.success("Localização editado com sucesso");
+    toast.success("Pavilhão editado com sucesso");
     toggleModal();
     onSuccess(data);
   }
 
   return (
     <Modal
-      title={`Editando item ${locations.label}`}
+      title={`Editando ${locations.label}`}
       isVisible={isVisible}
       toggleModal={toggleModal}
     >
       <Form onSubmit={onSubmit} schema={LocationsSchema}>
         <Input
-          placeholder="Parvilhão de exatas"
-          label="Localização"
+          placeholder="Parvilhão Marques ..."
+          label="Pavilhão"
           name="label"
           type="text"
           defaultValue={locations.label}
+        />
+        <Input
+          placeholder="Parvilhão de exatas"
+          label="Descrição"
+          name="description"
+          type="text"
+          defaultValue={locations.description}
+        />
+        <Input
+          placeholder="Não possui elevador ..."
+          label="Observação"
+          name="observation"
+          type="text"
+          defaultValue={locations.observation}
         />
         <ButtonWrapper>
           <Button
