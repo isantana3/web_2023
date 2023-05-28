@@ -11,7 +11,7 @@ import { useModal } from "hooks/modals.hook";
 
 import { CreateLocationsModal, EditLocationsModal } from "../..";
 
-import { type IUseLocations } from "./Locations.types";
+import { type IUseLocations } from "./locations.types";
 import { type ILocation } from "global/location.types";
 
 export function Locations(): IUseLocations {

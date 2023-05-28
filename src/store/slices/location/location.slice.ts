@@ -4,7 +4,7 @@ import { type ILocationSlice } from "./locationSlice.types";
 import { type ILocation } from "global/location.types";
 
 const initialState: ILocationSlice = {
-  locations: [{}] as ILocation[],
+  locations: {} as ILocation,
 };
 
 const slice = createSlice({
