@@ -7,6 +7,7 @@ export interface IButtonProps {
   icon?: JSX.Element;
   color?: keyof typeof Theme.Components.button;
   type?: "button" | "submit" | "reset";
+  center?: boolean;
 }
 
-export type IButtonStylesType = Pick<IButtonProps, "color">;
+export type IButtonStylesType = Pick<IButtonProps, "color" | "center">;

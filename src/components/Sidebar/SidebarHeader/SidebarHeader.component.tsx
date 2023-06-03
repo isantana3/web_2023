@@ -1,4 +1,5 @@
 import { Icons } from "global/icons.constants";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "store/slices/auth/useAuth";
 
 import {
@@ -10,6 +11,7 @@ import {
 
 export function SidebarHeader(): JSX.Element {
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -18,8 +20,12 @@ export function SidebarHeader(): JSX.Element {
       </IconContainer>
       <Label>{user.name}</Label>
       <Label>{user.role}</Label>
-      <EditButon>
-        <Icons.EditIcon /> Edit r perfil
+      <EditButon
+        onClick={() => {
+          navigate("/configuracoes");
+        }}
+      >
+        <Icons.EditIcon /> Editar perfil
       </EditButon>
     </Container>
   );

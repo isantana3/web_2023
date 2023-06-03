@@ -8,9 +8,15 @@ export function Button({
   label,
   color,
   type,
+  center = false,
 }: IButtonProps): JSX.Element {
   return (
-    <Container type={type} color={color} onClick={callback ?? undefined}>
+    <Container
+      center={center}
+      type={type}
+      color={color}
+      onClick={callback ?? undefined}
+    >
       {icon && icon}
       <ButtonLabel>{label}</ButtonLabel>
     </Container>
