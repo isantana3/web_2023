@@ -82,7 +82,7 @@ export function Laboratories({
             label:
               locations.find((c) => c._id === laboratory.pavilion._id)?.label ??
               "",
-            value: laboratory.pavilion.label,
+            value: laboratory.pavilion._id,
           }}
           options={locations.map((item) => {
             return {

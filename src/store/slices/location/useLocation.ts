@@ -9,7 +9,7 @@ import { type ILocationSlice, type IUseLocation } from "./locationSlice.types";
 export function useLocation(): IUseLocation {
   const dispatch = useDispatch<AppDispatchType>();
   const { locations } = useSelector(
-    (state: RootStateType) => state.calendarReducer
+    (state: RootStateType) => state.locationReducer
   );
 
   return {

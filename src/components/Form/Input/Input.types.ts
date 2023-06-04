@@ -5,7 +5,7 @@ export interface IInputProps {
   type: HTMLInputTypeAttribute;
   placeholder: string;
   label: string;
-  defaultValue?: string;
+  defaultValue?: string | number;
   width?: number;
   disabled?: boolean;
 }

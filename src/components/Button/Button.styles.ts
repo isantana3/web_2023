@@ -41,6 +41,11 @@ export const Container = styled.button<IButtonStylesType>`
         color: ${({ theme }) => theme.Components.button.primary};
       }
     `}
+
+  :disabled {
+    filter: grayscale(1);
+    cursor: not-allowed;
+  }
 `;
 
 export const ButtonLabel = styled.span`

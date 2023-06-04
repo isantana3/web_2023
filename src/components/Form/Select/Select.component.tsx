@@ -22,7 +22,7 @@ export function CustomSelect({
     <Controller
       control={control}
       name={name}
-      defaultValue={options[0]}
+      defaultValue={defaultValue?.value}
       render={({ field: { onChange, value }, formState }) => (
         <Container>
           <Label>{label}</Label>
@@ -30,7 +30,6 @@ export function CustomSelect({
             styles={{
               menuPortal: (base) => ({ ...base, fontSize: 14 }),
             }}
-            defaultValue={defaultValue}
             menuPosition="fixed"
             menuPortalTarget={document.body}
             options={options}

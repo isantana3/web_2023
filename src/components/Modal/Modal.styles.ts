@@ -42,7 +42,7 @@ export const ModalContent = styled.div`
   justify-content: center;
   min-width: 30vw;
   min-height: fit-content;
-  max-height: 50vh;
+  max-height: 80vh;
   overflow: hidden;
 
   @media screen and (max-width: 1400px) {

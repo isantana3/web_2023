@@ -9,12 +9,14 @@ export function Button({
   color,
   type,
   center = false,
+  disabled,
 }: IButtonProps): JSX.Element {
   return (
     <Container
       center={center}
       type={type}
       color={color}
+      disabled={disabled}
       onClick={callback ?? undefined}
     >
       {icon && icon}

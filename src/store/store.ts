@@ -4,7 +4,8 @@ import authReducer from "./slices/auth/auth.slice";
 import infraReducer from "./slices/infra/infra.slice";
 import laboratoryReducer from "./slices/laboratory/laboratory.slice";
 import langReducer from "./slices/lang/lang.slice";
-import calendarReducer from "./slices/location/location.slice";
+import locationReducer from "./slices/location/location.slice";
+import userReducer from "./slices/user/user.slice";
 
 const store = configureStore({
   reducer: {
@@ -12,7 +13,8 @@ const store = configureStore({
     infraReducer,
     laboratoryReducer,
     langReducer,
-    calendarReducer,
+    locationReducer,
+    userReducer,
   },
 });
 

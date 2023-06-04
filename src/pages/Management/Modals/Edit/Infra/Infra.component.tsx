@@ -52,10 +52,12 @@ export function Infra({
   };
 
   useEffect(() => {
+    if (helpers.isObjectEmpty(infra)) return;
+
     getLaboratories().catch((err) => {
       toast.error(err.message);
     });
-  }, []);
+  }, [infra]);
 
   if (helpers.isObjectEmpty(infra)) return <></>;
 
@@ -86,7 +88,7 @@ export function Infra({
           defaultValue={{
             label:
               laboratory.find((c) => c._id === infra.room._id)?.label ?? "",
-            value: infra.label,
+            value: infra.room._id,
           }}
           options={laboratory.map((item) => {
             return {

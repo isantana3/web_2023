@@ -14,7 +14,7 @@ export const userService = {
 
   updateUser: async (
     id: string,
-    data: Omit<IUser, "_id">
+    data: Omit<IUser, "_id" & "password">
   ): Promise<IDefaultResponse<IUser>> => {
     return await api.patch(`/users/${id}`, data);
   },

@@ -3,7 +3,12 @@
 import { Table } from "components/Table";
 import { Tabs } from "components/Tabs";
 
-import { UseInfraCrud, UseLaboratoriesCrud, UseLocationsCrud } from "./Modals";
+import {
+  UseInfraCrud,
+  UseLaboratoriesCrud,
+  UseLocationsCrud,
+  UseUsersCrud,
+} from "./Modals";
 
 import { Header, SubTitle, Title, Wrapper } from "./Management.styles";
 
@@ -26,14 +31,22 @@ export function Management(): JSX.Element {
     table: locationsTable,
   } = UseLocationsCrud();
 
+  const {
+    create: createUsers,
+    edit: editUsers,
+    table: usersTable,
+  } = UseUsersCrud();
+
   return (
     <Wrapper>
       {editInfra.modal}
       {editLab.modal}
       {editLocations.modal}
+      {editUsers.modal}
       {createInfra.modal}
       {createLab.modal}
       {createLocations.modal}
+      {createUsers.modal}
       <Header>
         <Title>Gestão</Title>
         <SubTitle>Cadastre, edite e exclua os seus módulos</SubTitle>
@@ -50,13 +63,7 @@ export function Management(): JSX.Element {
             row={[]}
           />,
           infraTable,
-          // ! TODO
-          <Table
-            title="Usuários"
-            header={["Laboratório", "Data", "Horario"]}
-            keys={["id", "time"]}
-            row={[]}
-          />,
+          usersTable,
           locationsTable,
         ]}
         headers={[
