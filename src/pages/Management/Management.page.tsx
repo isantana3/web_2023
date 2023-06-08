@@ -71,7 +71,7 @@ export function Management(): JSX.Element {
           "Agendamentos",
           "Infraestrutura",
           "Usuários",
-          "Localização",
+          "Pavilhões",
         ]}
       />
     </Wrapper>

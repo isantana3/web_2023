@@ -11,6 +11,7 @@ export function UserRoutes(): JSX.Element {
       <Route path="*" element={<Dashboard />} />
       <Route path="/configuracoes" element={<User />} />
       <Route path="/reservas" element={<Bookings />} />
+      <Route path="/reserva/:id" element={<Booking />} />
       <Route path="/reserva" element={<Booking />} />
       <Route path="/cadastros" element={<Management />} />
     </Routes>

@@ -20,11 +20,13 @@ export function Users(): IUseUser {
   const { toggleModal: toggleEditUsers, isVisible: isVisibleEditUsers } =
     useModal();
   const { setUser } = useUser();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // Lista dos itens da entidade
   const getUserss = async (): Promise<void> => {
     const { data } = await userService.getUsers();
     setData(data);
+    setIsLoading(false);
   };
 
   // Modal de criação da entidade
@@ -97,6 +99,7 @@ export function Users(): IUseUser {
           setUser({ user: data[id] });
           toggleEditUsers();
         }}
+        isLoading={isLoading}
       />
     );
   }

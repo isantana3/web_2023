@@ -12,6 +12,7 @@ export function CustomSelect({
   options,
   label,
   defaultValue,
+  placeholder,
 }: ISelectProps): JSX.Element {
   const {
     formState: { errors },
@@ -24,11 +25,20 @@ export function CustomSelect({
       name={name}
       defaultValue={defaultValue?.value}
       render={({ field: { onChange, value }, formState }) => (
-        <Container>
+        <Container error={!!errors[name]?.message}>
           <Label>{label}</Label>
           <Select
+            placeholder={placeholder}
             styles={{
-              menuPortal: (base) => ({ ...base, fontSize: 14 }),
+              control: (base) => ({
+                ...base,
+                padding: "1px",
+                borderRadius: "8px",
+              }),
+              menuPortal: (base) => ({
+                ...base,
+                fontSize: 14,
+              }),
             }}
             menuPosition="fixed"
             menuPortalTarget={document.body}

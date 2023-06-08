@@ -16,6 +16,7 @@ import { type ILocation } from "global/location.types";
 
 export function Locations(): IUseLocations {
   const [data, setData] = useState<ILocation[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const { toggleModal: toggleLocation, isVisible: isVisibleLocation } =
     useModal();
   const { toggleModal: toggleEditLocation, isVisible: isVisibleEditLocation } =
@@ -26,6 +27,7 @@ export function Locations(): IUseLocations {
   const getLocations = async (): Promise<void> => {
     const { data } = await locationService.getLocations();
     setData(data);
+    setIsLoading(false);
   };
 
   // Modal de criação da entidade
@@ -96,6 +98,7 @@ export function Locations(): IUseLocations {
           setLocation({ locations: data[id] });
           toggleEditLocation();
         }}
+        isLoading={isLoading}
       />
     );
   }

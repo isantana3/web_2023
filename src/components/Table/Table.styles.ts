@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+import { Theme } from "styles/Themes";
 
 export const Container = styled.div`
   display: flex;
@@ -46,6 +47,28 @@ export const Row = styled.tr`
   }
 `;
 
+const SkelletonAnimation = keyframes`
+  0% {
+    background-color: ${Theme.Configurations.background};
+  }
+  50% {
+    background-color: ${Theme.Configurations.stroke}85;
+  }
+  100% {
+    background-color: ${Theme.Configurations.background};
+  }
+`;
+
+export const RowSkelleton = styled.tr`
+  animation: ${SkelletonAnimation} 1.5s infinite ease-in-out;
+
+  td {
+    padding: 20px 24px;
+    color: transparent;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+`;
+
 export const Cell = styled.td`
   padding: 12px 24px;
   font-family: "Montserrat", sans-serif;
@@ -58,7 +81,12 @@ export const Cell = styled.td`
 
 export const TableBody = styled.tbody``;
 
-export const TableHeader = styled.thead``;
+export const TableHeader = styled.thead`
+  tr:hover {
+    background-color: transparent !important;
+    cursor: default;
+  }
+`;
 
 export const TableTitle = styled.th`
   padding: 16px 24px;

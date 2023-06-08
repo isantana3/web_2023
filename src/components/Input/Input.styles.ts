@@ -1,37 +1,25 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { type InputStylesType } from "./Input.types";
 
 export const Container = styled.div<InputStylesType>`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: start;
+  flex-direction: flex;
+  justify-content: space-between;
+  align-items: center;
   gap: 10px;
+  padding: 10px 14px;
   width: ${({ width }) => width ?? 100}%;
-
-  ${({ error }) =>
-    error &&
-    css`
-      * {
-        border-color: red !important;
-        color: red !important;
-      }
-      input::placeholder {
-        color: red;
-        opacity: 1;
-      }
-    `}
+  border: 1px solid ${({ theme }) => theme.Components.input.stroke};
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.15);
+  border-radius: 8px;
 `;
 
 export const InputComponent = styled.input`
-  border: 1px solid ${({ theme }) => theme.Components.input.stroke};
-  padding: 10px 14px;
   color: #000;
   font-weight: 500;
-  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.15);
-  border-radius: 8px;
   width: 100%;
+  height: 100%;
   background-color: transparent !important;
 
   ::placeholder {

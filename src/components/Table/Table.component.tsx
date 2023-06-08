@@ -1,4 +1,3 @@
-import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { Icons } from "global/icons.constants";
 
 import { type ITableProps } from "./Table.types";
@@ -7,6 +6,7 @@ import {
   Cell,
   Container,
   Row,
+  RowSkelleton,
   TableBody,
   TableContainer,
   TableHeader,
@@ -22,8 +22,55 @@ export function Table({
   keys,
   headerIcon,
   onClickRow,
+  isLoading,
 }: ITableProps): JSX.Element {
-  const [parent] = useAutoAnimate();
+  if (isLoading) {
+    return (
+      <Container>
+        {title && (
+          <Title>
+            {title}
+            {headerIcon}
+          </Title>
+        )}
+        <TableContainer>
+          <TableHeader>
+            <Row key={`th-0`}>
+              {header.map((item) => (
+                <TableTitle key={`th-${item}`}>{item}</TableTitle>
+              ))}
+              {actions ? (
+                <TableTitle>
+                  <Icons.DotsIcon />{" "}
+                </TableTitle>
+              ) : undefined}
+            </Row>
+          </TableHeader>
+          <TableBody>
+            {/* Skelleton */}
+            <RowSkelleton>
+              {keys.map((key: string, index) => (
+                <Cell key={`td-R-${index}`}>Lorem ipsum dolor</Cell>
+              ))}
+              {actions ? <Cell /> : undefined}
+            </RowSkelleton>
+            <RowSkelleton>
+              {keys.map((key: string, index) => (
+                <Cell key={`td-R-${index}`}>Lorem ipsum dolor</Cell>
+              ))}
+              {actions ? <Cell /> : undefined}
+            </RowSkelleton>
+            <RowSkelleton>
+              {keys.map((key: string, index) => (
+                <Cell key={`td-R-${index}`}>Lorem ipsum dolor</Cell>
+              ))}
+              {actions ? <Cell /> : undefined}
+            </RowSkelleton>
+          </TableBody>
+        </TableContainer>
+      </Container>
+    );
+  }
 
   return (
     <Container>
@@ -46,7 +93,19 @@ export function Table({
             ) : undefined}
           </Row>
         </TableHeader>
-        <TableBody ref={parent}>
+        <TableBody>
+          {/* Skelleton */}
+          {isLoading &&
+            row.map((cell, row) => (
+              <RowSkelleton key={`tr-${row}`}>
+                {keys.map((key: string, index) => (
+                  <Cell key={`td-${row}-${index}`} />
+                ))}
+                {actions ? <Cell /> : undefined}
+              </RowSkelleton>
+            ))}
+
+          {/* Component */}
           {row.map((cell, row) => (
             <Row
               onClick={() => {

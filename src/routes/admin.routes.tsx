@@ -12,6 +12,7 @@ export function AdminRoutes(): JSX.Element {
       <Route path="/configuracoes" element={<Admin />} />
       <Route path="/reservas" element={<Bookings />} />
       <Route path="/reserva/:id" element={<Booking />} />
+      <Route path="/reserva" element={<Booking />} />
       <Route path="/cadastros" element={<Management />} />
     </Routes>
   );

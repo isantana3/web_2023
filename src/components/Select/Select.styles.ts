@@ -3,7 +3,13 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  overflow: hidden;
+  gap: 10px;
+
+  * {
+    font-size: 14px !important;
+  }
+`;
+
+export const Label = styled.div`
+  font-size: 14px;
 `;

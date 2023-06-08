@@ -1,6 +1,7 @@
 import { ReactComponent as AddIcon } from "assets/icons/add.svg";
 import { ReactComponent as LeftArrowIcon } from "assets/icons/arrow_left.svg";
 import { ReactComponent as RightArrowIcon } from "assets/icons/arrow_right.svg";
+import { ReactComponent as BuildingIcon } from "assets/icons/building.svg";
 import { ReactComponent as BulletinIcon } from "assets/icons/bulletin.svg";
 import { ReactComponent as BulletinNewIcon } from "assets/icons/bulletin_new.svg";
 import { ReactComponent as ChevronIcon } from "assets/icons/chevron.svg";
@@ -15,6 +16,8 @@ import { ReactComponent as LaboratoryIcon } from "assets/icons/laboratory.svg";
 import { ReactComponent as Managementcon } from "assets/icons/management.svg";
 import { ReactComponent as PendingIcon } from "assets/icons/pending.svg";
 import { ReactComponent as RejectedIcon } from "assets/icons/rejected.svg";
+import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
+import { ReactComponent as TimeIcon } from "assets/icons/time.svg";
 import { ReactComponent as UserIcon } from "assets/icons/user.svg";
 
 export const Icons = {
@@ -36,4 +39,7 @@ export const Icons = {
   DotsIcon,
   RejectedIcon,
   AddIcon,
+  SearchIcon,
+  TimeIcon,
+  BuildingIcon,
 };

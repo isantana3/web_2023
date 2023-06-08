@@ -16,6 +16,7 @@ import { type ILaboratory } from "global/laboratory.types";
 
 export function Laboratories(): IUseLaboratories {
   const [data, setData] = useState<ILaboratory[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const { toggleModal: toggleLaboratory, isVisible: isVisibleLaboratory } =
     useModal();
   const {
@@ -28,6 +29,7 @@ export function Laboratories(): IUseLaboratories {
   const getLaboratories = async (): Promise<void> => {
     const { data } = await laboratoryService.getLaboratories();
     setData(data);
+    setIsLoading(false);
   };
 
   // Modal de criação da entidade
@@ -98,6 +100,7 @@ export function Laboratories(): IUseLaboratories {
           setLaboratory({ laboratory: data[id] });
           toggleEditLaboratory();
         }}
+        isLoading={isLoading}
       />
     );
   }

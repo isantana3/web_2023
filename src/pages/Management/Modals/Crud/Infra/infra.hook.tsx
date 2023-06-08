@@ -20,11 +20,13 @@ export function Infra(): IUseInfra {
   const { toggleModal: toggleEditInfra, isVisible: isVisibleEditInfra } =
     useModal();
   const { setInfra } = useInfra();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // Lista dos itens da entidade
   const getInfras = async (): Promise<void> => {
     const { data } = await infraService.getInfras();
     setData(data);
+    setIsLoading(false);
   };
 
   // Modal de criação da entidade
@@ -95,6 +97,7 @@ export function Infra(): IUseInfra {
           setInfra({ infra: data[id] });
           toggleEditInfra();
         }}
+        isLoading={isLoading}
       />
     );
   }

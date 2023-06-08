@@ -21,7 +21,7 @@ export function Input({
   } = useFormContext();
 
   return (
-    <Container width={width}>
+    <Container error={!!errors[name]?.message} width={width}>
       <Label>{label}</Label>
       <InputComponent
         disabled={disabled}

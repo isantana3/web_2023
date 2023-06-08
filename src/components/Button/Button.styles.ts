@@ -5,6 +5,7 @@ import { type IButtonStylesType } from "./Button.types";
 export const Container = styled.button<IButtonStylesType>`
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: ${({ center }) => (center ? "center" : "space-between")};
   padding: 8px 16px;
   gap: 6px;

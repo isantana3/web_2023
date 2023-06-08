@@ -8,4 +8,9 @@ export interface ISelectProps {
   name: string;
   label: string;
   defaultValue?: IOptions;
+  placeholder?: string;
 }
+
+export type SelectStylesType = {
+  error?: boolean;
+};

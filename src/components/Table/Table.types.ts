@@ -7,4 +7,5 @@ export interface ITableProps {
   actions?: (any: any) => JSX.Element;
   headerIcon?: JSX.Element;
   onClickRow?: (row: number) => void;
+  isLoading?: boolean;
 }

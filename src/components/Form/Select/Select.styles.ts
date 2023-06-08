@@ -1,9 +1,20 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const Container = styled.div`
+import { type SelectStylesType } from "./Select.types";
+
+export const Container = styled.div<SelectStylesType>`
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  ${({ error }) =>
+    error &&
+    css`
+      * {
+        border-color: red !important;
+        color: red !important;
+      }
+    `}
 
   * {
     font-size: 14px !important;
