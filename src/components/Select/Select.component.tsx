@@ -1,4 +1,4 @@
-import { type ReactNode, useState } from "react";
+import { useState } from "react";
 
 import { Icons } from "global/icons.constants";
 import Select, {
@@ -31,8 +31,10 @@ export function CustomSelect({
       <Select
         isMulti={isMulti}
         components={{
-          Control: ({ children, ...rest }: { children: ReactNode }) => (
+          // eslint-disable-next-line react/prop-types
+          Control: ({ children, ...rest }) => (
             <components.Control {...rest}>
+              {" "}
               {Icon && <Icon />} {children}
             </components.Control>
           ),
