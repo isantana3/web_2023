@@ -1,5 +1,4 @@
 import { Booking } from "pages/Booking";
-import { Bookings } from "pages/Bookings";
 import { User } from "pages/Configurations";
 import { Dashboard } from "pages/Dashboard";
 import { Management } from "pages/Management";
@@ -10,10 +9,10 @@ export function UserRoutes(): JSX.Element {
     <Routes>
       <Route path="*" element={<Dashboard />} />
       <Route path="/configuracoes" element={<User />} />
-      <Route path="/reservas" element={<Bookings />} />
+      {/* <Route path="/reservas" element={<Bookings />} /> */}
       <Route path="/reserva/:id" element={<Booking />} />
       <Route path="/reserva" element={<Booking />} />
-      <Route path="/cadastros" element={<Management />} />
+      <Route path="/gestao" element={<Management />} />
     </Routes>
   );
 }

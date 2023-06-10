@@ -19,3 +19,12 @@ export const times: IOptions[] = [
   { value: "20:20", label: "20: 20" },
   { value: "21:10", label: "21: 10" },
 ];
+
+export const days: IOptions[] = [
+  { value: 0, label: "Segunda-Feira" },
+  { value: 1, label: "Terça-Feira" },
+  { value: 2, label: "Quarta-Feira" },
+  { value: 3, label: "Quinta-Feira" },
+  { value: 4, label: "Sexta-Feira" },
+  { value: 5, label: "Sabado" },
+];

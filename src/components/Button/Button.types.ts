@@ -11,6 +11,7 @@ export interface IButtonProps {
   disabled?: boolean;
   iconStroke?: boolean;
   iconPosition?: "right" | "left";
+  border?: keyof typeof Theme.Components.button;
 }
 
 export type IButtonStylesType = Pick<

@@ -14,6 +14,7 @@ export const Container = styled.button<IButtonStylesType>`
   border: 1px solid
     ${({ theme, color }) => theme.Components.button[color ?? "primary"]};
   border-radius: 6px;
+  height: fit-content;
   transition: all 100ms ease-in-out;
 
   &:hover {
@@ -72,4 +73,7 @@ export const ButtonLabel = styled.span`
   display: flex;
   align-items: center;
   color: #ffffff;
+  word-wrap: normal;
+  word-break: keep-all;
+  white-space: nowrap;
 `;

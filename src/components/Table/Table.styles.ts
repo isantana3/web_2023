@@ -17,6 +17,7 @@ export const Title = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   font-family: "Montserrat", sans-serif;
   font-style: normal;
   font-weight: 500;

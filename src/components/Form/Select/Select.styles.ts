@@ -6,6 +6,8 @@ export const Container = styled.div<SelectStylesType>`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-width: 150px;
+  width: ${({ width }) => width ?? 100}%;
 
   ${({ error }) =>
     error &&
@@ -14,9 +16,7 @@ export const Container = styled.div<SelectStylesType>`
         border-color: red !important;
         color: red !important;
       }
-    `}
-
-  * {
+    `} * {
     font-size: 14px !important;
   }
 `;

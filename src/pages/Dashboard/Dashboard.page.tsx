@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-key */
 
 import { Icons } from "global/icons.constants";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "store/slices/auth/useAuth";
 
 import { Button } from "components/Button";
@@ -33,6 +34,7 @@ export function Dashboard(): JSX.Element {
   };
 
   const { isVisible, toggleModal } = useModal();
+  const navigate = useNavigate();
 
   return (
     <Wrapper>
@@ -64,6 +66,14 @@ export function Dashboard(): JSX.Element {
         <SubTitle>Suas últimas atividades podem ser vistas abaixo </SubTitle>
       </Header>
       <Table
+        headerIcon={
+          <Button
+            callback={() => {
+              navigate("/reserva");
+            }}
+            label="Nova Reserva"
+          />
+        }
         title="Suas reservas"
         header={["Laboratório", "Status", ""]}
         actions={Actions}

@@ -8,9 +8,11 @@ export interface ISelectProps {
   name: string;
   label: string;
   defaultValue?: IOptions;
+  width?: number;
   placeholder?: string;
 }
 
 export type SelectStylesType = {
   error?: boolean;
+  width?: number;
 };

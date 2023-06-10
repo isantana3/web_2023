@@ -16,12 +16,12 @@ export const routes: IRoutes[] = [
     users: "ALL",
     icon: "HomeIcon",
   },
-  {
-    name: "Reservas",
-    path: "/reservas",
-    users: "ALL",
-    icon: "BulletinIcon",
-  },
+  // {
+  //   name: "Reservas",
+  //   path: "/reservas",
+  //   users: "ALL",
+  //   icon: "BulletinIcon",
+  // },
   {
     name: "Configurações",
     path: "/configuracoes",
@@ -29,8 +29,8 @@ export const routes: IRoutes[] = [
     icon: "ConfigIcon",
   },
   {
-    name: "Cadastros",
-    path: "/cadastros",
+    name: "Gestão",
+    path: "/gestao",
     users: ["admin", "manager"],
     icon: "Managementcon",
   },
