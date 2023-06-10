@@ -1,11 +1,19 @@
 import { api } from "service/server";
 
 import { type IUser } from "global/user.types";
-import { type IDefaultResponse } from "service/server.types";
+import {
+  type IDefaultPaginated,
+  type IDefaultResponse,
+} from "service/server.types";
 
 export const userService = {
-  getUsers: async (): Promise<IDefaultResponse<IUser[]>> => {
-    return await api.get("/users");
+  getUsers: async ({
+    page = 1,
+    limit = 10,
+  }: IDefaultPaginated): Promise<IDefaultResponse<IUser[]>> => {
+    return await api.get("/users", {
+      params: { page, limit },
+    });
   },
 
   getUser: async (id: string): Promise<IDefaultResponse<IUser>> => {

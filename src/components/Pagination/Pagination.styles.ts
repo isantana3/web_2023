@@ -7,6 +7,7 @@ export const Container = styled.div`
   padding: 10px;
   justify-content: end;
   gap: 16px;
+  margin-top: 2rem;
 `;
 
 export const PageButton = styled.button`
@@ -24,4 +25,8 @@ export const PageButton = styled.button`
   align-items: center;
   letter-spacing: -0.001em;
   color: #5f6d7e;
+
+  :disabled {
+    cursor: not-allowed;
+  }
 `;

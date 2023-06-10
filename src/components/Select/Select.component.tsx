@@ -7,9 +7,11 @@ import Select, {
   type SingleValue,
 } from "react-select";
 
-import { type ISelectProps } from "./Select.types";
+import { type IOptions, type ISelectProps } from "./Select.types";
 
 import { Container, Label } from "./Select.styles";
+
+type ValueType = MultiValue<string | number> | SingleValue<string | number>;
 
 export function CustomSelect({
   options,
@@ -21,9 +23,9 @@ export function CustomSelect({
   isMulti,
 }: ISelectProps): JSX.Element {
   const Icon = icon ? Icons[icon] : undefined;
-  const [value, setValue] = useState<
-    MultiValue<string | number> | SingleValue<string | number>
-  >(defaultValue?.value ?? "");
+  const [value, setValue] = useState<ValueType>(
+    (defaultValue as unknown as ValueType) ?? ""
+  );
 
   return (
     <Container>
@@ -51,7 +53,7 @@ export function CustomSelect({
         value={value}
         onChange={(val) => {
           setValue(val);
-          onChange(val);
+          onChange(val as unknown as IOptions);
         }}
       />
     </Container>

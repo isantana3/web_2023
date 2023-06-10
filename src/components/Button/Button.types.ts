@@ -9,9 +9,11 @@ export interface IButtonProps {
   type?: "button" | "submit" | "reset";
   center?: boolean;
   disabled?: boolean;
+  iconStroke?: boolean;
+  iconPosition?: "right" | "left";
 }
 
 export type IButtonStylesType = Pick<
   IButtonProps,
-  "color" | "center" | "disabled"
+  "color" | "center" | "disabled" | "iconStroke"
 >;

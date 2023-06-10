@@ -29,7 +29,7 @@ export function Booking(): JSX.Element {
   const [laboratory, setLaboratory] = useState<ILaboratory[]>([]);
   const navigate = useNavigate();
   const getLaboratories = async (): Promise<void> => {
-    const { data } = await laboratoryService.getLaboratories();
+    const { data } = await laboratoryService.getLaboratoriesNormal();
     setLaboratory(data);
   };
 

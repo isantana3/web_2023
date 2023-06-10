@@ -8,7 +8,7 @@ export const Container = styled.button<IButtonStylesType>`
   align-items: center;
   justify-content: ${({ center }) => (center ? "center" : "space-between")};
   padding: 8px 16px;
-  gap: 6px;
+  gap: 10px;
   background: ${({ theme, color }) =>
     theme.Components.button[color ?? "primary"]};
   border: 1px solid
@@ -20,14 +20,28 @@ export const Container = styled.button<IButtonStylesType>`
     opacity: 90%;
   }
 
-  svg {
+  svg,
+  path {
     width: 20px;
     height: 20px;
-
-    * {
-      fill: #fff;
-    }
   }
+
+  ${({ iconStroke }) =>
+    iconStroke
+      ? css`
+          svg {
+            * {
+              stroke: #fff;
+            }
+          }
+        `
+      : css`
+          svg {
+            * {
+              fill: #fff;
+            }
+          }
+        `}
 
   ${({ color }) =>
     color === "transparent" &&

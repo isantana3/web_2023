@@ -6,6 +6,7 @@ import { userService } from "service/user/user.service";
 import { useUser } from "store/slices/user/useUser";
 
 import { Button } from "components/Button";
+import { Pagination } from "components/Pagination";
 import { Table } from "components/Table";
 import { useModal } from "hooks/modals.hook";
 
@@ -15,6 +16,7 @@ import { type IUseUser } from "./user.types";
 import { type IUser } from "global/user.types";
 
 export function Users(): IUseUser {
+  const [page, setPage] = useState<number>(1);
   const [data, setData] = useState<IUser[]>([]);
   const { toggleModal: toggleUsers, isVisible: isVisibleUsers } = useModal();
   const { toggleModal: toggleEditUsers, isVisible: isVisibleEditUsers } =
@@ -23,8 +25,8 @@ export function Users(): IUseUser {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // Lista dos itens da entidade
-  const getUserss = async (): Promise<void> => {
-    const { data } = await userService.getUsers();
+  const getUsers = async (page: number): Promise<void> => {
+    const { data } = await userService.getUsers({ page, limit: 2 });
     setData(data);
     setIsLoading(false);
   };
@@ -75,7 +77,7 @@ export function Users(): IUseUser {
               );
               toast.success("Item deletado com sucesso!");
             } else {
-              await getUserss();
+              setPage(1);
             }
           }
         }}
@@ -88,25 +90,29 @@ export function Users(): IUseUser {
   // Tabela com listagem da entidade
   function TableList(): JSX.Element {
     return (
-      <Table
-        headerIcon={<Icons.AddIcon onClick={toggleUsers} />}
-        title="Itens de infraestrutura"
-        header={["ID", "Nome", "Matricula", "Cargo", "Tipo de Usuário"]}
-        actions={Actions}
-        keys={["_id", "name", "registration", "office", "role"]}
-        row={data}
-        onClickRow={(id: number) => {
-          setUser({ user: data[id] });
-          toggleEditUsers();
-        }}
-        isLoading={isLoading}
-      />
+      <div>
+        <Table
+          headerIcon={<Icons.AddIcon onClick={toggleUsers} />}
+          title="Itens de infraestrutura"
+          header={["ID", "Nome", "Matricula", "Cargo", "Tipo de Usuário"]}
+          actions={Actions}
+          keys={["_id", "name", "registration", "office", "role"]}
+          row={data}
+          onClickRow={(id: number) => {
+            setUser({ user: data[id] });
+            toggleEditUsers();
+          }}
+          isLoading={isLoading}
+        />
+        <Pagination currentPage={page} setPage={setPage} totalPages={2} />
+      </div>
     );
   }
 
   useEffect(() => {
-    getUserss().catch((e) => {});
-  }, []);
+    setIsLoading(true);
+    getUsers(page).catch((e) => {});
+  }, [page]);
 
   return {
     create: {

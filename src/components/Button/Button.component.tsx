@@ -10,17 +10,21 @@ export function Button({
   type,
   center = false,
   disabled,
+  iconStroke = false,
+  iconPosition = "left",
 }: IButtonProps): JSX.Element {
   return (
     <Container
+      iconStroke={iconStroke}
       center={center}
       type={type}
       color={color}
       disabled={disabled}
       onClick={callback ?? undefined}
     >
-      {icon && icon}
+      {icon && iconPosition === "left" && icon}
       <ButtonLabel>{label}</ButtonLabel>
+      {icon && iconPosition === "right" && icon}
     </Container>
   );
 }

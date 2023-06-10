@@ -1,9 +1,5 @@
 import { type Icons } from "global/icons.constants";
-import {
-  type MultiValue,
-  type OptionsOrGroups,
-  type SingleValue,
-} from "react-select";
+import { type OptionsOrGroups } from "react-select";
 
 export interface IOptions {
   value: string | number;
@@ -15,9 +11,7 @@ export interface ISelectProps {
   options: OptionsOrGroups<string | number, any> | undefined[];
   label?: string;
   defaultValue?: IOptions;
-  onChange: (
-    data: MultiValue<string | number> | SingleValue<string | number>
-  ) => void;
+  onChange: (data: IOptions) => void;
   icon?: keyof typeof Icons;
   placeholder?: string;
   isMulti?: boolean;

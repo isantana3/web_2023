@@ -6,6 +6,7 @@ import { locationService } from "service/location/location.service";
 import { useLocation } from "store/slices/location/useLocation";
 
 import { Button } from "components/Button";
+import { Pagination } from "components/Pagination";
 import { Table } from "components/Table";
 import { useModal } from "hooks/modals.hook";
 
@@ -16,6 +17,7 @@ import { type ILocation } from "global/location.types";
 
 export function Locations(): IUseLocations {
   const [data, setData] = useState<ILocation[]>([]);
+  const [page, setPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { toggleModal: toggleLocation, isVisible: isVisibleLocation } =
     useModal();
@@ -24,8 +26,8 @@ export function Locations(): IUseLocations {
   const { setLocation } = useLocation();
 
   // Lista dos itens da entidade
-  const getLocations = async (): Promise<void> => {
-    const { data } = await locationService.getLocations();
+  const getLocations = async (page: number): Promise<void> => {
+    const { data } = await locationService.getLocations({ page, limit: 2 });
     setData(data);
     setIsLoading(false);
   };
@@ -74,7 +76,7 @@ export function Locations(): IUseLocations {
               );
               toast.success("Localização deletada com sucesso!");
             } else {
-              await getLocations();
+              setPage(1);
             }
           }
         }}
@@ -87,25 +89,29 @@ export function Locations(): IUseLocations {
   // Tabela com listagem da entidade
   function TableList(): JSX.Element {
     return (
-      <Table
-        headerIcon={<Icons.AddIcon onClick={toggleLocation} />}
-        title="Pavilhões"
-        header={["ID", "Pavilhão", "Descrição", "Observação"]}
-        actions={Actions}
-        keys={["_id", "label", "description", "observation"]}
-        row={data}
-        onClickRow={(id: number) => {
-          setLocation({ locations: data[id] });
-          toggleEditLocation();
-        }}
-        isLoading={isLoading}
-      />
+      <div>
+        <Table
+          headerIcon={<Icons.AddIcon onClick={toggleLocation} />}
+          title="Pavilhões"
+          header={["ID", "Pavilhão", "Descrição", "Observação"]}
+          actions={Actions}
+          keys={["_id", "label", "description", "observation"]}
+          row={data}
+          onClickRow={(id: number) => {
+            setLocation({ locations: data[id] });
+            toggleEditLocation();
+          }}
+          isLoading={isLoading}
+        />
+        <Pagination currentPage={page} setPage={setPage} totalPages={2} />
+      </div>
     );
   }
 
   useEffect(() => {
-    getLocations().catch((e) => {});
-  }, []);
+    setIsLoading(true);
+    getLocations(page).catch((e) => {});
+  }, [page]);
 
   return {
     create: {

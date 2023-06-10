@@ -1,10 +1,26 @@
 import { api } from "service/server";
 
 import { type ILaboratory } from "global/laboratory.types";
-import { type IDefaultResponse } from "service/server.types";
+import {
+  type IDefaultPaginated,
+  type IDefaultResponse,
+} from "service/server.types";
 
 export const laboratoryService = {
-  getLaboratories: async (): Promise<IDefaultResponse<ILaboratory[]>> => {
+  getLaboratories: async ({
+    page = 1,
+    limit = 10,
+  }: IDefaultPaginated): Promise<IDefaultResponse<ILaboratory[]>> => {
+    const { status, data } = await api.get("/rooms", {
+      params: { page, limit },
+    });
+    return {
+      status,
+      data,
+    };
+  },
+
+  getLaboratoriesNormal: async (): Promise<IDefaultResponse<ILaboratory[]>> => {
     const { status, data } = await api.get("/rooms");
     return {
       status,

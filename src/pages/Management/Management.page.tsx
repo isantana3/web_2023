@@ -59,7 +59,8 @@ export function Management(): JSX.Element {
           <Table
             title="Agendamentos"
             header={["Laboratório", "Data", "Horario"]}
-            keys={["time"]}
+            keys={["time", "time", "time"]}
+            isLoading
             row={[]}
           />,
           infraTable,

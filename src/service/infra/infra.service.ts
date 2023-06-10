@@ -1,11 +1,19 @@
 import { api } from "service/server";
 
 import { type IInfra } from "global/infra.types";
-import { type IDefaultResponse } from "service/server.types";
+import {
+  type IDefaultPaginated,
+  type IDefaultResponse,
+} from "service/server.types";
 
 export const infraService = {
-  getInfras: async (): Promise<IDefaultResponse<IInfra[]>> => {
-    const { status, data } = await api.get("/items");
+  getInfras: async ({
+    page = 1,
+    limit = 10,
+  }: IDefaultPaginated): Promise<IDefaultResponse<IInfra[]>> => {
+    const { status, data } = await api.get("/items", {
+      params: { page, limit },
+    });
     return {
       status,
       data,

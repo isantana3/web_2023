@@ -6,6 +6,7 @@ import { infraService } from "service/infra/infra.service";
 import { useInfra } from "store/slices/infra/useInfra";
 
 import { Button } from "components/Button";
+import { Pagination } from "components/Pagination";
 import { Table } from "components/Table";
 import { useModal } from "hooks/modals.hook";
 
@@ -16,6 +17,7 @@ import { type IInfra } from "global/infra.types";
 
 export function Infra(): IUseInfra {
   const [data, setData] = useState<IInfra[]>([]);
+  const [page, setPage] = useState<number>(1);
   const { toggleModal: toggleInfra, isVisible: isVisibleInfra } = useModal();
   const { toggleModal: toggleEditInfra, isVisible: isVisibleEditInfra } =
     useModal();
@@ -23,10 +25,10 @@ export function Infra(): IUseInfra {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // Lista dos itens da entidade
-  const getInfras = async (): Promise<void> => {
-    const { data } = await infraService.getInfras();
+  const getInfras = async (page: number): Promise<void> => {
+    setIsLoading(true);
+    const { data } = await infraService.getInfras({ page, limit: 2 });
     setData(data);
-    setIsLoading(false);
   };
 
   // Modal de criação da entidade
@@ -73,7 +75,7 @@ export function Infra(): IUseInfra {
               );
               toast.success("Item deletado com sucesso!");
             } else {
-              await getInfras();
+              setPage(1);
             }
           }
         }}
@@ -84,8 +86,8 @@ export function Infra(): IUseInfra {
   };
 
   // Tabela com listagem da entidade
-  function TableList(): JSX.Element {
-    return (
+  const table = (
+    <div>
       <Table
         headerIcon={<Icons.AddIcon onClick={toggleInfra} />}
         title="Itens de infraestrutura"
@@ -99,12 +101,17 @@ export function Infra(): IUseInfra {
         }}
         isLoading={isLoading}
       />
-    );
-  }
+      <Pagination currentPage={page} setPage={setPage} totalPages={2} />
+    </div>
+  );
 
   useEffect(() => {
-    getInfras().catch((e) => {});
-  }, []);
+    getInfras(page)
+      .catch((e) => {})
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [page]);
 
   return {
     create: {
@@ -122,6 +129,6 @@ export function Infra(): IUseInfra {
       modal: EditModal(),
     },
     data,
-    table: TableList(),
+    table,
   };
 }

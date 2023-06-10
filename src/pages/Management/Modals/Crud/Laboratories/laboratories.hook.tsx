@@ -6,6 +6,7 @@ import { laboratoryService } from "service/laboratory/laboratory.service";
 import { useLaboratory } from "store/slices/laboratory/useLaboratory";
 
 import { Button } from "components/Button";
+import { Pagination } from "components/Pagination";
 import { Table } from "components/Table";
 import { useModal } from "hooks/modals.hook";
 
@@ -15,6 +16,7 @@ import { type IUseLaboratories } from "./laboratories.types";
 import { type ILaboratory } from "global/laboratory.types";
 
 export function Laboratories(): IUseLaboratories {
+  const [page, setPage] = useState<number>(1);
   const [data, setData] = useState<ILaboratory[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { toggleModal: toggleLaboratory, isVisible: isVisibleLaboratory } =
@@ -26,8 +28,11 @@ export function Laboratories(): IUseLaboratories {
   const { setLaboratory } = useLaboratory();
 
   // Lista dos itens da entidade
-  const getLaboratories = async (): Promise<void> => {
-    const { data } = await laboratoryService.getLaboratories();
+  const getLaboratories = async (page: number): Promise<void> => {
+    const { data } = await laboratoryService.getLaboratories({
+      page,
+      limit: 2,
+    });
     setData(data);
     setIsLoading(false);
   };
@@ -76,7 +81,7 @@ export function Laboratories(): IUseLaboratories {
               );
               toast.success("Laboratório deletado com sucesso!");
             } else {
-              await getLaboratories();
+              setPage(1);
             }
           }
         }}
@@ -89,25 +94,29 @@ export function Laboratories(): IUseLaboratories {
   // Tabela com listagem da entidade
   function TableList(): JSX.Element {
     return (
-      <Table
-        headerIcon={<Icons.AddIcon onClick={toggleLaboratory} />}
-        title="Laboratórios"
-        header={["ID", "Nome", "Pavilhão"]}
-        actions={Actions}
-        keys={["_id", "label", "pavilion.label"]}
-        row={data}
-        onClickRow={(id: number) => {
-          setLaboratory({ laboratory: data[id] });
-          toggleEditLaboratory();
-        }}
-        isLoading={isLoading}
-      />
+      <div>
+        <Table
+          headerIcon={<Icons.AddIcon onClick={toggleLaboratory} />}
+          title="Laboratórios"
+          header={["ID", "Nome", "Pavilhão"]}
+          actions={Actions}
+          keys={["_id", "label", "pavilion.label"]}
+          row={data}
+          onClickRow={(id: number) => {
+            setLaboratory({ laboratory: data[id] });
+            toggleEditLaboratory();
+          }}
+          isLoading={isLoading}
+        />
+        <Pagination currentPage={page} setPage={setPage} totalPages={2} />
+      </div>
     );
   }
 
   useEffect(() => {
-    getLaboratories().catch((e) => {});
-  }, []);
+    setIsLoading(true);
+    getLaboratories(page).catch((e) => {});
+  }, [page]);
 
   return {
     create: {

@@ -1,10 +1,26 @@
 import { api } from "service/server";
 
 import { type ILocation } from "global/location.types";
-import { type IDefaultResponse } from "service/server.types";
+import {
+  type IDefaultPaginated,
+  type IDefaultResponse,
+} from "service/server.types";
 
 export const locationService = {
-  getLocations: async (): Promise<IDefaultResponse<ILocation[]>> => {
+  getLocations: async ({
+    page = 1,
+    limit = 10,
+  }: IDefaultPaginated): Promise<IDefaultResponse<ILocation[]>> => {
+    const { status, data } = await api.get("/pavilions", {
+      params: { page, limit },
+    });
+    return {
+      status,
+      data,
+    };
+  },
+
+  getLocationsNormal: async (): Promise<IDefaultResponse<ILocation[]>> => {
     const { status, data } = await api.get("/pavilions");
     return {
       status,
