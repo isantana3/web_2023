@@ -10,17 +10,18 @@ const initialState: IAuthUserSlice = {
   user: {} as IUser,
 };
 
-if (token !== "undefined") {
+if (token) {
   try {
-    const jwtDecoded = jwt_decode<IUser>(token ?? "");
+    const jwtDecoded = jwt_decode<IUser>(token);
     const timeToExpire = (jwtDecoded.exp as number) - Date.now();
     if (timeToExpire > 0) {
       setTimeout(() => {
         localStorage.setItem("token", "");
       }, timeToExpire);
-      initialState.user.token = token ?? "";
+      initialState.user.token = token;
     }
   } catch (error) {
+    localStorage.setItem("token", "");
     // console.log("error parsing token", error);
   }
 }

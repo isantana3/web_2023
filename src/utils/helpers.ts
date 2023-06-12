@@ -11,8 +11,8 @@ export const helpers = {
     return `${date}T${time}:00.000Z`;
   },
   validToken: () => {
-    const token = localStorage.getItem("token") ?? "";
-    if (token !== "undefined") {
+    const token = localStorage.getItem("token");
+    if (token) {
       const jwtDecoded = jwt_decode<IUser>(token);
       const currentDate = new Date();
       return (jwtDecoded.exp as number) * 1000 < currentDate.getTime();
