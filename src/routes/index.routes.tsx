@@ -35,7 +35,7 @@ export function AppRoutes(): JSX.Element {
   return (
     <Router>
       {/* Auth Routes */}
-      {isUserValid ? (
+      {!isUserValid ? (
         user.role === "admin" ? (
           <RoutesTemplate>
             <AdminRoutes />
