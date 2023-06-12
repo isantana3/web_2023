@@ -15,11 +15,12 @@ import { UserRoutes } from "./user.routes";
 
 export function AppRoutes(): JSX.Element {
   const { user, authenticate } = useAuth();
-  const isUserValid = helpers.validToken();
 
   useEffect(() => {
     const getUser = async (): Promise<void> => {
       const { data } = await userService.getUser("64623504921a64b1f6991cd1");
+      data.token =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDYyMzUwNDkyMWE2NGIxZjY5OTFjZDEiLCJuYW1lIjoiUm9iZXJ0byBDYXJsb3MiLCJlbWFpbCI6InJvYmVydG8yQGVtYWlsLmNvbSIsInBhc3N3b3JkIjoiMTIzNDU2NzgiLCJyZWdpc3RyYXRpb24iOiIyMDIwMjAxNTQ1Iiwib2ZmaWNlIjoicHJvZmVzc29yIiwicm9sZSI6ImFkbWluIn0.bOR3z4xVkflHGonUQ6R-8g-saEPf1_op9oGD1yAfh88";
       authenticate({ user: data });
     };
 
@@ -27,6 +28,8 @@ export function AppRoutes(): JSX.Element {
       console.log(e);
     });
   }, []);
+
+  const isUserValid = helpers.validToken();
 
   return (
     <Router>
