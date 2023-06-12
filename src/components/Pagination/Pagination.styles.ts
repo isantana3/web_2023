@@ -9,6 +9,11 @@ export const Container = styled.div`
   justify-content: end;
   gap: 16px;
   margin-top: 2rem;
+
+  div {
+    width: fit-content;
+    min-width: fit-content;
+  }
 `;
 
 export const PageButton = styled.button`

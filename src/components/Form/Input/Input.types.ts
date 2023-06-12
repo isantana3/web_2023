@@ -8,6 +8,7 @@ export interface IInputProps {
   defaultValue?: string | number;
   width?: number;
   disabled?: boolean;
+  onChange?: (event: KeyboardEvent) => void;
 }
 
 export type InputStylesType = Pick<IInputProps, "width"> & {
