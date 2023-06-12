@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 
 import { Login } from "pages/Login/Login.page";
+import { Register } from "pages/Register";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { userService } from "service/user/user.service";
 import { useAuth } from "store/slices/auth/useAuth";
@@ -34,7 +35,7 @@ export function AppRoutes(): JSX.Element {
   return (
     <Router>
       {/* Auth Routes */}
-      {!isUserValid ? (
+      {isUserValid ? (
         user.role === "admin" ? (
           <RoutesTemplate>
             <AdminRoutes />
@@ -47,6 +48,7 @@ export function AppRoutes(): JSX.Element {
       ) : (
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="/cadastro" element={<Register />} />
         </Routes>
       )}
     </Router>

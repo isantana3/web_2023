@@ -10,6 +10,9 @@ export const Content = styled.div`
   padding-top: 5%;
   padding-left: 5%;
   padding-right: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const Header = styled.div`
@@ -27,7 +30,11 @@ export const LogoTitle = styled.h2`
   color: ${({ theme }) => theme.Register.logoTitle};
 `;
 
-export const TitleContainer = styled.div``;
+export const TitleContainer = styled.div`
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 70%;
+`;
 
 export const Title = styled.h2`
   font-family: "Montserrat", sans-serif;
@@ -51,6 +58,12 @@ export const SubTitle = styled.h4`
 export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 70%;
+  gap: 2rem;
+`;
+
+export const InputContainer = styled.div`
+  width: 100% !important;
 `;
 
 export const ButtonWrapper = styled.div`

@@ -4,11 +4,9 @@ import { type IStepBall } from "./StepIndicator.types";
 
 export const StepIndicatorContainer = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin: 0 auto;
-  padding: 20px;
 `;
 
 export const StepBallContainer = styled.div`
@@ -45,7 +43,7 @@ export const ProgressBarContainer = styled.div`
   width: 100%;
   height: 2px;
   background-color: #ccc;
-  margin-top: -5px;
+  margin-top: -8px;
 `;
 
 export const ProgressBarFill = styled.div<IStepBall>`
