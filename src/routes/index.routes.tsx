@@ -8,12 +8,14 @@ import { userService } from "service/user/user.service";
 import { useAuth } from "store/slices/auth/useAuth";
 
 import { RoutesTemplate } from "components/RoutesTemplate";
+import { helpers } from "utils/helpers";
 
 import { AdminRoutes } from "./admin.routes";
 import { UserRoutes } from "./user.routes";
 
 export function AppRoutes(): JSX.Element {
   const { user, authenticate } = useAuth();
+  const isUserValid = helpers.validToken();
 
   useEffect(() => {
     const getUser = async (): Promise<void> => {
@@ -29,7 +31,7 @@ export function AppRoutes(): JSX.Element {
   return (
     <Router>
       {/* Auth Routes */}
-      {user._id ? (
+      {!isUserValid ? (
         user.role === "admin" ? (
           <RoutesTemplate>
             <AdminRoutes />

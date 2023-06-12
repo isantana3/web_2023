@@ -72,6 +72,35 @@ export function Table({
     );
   }
 
+  if (row.length === 0) {
+    return (
+      <Container>
+        {title && (
+          <Title>
+            {title}
+            {headerIcon}
+          </Title>
+        )}
+        <TableContainer>
+          <TableHeader>
+            <Row key={`th-0`}>
+              {header.map((item) => (
+                <TableTitle key={`th-${item}`}>{item}</TableTitle>
+              ))}
+            </Row>
+          </TableHeader>
+          <TableBody>
+            <Row>
+              {keys.map((key: string, index) => (
+                <Cell key={`td-R-${index}`}>Nenhum dado encontrado !</Cell>
+              ))}
+            </Row>
+          </TableBody>
+        </TableContainer>
+      </Container>
+    );
+  }
+
   return (
     <Container>
       {title && (

@@ -23,14 +23,13 @@ export function CustomSelect({
   isMulti,
 }: ISelectProps): JSX.Element {
   const Icon = icon ? Icons[icon] : undefined;
-  const [value, setValue] = useState<ValueType>(
-    (defaultValue as unknown as ValueType) ?? ""
-  );
+  const [value, setValue] = useState<ValueType>();
 
   return (
     <Container>
       {label && <Label>{label}</Label>}
       <Select
+        noOptionsMessage={() => <>Nenhum item para esses filtros ...</>}
         isMulti={isMulti}
         components={{
           // eslint-disable-next-line react/prop-types
@@ -42,8 +41,15 @@ export function CustomSelect({
           ),
         }}
         styles={{
-          control: (base) => ({ ...base, padding: "0.5rem", borderRadius: 8 }),
-          menuPortal: (base) => ({ ...base, fontSize: 14 }),
+          control: (base) => ({
+            ...base,
+            padding: "1px",
+            borderRadius: "8px",
+          }),
+          menuPortal: (base) => ({
+            ...base,
+            fontSize: 14,
+          }),
         }}
         placeholder={placeholder}
         isOptionDisabled={() => Array.isArray(value) && value.length >= 2}
@@ -51,6 +57,7 @@ export function CustomSelect({
         menuPortalTarget={document.body}
         options={options}
         value={value}
+        defaultValue={defaultValue as unknown as ValueType}
         onChange={(val) => {
           setValue(val);
           onChange(val as unknown as IOptions);

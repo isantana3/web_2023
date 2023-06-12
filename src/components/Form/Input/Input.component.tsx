@@ -14,6 +14,7 @@ export function Input({
   defaultValue,
   width,
   disabled = false,
+  onChange,
 }: IInputProps): JSX.Element {
   const {
     register,
@@ -26,7 +27,9 @@ export function Input({
       <InputComponent
         disabled={disabled}
         defaultValue={defaultValue}
-        {...register(name)}
+        {...register(name, {
+          onChange,
+        })}
         type={type}
         placeholder={placeholder}
       />

@@ -85,6 +85,6 @@ export const ButtonWrapper = styled.div`
 export const InputRow = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: end;
+  align-items: start;
   gap: 2rem;
 `;

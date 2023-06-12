@@ -1,10 +1,10 @@
 import * as yup from "yup";
 
-export const BookingSchema = yup.object().shape({
-  observation: yup.string().required("Este campo é obrigatório"),
+export const BookingUniqueSchema = yup.object().shape({
+  label: yup.string().required("Este campo é obrigatório"),
+  observation: yup.string(),
   laboratory: yup.string().required("Este campo é obrigatório"),
-  date_init: yup.string().required("Este campo é obrigatório"),
-  date_end: yup.string().required("Este campo é obrigatório"),
-  hour_init: yup.string().required("Este campo é obrigatório"),
-  hour_end: yup.string().required("Este campo é obrigatório"),
+  dateStart: yup.string().required("Este campo é obrigatório"),
+  hourStart: yup.string().required("Este campo é obrigatório"),
+  hourEnd: yup.string().required("Este campo é obrigatório"),
 });

@@ -65,4 +65,6 @@ export const LaboratoryItemSubTitle = styled.h4`
   font-size: 14px;
   line-height: 20px;
   color: ${({ theme }) => theme.Dashboard.subTitle};
+  display: flex;
+  gap: 1rem;
 `;
