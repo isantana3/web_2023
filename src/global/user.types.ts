@@ -8,4 +8,6 @@ export interface IUser {
   registration: number;
   office: string;
   password?: string;
+  token?: string;
+  exp?: number;
 }

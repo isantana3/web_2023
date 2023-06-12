@@ -14,6 +14,8 @@ export function CustomSelect({
   defaultValue,
   placeholder,
   width,
+  onClick,
+  disabled,
 }: ISelectProps): JSX.Element {
   const {
     formState: { errors },
@@ -29,6 +31,9 @@ export function CustomSelect({
         <Container width={width} error={!!errors[name]?.message}>
           <Label>{label}</Label>
           <Select
+            noOptionsMessage={() => <>Nenhum item para esses filtros ...</>}
+            isDisabled={disabled}
+            defaultValue={defaultValue}
             placeholder={placeholder}
             styles={{
               control: (base) => ({
@@ -47,6 +52,9 @@ export function CustomSelect({
             value={options.find((c) => c.value === value)}
             onChange={(val) => {
               onChange(val?.value);
+              if (onClick) {
+                onClick(val?.value);
+              }
             }}
           />
           {errors[name]?.message && (

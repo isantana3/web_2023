@@ -10,6 +10,8 @@ export interface ISelectProps {
   defaultValue?: IOptions;
   width?: number;
   placeholder?: string;
+  disabled?: boolean;
+  onClick?: (value: string | number | undefined) => void;
 }
 
 export type SelectStylesType = {
