@@ -9,6 +9,8 @@ import { Navbar } from "components/Navbar";
 import { StepIndicator } from "./StepIndicator/StepIndicator.component";
 import { RegisterSchema } from "./example.schema";
 
+import { type IFormData } from "./Register.types";
+
 import {
   ButtonRow,
   ButtonWrapper,
@@ -16,6 +18,7 @@ import {
   Content,
   FormContainer,
   Header,
+  InputContainer,
   InputRow,
   LogoTitle,
   SubTitle,
@@ -26,15 +29,15 @@ import {
 export function Register(): JSX.Element {
   const [isStepOne, setIsStepOne] = useState(true);
 
-  function validateForm(data: { email: string; password: string }): boolean {
+  function validateForm(data: IFormData): boolean {
     if (data) {
       return true;
     }
     return false;
   }
 
-  function handleSubmit(data: { email: string; password: string }): any {
-    setIsStepOne(!isStepOne);
+  function handleSubmit(data: IFormData): any {
+    console.log(data);
     // if (data && validateForm(data)) {
     //   setIsStepOne(!isStepOne);
     // }
@@ -42,6 +45,10 @@ export function Register(): JSX.Element {
 
   function handleBackButton(): void {
     setIsStepOne(true);
+  }
+
+  function handleStepOne(): void {
+    setIsStepOne(false);
   }
 
   return (
@@ -58,30 +65,29 @@ export function Register(): JSX.Element {
         </TitleContainer>
         <FormContainer>
           <StepIndicator stepOne={isStepOne} />
-          <div>
+          <Form onSubmit={handleSubmit} schema={RegisterSchema}>
             {isStepOne ? (
-              <Form onSubmit={handleSubmit} schema={RegisterSchema}>
-                <Input
-                  label="E-mail"
-                  name="email"
-                  type="text"
-                  placeholder="E-mail"
-                  defaultValue={""}
-                />
-                <Input
-                  label="Senha"
-                  name="password"
-                  type="password"
-                  placeholder="Senha"
-                  defaultValue={""}
-                />
+              <>
+                <InputContainer>
+                  <Input
+                    label="E-mail"
+                    name="email"
+                    type="text"
+                    placeholder="E-mail"
+                    defaultValue={""}
+                  />
+                </InputContainer>
 
                 <ButtonWrapper>
-                  <Button label="Continuar" color="primary" type="submit" />
+                  <Button
+                    label="Continuar"
+                    color="primary"
+                    callback={handleStepOne}
+                  />
                 </ButtonWrapper>
-              </Form>
+              </>
             ) : (
-              <Form onSubmit={handleSubmit} schema={RegisterSchema}>
+              <>
                 <Input
                   label="Nome"
                   name="name"
@@ -113,11 +119,15 @@ export function Register(): JSX.Element {
                     color="darker"
                     callback={handleBackButton}
                   />
-                  <Button label="Continuar" color="primary" type="submit" />
+                  <Button
+                    label="Continuar"
+                    color="primary"
+                    callback={handleSubmit}
+                  />
                 </ButtonRow>
-              </Form>
+              </>
             )}
-          </div>
+          </Form>
         </FormContainer>
       </Content>
     </Container>
