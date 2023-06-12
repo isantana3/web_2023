@@ -2,6 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 
+import { ForgotPassword } from "pages/ForgotPassword";
 import { Login } from "pages/Login/Login.page";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { userService } from "service/user/user.service";
@@ -47,6 +48,7 @@ export function AppRoutes(): JSX.Element {
       ) : (
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="/recuperar-senha" element={<ForgotPassword />} />
         </Routes>
       )}
     </Router>
