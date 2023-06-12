@@ -3,6 +3,8 @@ const PrimaryTheme = {
   "primary-light": "#4563BF",
   secondary: "#F2D400",
   "secondary-light": "#F2E63D",
+  black: "#000000",
+  white: "#ffffff",
 };
 
 const Sidebar = {
@@ -74,6 +76,7 @@ const Components = {
     secondary: "transparent",
     warning: "#DC3545",
     transparent: "transparent",
+    darker: "#5F6D7E",
   },
   navbar: {
     background: "#fff",
@@ -93,6 +96,17 @@ const Feedback = {
   warning: "#9C5D42",
 };
 
+const Register = {
+  background: "#D4E1F4",
+  logoTitle: "#314CA5",
+  title: "#2e3646",
+  subTitle: "#5F6D7E",
+  activeStepBall: "#314CA5",
+  inactiveStepBall: "#5F6D7E",
+  activeLineIndicator: "#4F575E",
+  inactiveLineIndicator: "#ADB5BD",
+};
+
 const ForgotPassword = {
   background: "#D4E1F4",
   title: "#314CA5",
@@ -109,5 +123,6 @@ export const Theme = {
   Management,
   Bookings,
   Feedback,
+  Register,
   ForgotPassword,
 };
