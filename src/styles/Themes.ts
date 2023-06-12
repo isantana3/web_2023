@@ -93,6 +93,12 @@ const Feedback = {
   warning: "#9C5D42",
 };
 
+const ForgotPassword = {
+  background: "#D4E1F4",
+  title: "#314CA5",
+  text: "#5F6D7E",
+};
+
 export const Theme = {
   PrimaryTheme,
   Sidebar,
@@ -103,4 +109,5 @@ export const Theme = {
   Management,
   Bookings,
   Feedback,
+  ForgotPassword,
 };
