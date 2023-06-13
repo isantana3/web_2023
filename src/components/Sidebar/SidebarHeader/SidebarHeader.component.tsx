@@ -10,12 +10,12 @@ import {
 } from "./SidebarHeader.styles";
 
 export function SidebarHeader(): JSX.Element {
-  const { user, authenticate } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   function handleLogout(): void {
     navigate("/");
-    authenticate({ user: undefined });
+    window.location.reload();
   }
 
   return (
