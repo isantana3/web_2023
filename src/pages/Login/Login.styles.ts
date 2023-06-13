@@ -39,14 +39,6 @@ export const LeftSide = styled.div`
     left: -25px;
     background: #283a73;
   }
-
-  @media (max-width: 1420px) {
-    img {
-      max-height: calc(715px - 20vh);
-      width: auto;
-      z-index: 99;
-    }
-  }
 `;
 
 export const RightSide = styled.div`
