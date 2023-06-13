@@ -10,3 +10,13 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+#blue {
+  height: 103px;
+  width: 260px;
+  left: 168px;
+  top: 820px;
+  border-radius: 0px;
+  background-color: #283A73;
+}
+
