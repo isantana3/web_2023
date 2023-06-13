@@ -37,7 +37,6 @@ export function CustomSelect({
           // eslint-disable-next-line react/prop-types
           Control: ({ children, ...rest }) => (
             <components.Control {...rest}>
-              {" "}
               {Icon && <Icon />} {children}
             </components.Control>
           ),

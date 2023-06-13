@@ -46,7 +46,7 @@ export function CustomSelect({
             }}
             menuPosition="fixed"
             menuPortalTarget={document.body}
-            defaultInputValue={defaultValue?.value as string}
+            defaultValue={defaultValue}
             options={options}
             value={options.find((c) => c.value === value)}
             onChange={(val) => {
