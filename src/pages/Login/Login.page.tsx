@@ -25,7 +25,7 @@ export function Login(): JSX.Element {
               type="text"
               name="email"
             />
-
+<!-- Não sei como colocar os icones pequenos de usuário e senha dentro da caixa dos inputs -->
             <Input
               label = "Senha"
               placeholder="*********"
