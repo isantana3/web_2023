@@ -3,121 +3,74 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   height: 100%;
   width: 100%;
-  background-color: #fafafa;
+  background-color: #d4e1f4;
   color: black;
   display: flex;
   flex-direction: column;
+  align-items: center;
+`;
+
+export const Content = styled.div`
+  display: flex;
+  height: 100%;
+  width: 100%;
+  gap: 8vw;
   justify-content: center;
   align-items: center;
 `;
 
-#all {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+export const LeftSide = styled.div`
+  position: relative;
   display: flex;
-  gap: 59px;
-}
+  align-items: center;
+  justify-content: center;
 
-#blue {
-  position: absolute;
-  width: 260px;
-  height: 103px;
-  left: 168px;
-  top: 820px;
-  background: #283A73;
-}
+  img {
+    max-height: calc(715px - 10vh);
+    width: auto;
+    z-index: 99;
+  }
 
-#colcicTitle {
-position: absolute;
-width: 190px;
-height: 59px;
-left: 86.5px;
-top: 97px;
-font-family: 'Montserrat';
-font-style: normal;
-font-weight: 700;
-font-size: 48px;
-line-height: 59px;
-color: #314CA5;
-}
+  div {
+    position: absolute;
+    width: 260px;
+    height: calc(103px - 2vh);
+    bottom: -25px;
+    left: -25px;
+    background: #283a73;
+  }
 
-#rightSide {
-display: flex;
-flex-direction: column;
-align-items: center;
-padding: 0px;
-gap: 34px;
-position: absolute;
-width: 363px;
-height: 498px;
-left: 887px;
-top: 278px;
-}
+  @media (max-width: 1420px) {
+    img {
+      max-height: calc(715px - 20vh);
+      width: auto;
+      z-index: 99;
+    }
+  }
+`;
 
-#colcicLogo {
-position: absolute;
-width: 85px;
-height: 85px;
-left: 139.5px;
-top: 0px;
-}
+export const RightSide = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 40%;
+  max-width: 20vw;
 
-#forgetPassword {
-width: 173px;
-height: 20px;
+  form {
+    width: 100%;
+  }
 
-font-family: 'Montserrat';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 20px;
+  img {
+    height: 100px;
+  }
 
-text-decoration-line: underline;
-
-color: #283A73;
-}
-
-#newHere {
-  position: absolute;
-width: 252px;
-height: 20px;
-left: 943px;
-top: 792px;
-
-font-family: 'Montserrat';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 20px;
-
-text-decoration-line: underline;
-}
-
-#labPic {
-position: absolute;
-width: 636px;
-height: 690px;
-left: 192px;
-top: 208px;
-}
-
-#leftSide {
-position: absolute;
-width: 660px;
-height: 715px;
-left: 168px;
-top: 208px;
-}
-
-
-
-
-
-
-
-
-
-
-
+  h1 {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 59px;
+    color: #314ca5;
+  }
+`;
