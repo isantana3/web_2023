@@ -26,14 +26,12 @@ export function CustomSelect({
     <Controller
       control={control}
       name={name}
-      defaultValue={defaultValue?.value}
       render={({ field: { onChange, value }, formState }) => (
         <Container width={width} error={!!errors[name]?.message}>
           <Label>{label}</Label>
           <Select
             noOptionsMessage={() => <>Nenhum item para esses filtros ...</>}
             isDisabled={disabled}
-            defaultValue={defaultValue}
             placeholder={placeholder}
             styles={{
               control: (base) => ({
@@ -48,6 +46,7 @@ export function CustomSelect({
             }}
             menuPosition="fixed"
             menuPortalTarget={document.body}
+            defaultInputValue={defaultValue?.value as string}
             options={options}
             value={options.find((c) => c.value === value)}
             onChange={(val) => {

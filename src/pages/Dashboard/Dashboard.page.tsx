@@ -12,7 +12,6 @@ import { LaboratoryTag } from "components/LaboratoryTag";
 import { Pagination } from "components/Pagination";
 import { type IPagination } from "components/Pagination/Pagination.types";
 import { Table } from "components/Table";
-import { helpers } from "utils/helpers";
 
 import { type IReservationList } from "global/reservations.types";
 
@@ -44,7 +43,7 @@ export function Dashboard(): JSX.Element {
     } = await reservationService.getReservations(page);
     setPage({
       page: page.page,
-      totalPages: helpers.getLastPage(lastPage),
+      totalPages: lastPage,
       limit: 2,
     });
     setBookings(data.filter((item) => item.responsible._id === user?._id));

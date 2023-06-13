@@ -1,7 +1,3 @@
-import jwt_decode from "jwt-decode";
-
-import { type IUser } from "global/user.types";
-
 export const helpers = {
   isObjectEmpty: (objectName: object) => {
     return JSON.stringify(objectName) === "{}";
@@ -12,15 +8,12 @@ export const helpers = {
   },
   validToken: () => {
     const token = localStorage.getItem("token");
-    if (token) {
-      const jwtDecoded = jwt_decode<IUser>(token);
-      const currentDate = new Date();
-      return (jwtDecoded.exp as number) * 1000 < currentDate.getTime();
-    }
-    return false;
-  },
-  getLastPage: (page: string | undefined) => {
-    const lastPage = new URLSearchParams(page?.replace("?", "?&"));
-    return parseInt(lastPage.get("page") ?? "0");
+    return !!token;
+    // if (token) {
+    //   const jwtDecoded = jwt_decode<IUser>(token);
+    //   const currentDate = new Date();
+    //   return (jwtDecoded.exp as number) * 1000 < currentDate.getTime();
+    // }
+    // return true;
   },
 };

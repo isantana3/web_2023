@@ -58,7 +58,7 @@ export const reservationService = {
 
   getReservation: async (
     id: string
-  ): Promise<IDefaultResponsePaginated<IReservationList>> => {
+  ): Promise<IDefaultResponse<IReservationList>> => {
     const { status, data } = await api.get(`/reservations/${id}`);
     return {
       status,

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { Icons } from "global/icons.constants";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { reservationService } from "service/reservation/reservation.service";
 
@@ -9,7 +10,6 @@ import { LaboratoryTag } from "components/LaboratoryTag";
 import { Pagination } from "components/Pagination";
 import { type IPagination } from "components/Pagination/Pagination.types";
 import { Table } from "components/Table";
-import { helpers } from "utils/helpers";
 
 import {
   type IReservationList,
@@ -31,6 +31,7 @@ export const Bookings = (): JSX.Element => {
     limit: 2,
   });
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const navigate = useNavigate();
 
   const getBookings = async (page: IPagination): Promise<void> => {
     setIsLoading(true);
@@ -40,7 +41,7 @@ export const Bookings = (): JSX.Element => {
     } = await reservationService.getReservations(page);
     setPage({
       page: page.page,
-      totalPages: helpers.getLastPage(lastPage),
+      totalPages: lastPage,
       limit: 2,
     });
     setBookings(data);
@@ -99,7 +100,12 @@ export const Bookings = (): JSX.Element => {
       </ButtonRow>
     ) : (
       <ButtonRow>
-        <Button label="Visualizar Reserva" />
+        <Button
+          callback={() => {
+            navigate(`/reserva/${bookings[rowId]._id as string}`);
+          }}
+          label="Visualizar Reserva"
+        />
       </ButtonRow>
     );
   };

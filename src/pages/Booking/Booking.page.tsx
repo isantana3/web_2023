@@ -44,11 +44,10 @@ export function Booking(): JSX.Element {
   const [startDate, setStartDate] = useState<string>("");
   const [endDate, setEndDate] = useState<string>("");
   const navigate = useNavigate();
+  const isDisabled = id && booking && booking.status !== "reserved";
 
   const getBooking = async (): Promise<void> => {
-    const {
-      data: { data },
-    } = await reservationService.getReservation(id as string);
+    const { data } = await reservationService.getReservation(id as string);
     setBooking(data);
     setStartDate(
       new Date(data.endDate).toLocaleTimeString([], {
@@ -144,6 +143,7 @@ export function Booking(): JSX.Element {
     <Content>
       <Form schema={BookingUniqueSchema} onSubmit={onSubmit}>
         <Input
+          disabled={isDisabled as boolean}
           name="label"
           type="text"
           label="Descrição"
@@ -152,6 +152,7 @@ export function Booking(): JSX.Element {
         />
         <InputRow>
           <Input
+            disabled={isDisabled as boolean}
             onChange={(val: KeyboardEvent) => {
               setDate((val.currentTarget as HTMLInputElement).value);
             }}
@@ -172,6 +173,7 @@ export function Booking(): JSX.Element {
             }
           />
           <Select
+            disabled={isDisabled as boolean}
             options={times}
             name="hourStart"
             label={"Horario de Inicio"}
@@ -186,6 +188,7 @@ export function Booking(): JSX.Element {
           />
 
           <Select
+            disabled={isDisabled as boolean}
             options={times}
             name="hourEnd"
             label={"Horario de Termino"}
@@ -244,6 +247,7 @@ export function Booking(): JSX.Element {
           />
         </InputRow>
         <Input
+          disabled={isDisabled as boolean}
           placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima placeat ab porro rem animi. Quibusdam veniam aut ipsam consequatur dolorum repudiandae aliquid harum beatae fugit dolorem hic nobis, placeat nam?m"
           type="textarea"
           label="Observação"
@@ -340,6 +344,7 @@ export function Booking(): JSX.Element {
           />
         </InputRow>
         <Input
+          disabled={isDisabled as boolean}
           placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima placeat ab porro rem animi. Quibusdam veniam aut ipsam consequatur dolorum repudiandae aliquid harum beatae fugit dolorem hic nobis, placeat nam?m"
           type="textarea"
           label="Observação"
