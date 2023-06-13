@@ -32,7 +32,7 @@ export const InputComponent = styled.input`
   box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.15);
   border-radius: 8px;
   width: 100%;
-  background-color: transparent !important;
+  background-color: ${({ theme }) => theme.Dashboard.background};
 
   ::placeholder {
     color: #00000055;

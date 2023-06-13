@@ -23,7 +23,7 @@ export function CustomSelect({
   isMulti,
 }: ISelectProps): JSX.Element {
   const Icon = icon ? Icons[icon] : undefined;
-  const [value, setValue] = useState<ValueType>();
+  const [valueLocal, setValue] = useState<ValueType>();
 
   return (
     <Container>
@@ -52,11 +52,13 @@ export function CustomSelect({
           }),
         }}
         placeholder={placeholder}
-        isOptionDisabled={() => Array.isArray(value) && value.length >= 2}
+        isOptionDisabled={() =>
+          Array.isArray(valueLocal) && valueLocal.length >= 2
+        }
         menuPosition="fixed"
         menuPortalTarget={document.body}
         options={options}
-        value={value}
+        value={valueLocal}
         defaultValue={defaultValue as unknown as ValueType}
         onChange={(val) => {
           setValue(val);

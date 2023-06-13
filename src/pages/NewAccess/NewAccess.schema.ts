@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const ForgotPasswordSchema = yup.object().shape({
+export const NewAccessSchema = yup.object().shape({
   new_password: yup
     .string()
     .min(8)

@@ -1,11 +1,8 @@
-/* eslint-disable react/jsx-key */
-
 import { useEffect, useState } from "react";
 
 import { Icons } from "global/icons.constants";
-import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { reservationService } from "service/reservation/reservation.service";
-import { useAuth } from "store/slices/auth/useAuth";
 
 import { Button } from "components/Button";
 import { LaboratoryTag } from "components/LaboratoryTag";
@@ -14,27 +11,26 @@ import { type IPagination } from "components/Pagination/Pagination.types";
 import { Table } from "components/Table";
 import { helpers } from "utils/helpers";
 
-import { type IReservationList } from "global/reservations.types";
-
 import {
-  Header,
+  type IReservationList,
+  type ReservationStatusType,
+} from "global/reservations.types";
+
+import { ButtonRow } from "./Bookings.styles";
+import {
   LaboratoryItem,
   LaboratoryItemSubTitle,
   LaboratoryItemTitle,
-  SubTitle,
-  Title,
-  Wrapper,
-} from "./Dashboard.styles";
+} from "pages/Dashboard/Dashboard.styles";
 
-export function Dashboard(): JSX.Element {
-  const { user } = useAuth();
+export const Bookings = (): JSX.Element => {
   const [bookings, setBookings] = useState<IReservationList[]>([]);
-  const [loading, setIsLoading] = useState<boolean>(true);
   const [page, setPage] = useState<IPagination>({
     page: 1,
     totalPages: 1,
     limit: 2,
   });
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const getBookings = async (page: IPagination): Promise<void> => {
     setIsLoading(true);
@@ -47,7 +43,7 @@ export function Dashboard(): JSX.Element {
       totalPages: helpers.getLastPage(lastPage),
       limit: 2,
     });
-    setBookings(data.filter((item) => item.responsible._id === user?._id));
+    setBookings(data);
     setIsLoading(false);
   };
 
@@ -55,19 +51,56 @@ export function Dashboard(): JSX.Element {
     getBookings(page).catch((e) => {});
   }, []);
 
-  const navigate = useNavigate();
+  const setBookingStatus = async (
+    newStatus: ReservationStatusType,
+    reservation: IReservationList
+  ): Promise<void> => {
+    const { status } = await reservationService.updateReservation(
+      reservation._id as string,
+      {
+        ...reservation,
+        room: reservation.room._id,
+        responsible: reservation.responsible._id,
+        status: newStatus,
+      }
+    );
+
+    if (status !== 200) {
+      toast.error("Ocorreu um erro ao atualizar uma reserva");
+      return;
+    }
+
+    toast.success("Reserva atualizada com sucesso");
+    await getBookings({
+      page: 1,
+      totalPages: 1,
+      limit: 2,
+    });
+  };
 
   const Actions = (rowId: number): JSX.Element => {
-    const id = bookings[rowId]._id ?? 0;
-    const status = bookings[rowId].status;
-    return status === "reserved" ? (
-      <Icons.EditIcon
-        onClick={() => {
-          navigate(`/reserva/${id}`);
-        }}
-      />
+    return bookings[rowId].status === "reserved" ? (
+      <ButtonRow>
+        <Button
+          label="Aprovar"
+          callback={async () => {
+            await setBookingStatus("finished", bookings[rowId]);
+          }}
+          icon={<Icons.ConfirmIcon />}
+        />
+        <Button
+          callback={async () => {
+            await setBookingStatus("cancelled", bookings[rowId]);
+          }}
+          label="Reprovar"
+          color="warning"
+          icon={<Icons.CloseIcon />}
+        />
+      </ButtonRow>
     ) : (
-      <Icons.DotsIcon />
+      <ButtonRow>
+        <Button label="Visualizar Reserva" />
+      </ButtonRow>
     );
   };
 
@@ -76,6 +109,7 @@ export function Dashboard(): JSX.Element {
       const dateStart = new Date(booking.startDate);
       const dateEnd = new Date(booking.endDate);
       const data = {
+        description: <div>{booking.label}</div>,
         laboratory: (
           <LaboratoryItem>
             <Icons.LaboratoryIcon />
@@ -98,6 +132,7 @@ export function Dashboard(): JSX.Element {
             </div>
           </LaboratoryItem>
         ),
+        name: booking.responsible.name,
         status: <LaboratoryTag status={booking.status} label="Pendente" />,
       };
       return data;
@@ -105,28 +140,16 @@ export function Dashboard(): JSX.Element {
   };
 
   return (
-    <Wrapper>
-      <Header>
-        <Title>Olá, {user?.name}!</Title>
-        <SubTitle>Suas últimas atividades podem ser vistas abaixo </SubTitle>
-      </Header>
+    <>
       <Table
-        isLoading={loading}
-        headerIcon={
-          <Button
-            callback={() => {
-              navigate("/reserva");
-            }}
-            label="Nova Reserva"
-          />
-        }
-        title="Suas reservas"
-        header={["Laboratório", "Status"]}
-        actions={Actions}
-        keys={["laboratory", "status"]}
+        title="Agendamentos"
+        header={["Descrição Geral", "Descrição", "Status", "Responsável"]}
+        keys={["laboratory", "description", "status", "name"]}
+        isLoading={isLoading}
         row={generateRows()}
+        actions={Actions}
       />
       <Pagination page={page} setPage={getBookings} />
-    </Wrapper>
+    </>
   );
-}
+};

@@ -4,14 +4,18 @@ import { type IInfra } from "global/infra.types";
 import {
   type IDefaultPaginated,
   type IDefaultResponse,
+  type IDefaultResponsePaginated,
 } from "service/server.types";
 
 export const infraService = {
   getInfras: async ({
     page = 1,
     limit = 10,
-  }: IDefaultPaginated): Promise<IDefaultResponse<IInfra[]>> => {
-    const { status, data } = await api.get("/items", {
+  }: IDefaultPaginated): Promise<IDefaultResponsePaginated<IInfra[]>> => {
+    const {
+      status,
+      data: { data },
+    } = await api.get("/items", {
       params: { page, limit },
     });
     return {
@@ -20,8 +24,11 @@ export const infraService = {
     };
   },
 
-  getInfra: async (id: string): Promise<IDefaultResponse<IInfra>> => {
-    const { status, data } = await api.get(`/items/${id}`);
+  getInfra: async (id: string): Promise<IDefaultResponsePaginated<IInfra>> => {
+    const {
+      status,
+      data: { data },
+    } = await api.get(`/items/${id}`);
     return {
       status,
       data,

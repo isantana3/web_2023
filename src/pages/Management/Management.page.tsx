@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-key */
 
-import { Table } from "components/Table";
 import { Tabs } from "components/Tabs";
 
+import { Bookings } from "./Bookings/Bookings.component";
 import {
   UseInfraCrud,
   UseLaboratoriesCrud,
@@ -52,21 +52,8 @@ export function Management(): JSX.Element {
         <SubTitle>Cadastre, edite e exclua os seus módulos</SubTitle>
       </Header>
       <Tabs
-        defaultTab={0}
-        items={[
-          labTable,
-          // ! TODO
-          <Table
-            title="Agendamentos"
-            header={["Laboratório", "Data", "Horario"]}
-            keys={["time", "time", "time"]}
-            isLoading
-            row={[]}
-          />,
-          infraTable,
-          usersTable,
-          locationsTable,
-        ]}
+        defaultTab={1}
+        items={[labTable, <Bookings />, infraTable, usersTable, locationsTable]}
         headers={[
           "Laboratórios",
           "Agendamentos",

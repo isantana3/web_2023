@@ -43,7 +43,9 @@ export function Laboratories({
   }
 
   const getLocations = async (): Promise<void> => {
-    const { data } = await locationService.getLocationsNormal();
+    const {
+      data: { data },
+    } = await locationService.getLocationsNormal();
     setLocations(data);
   };
 

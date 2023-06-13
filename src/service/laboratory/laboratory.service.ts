@@ -4,14 +4,18 @@ import { type ILaboratory } from "global/laboratory.types";
 import {
   type IDefaultPaginated,
   type IDefaultResponse,
+  type IDefaultResponsePaginated,
 } from "service/server.types";
 
 export const laboratoryService = {
   getLaboratories: async ({
     page = 1,
     limit = 10,
-  }: IDefaultPaginated): Promise<IDefaultResponse<ILaboratory[]>> => {
-    const { status, data } = await api.get("/rooms", {
+  }: IDefaultPaginated): Promise<IDefaultResponsePaginated<ILaboratory[]>> => {
+    const {
+      status,
+      data: { data },
+    } = await api.get("/rooms", {
       params: { page, limit },
     });
     return {
@@ -20,15 +24,22 @@ export const laboratoryService = {
     };
   },
 
-  getLaboratoriesNormal: async (): Promise<IDefaultResponse<ILaboratory[]>> => {
-    const { status, data } = await api.get("/rooms");
+  getLaboratoriesNormal: async (): Promise<
+    IDefaultResponsePaginated<ILaboratory[]>
+  > => {
+    const {
+      status,
+      data: { data },
+    } = await api.get("/rooms");
     return {
       status,
       data,
     };
   },
 
-  getLaboratory: async (id: string): Promise<IDefaultResponse<ILaboratory>> => {
+  getLaboratory: async (
+    id: string
+  ): Promise<IDefaultResponsePaginated<ILaboratory>> => {
     const { status, data } = await api.get(`/rooms/${id}`);
     return {
       status,

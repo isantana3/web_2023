@@ -4,14 +4,18 @@ import { type ILocation } from "global/location.types";
 import {
   type IDefaultPaginated,
   type IDefaultResponse,
+  type IDefaultResponsePaginated,
 } from "service/server.types";
 
 export const locationService = {
   getLocations: async ({
     page = 1,
     limit = 10,
-  }: IDefaultPaginated): Promise<IDefaultResponse<ILocation[]>> => {
-    const { status, data } = await api.get("/pavilions", {
+  }: IDefaultPaginated): Promise<IDefaultResponsePaginated<ILocation[]>> => {
+    const {
+      status,
+      data: { data },
+    } = await api.get("/pavilions", {
       params: { page, limit },
     });
     return {
@@ -20,16 +24,26 @@ export const locationService = {
     };
   },
 
-  getLocationsNormal: async (): Promise<IDefaultResponse<ILocation[]>> => {
-    const { status, data } = await api.get("/pavilions");
+  getLocationsNormal: async (): Promise<
+    IDefaultResponsePaginated<ILocation[]>
+  > => {
+    const {
+      status,
+      data: { data },
+    } = await api.get("/pavilions");
     return {
       status,
       data,
     };
   },
 
-  getLocation: async (id: string): Promise<IDefaultResponse<ILocation>> => {
-    const { status, data } = await api.get(`/pavilions/${id}`);
+  getLocation: async (
+    id: string
+  ): Promise<IDefaultResponsePaginated<ILocation>> => {
+    const {
+      status,
+      data: { data },
+    } = await api.get(`/pavilions/${id}`);
     return {
       status,
       data,

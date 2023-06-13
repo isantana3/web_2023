@@ -44,7 +44,9 @@ export function Infra({
   }
 
   const getLaboratories = async (): Promise<void> => {
-    const { data } = await laboratoryService.getLaboratoriesNormal();
+    const {
+      data: { data },
+    } = await laboratoryService.getLaboratoriesNormal();
     setLaboratory(data);
   };
 

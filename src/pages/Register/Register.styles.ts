@@ -84,3 +84,19 @@ export const InputRow = styled.div`
   justify-content: space-between;
   gap: 2rem;
 `;
+
+export const ButtonLink = styled.a`
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  color: ${({ theme }) => theme.ForgotPassword.title};
+  text-align: center;
+  cursor: pointer;
+  text-decoration: underline;
+`;
+
+export const ButtonLinkWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;

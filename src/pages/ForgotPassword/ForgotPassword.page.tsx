@@ -1,12 +1,16 @@
+import { useNavigate } from "react-router-dom";
+
 import colcicLogo from "assets/images/logo.png";
 import { Button } from "components/Button";
 import { Form } from "components/Form/Form";
 import { Input } from "components/Input";
 import { Navbar } from "components/Navbar";
 
-import { ForgotPasswordSchema } from "./example.schema";
+import { ForgotPasswordSchema } from "./ForgotPassword.schema";
 
 import {
+  ButtonLink,
+  ButtonWrapper,
   CentralizedContent,
   Container,
   Header,
@@ -15,6 +19,12 @@ import {
 } from "./ForgotPassword.styles";
 
 export function ForgotPassword(): JSX.Element {
+  const navigate = useNavigate();
+
+  function handleGoBack(): void {
+    navigate("/");
+  }
+
   return (
     <Container>
       <Navbar />
@@ -24,21 +34,19 @@ export function ForgotPassword(): JSX.Element {
             <img src={colcicLogo} />
             <Title>COLCIC</Title>
           </Header>
-          <SmallText>Atualize suas credenciais antes de continuar</SmallText>
+          <SmallText>
+            Insira seu email institucional para renovar sua senha
+          </SmallText>
           <Input
-            type="password"
-            placeholder="Nova senha"
+            type="email"
+            placeholder="Email"
             defaultValue={""}
             onChange={(text) => {}}
           />
-          <Input
-            type="password"
-            placeholder="Confirme a senha"
-            defaultValue={""}
-            onChange={(text) => {}}
-          />
-
-          <Button label="Continuar" color="primary" type="submit" center />
+          <ButtonWrapper>
+            <ButtonLink onClick={handleGoBack}>Voltar</ButtonLink>
+            <Button label="Enviar Email" color="primary" type="submit" center />
+          </ButtonWrapper>
         </Form>
       </CentralizedContent>
     </Container>
