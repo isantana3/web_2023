@@ -13,7 +13,7 @@ import { Container } from "./Pagination.styles";
 export function Pagination({ page, setPage }: IPaginationProps): JSX.Element {
   const options = useMemo(() => {
     const arr: IOptions[] = [];
-    for (let i = 1; i <= page.totalPages; i++) {
+    for (let i = 1; i <= (page.totalPages as number); i++) {
       arr.push({ label: i, value: i });
     }
     return arr;
@@ -58,7 +58,7 @@ export function Pagination({ page, setPage }: IPaginationProps): JSX.Element {
           });
         }}
         label="Próximo"
-        disabled={page.page + 1 > page.totalPages}
+        disabled={page.page + 1 > (page.totalPages as number)}
         icon={<Icons.RightArrowIcon width={20} height={20} />}
         iconPosition="right"
       />

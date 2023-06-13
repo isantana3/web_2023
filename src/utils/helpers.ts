@@ -19,8 +19,4 @@ export const helpers = {
     }
     return false;
   },
-  getLastPage: (page: string | undefined) => {
-    const lastPage = new URLSearchParams(page?.replace("?", "?&"));
-    return parseInt(lastPage.get("page") ?? "0");
-  },
 };

@@ -10,7 +10,6 @@ import { Pagination } from "components/Pagination";
 import { type IPagination } from "components/Pagination/Pagination.types";
 import { Table } from "components/Table";
 import { useModal } from "hooks/modals.hook";
-import { helpers } from "utils/helpers";
 
 import { CreateLocationsModal, EditLocationsModal } from "../..";
 
@@ -40,7 +39,7 @@ export function Locations(): IUseLocations {
     setData(data);
     setPage({
       page: page.page,
-      totalPages: helpers.getLastPage(lastPage),
+      totalPages: lastPage,
       limit: 2,
     });
     setIsLoading(false);
