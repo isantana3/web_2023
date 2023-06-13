@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { userService } from "service/user/user.service";
 import { useAuth } from "store/slices/auth/useAuth";
 
+import Logo from "assets/images/imgLogin.png";
+import ColcicLogo from "assets/images/logo.png";
 import { Button } from "components/Button";
 import { Form } from "components/Form/Form";
 import { Input } from "components/Form/Input";
@@ -30,17 +32,13 @@ export function Login(): JSX.Element {
       <Content>
         <LeftSide>
           <img
-            src="src\assets\images\imgLogin.png"
+            src={Logo}
             alt="Imagem com computadores dispostos em um laboratório"
           />
           <div />
         </LeftSide>
         <RightSide>
-          <img
-            id="colcicLogo"
-            src="src\assets\images\logo.png"
-            alt="Logo do colegiado"
-          />
+          <img id="colcicLogo" src={ColcicLogo} alt="Logo do colegiado" />
           <Title>COLCIC</Title>
           <Form schema={LoginSchema} onSubmit={login}>
             <Input
