@@ -23,7 +23,10 @@ export function Users({
   const { user } = useUser();
 
   async function onSubmit(userNew: IUser): Promise<void> {
-    const { data, status } = await userService.updateUser(user._id, userNew);
+    const {
+      data: { data },
+      status,
+    } = await userService.updateUser(user._id, userNew);
 
     if (status !== 200) {
       toast.error("Erro ao editar usuário");

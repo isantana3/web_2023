@@ -30,13 +30,13 @@ export function Laboratories({
 
   async function onSubmit(newData: ILaboratory): Promise<void> {
     const { pavilion, label } = newData;
-    const { data, status } = await laboratoryService.updateLaboratory(
-      laboratory._id,
-      {
-        pavilion,
-        label,
-      }
-    );
+    const {
+      data: { data },
+      status,
+    } = await laboratoryService.updateLaboratory(laboratory._id, {
+      pavilion,
+      label,
+    });
 
     if (status !== 200) {
       toast.error("Erro ao editar laboratório");
@@ -49,7 +49,9 @@ export function Laboratories({
   }
 
   const getLocations = async (): Promise<void> => {
-    const { data } = await locationService.getLocationsNormal();
+    const {
+      data: { data },
+    } = await locationService.getLocationsNormal();
     setLocations(data);
   };
 

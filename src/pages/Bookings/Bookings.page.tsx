@@ -39,12 +39,16 @@ export function Bookings(): JSX.Element {
   }
 
   const getLocations = async (): Promise<void> => {
-    const { data } = await locationService.getLocationsNormal();
+    const {
+      data: { data },
+    } = await locationService.getLocationsNormal();
     setLocation(data);
   };
 
   const getLaboratories = async (page: number): Promise<void> => {
-    const { data } = await laboratoryService.getLaboratories({
+    const {
+      data: { data },
+    } = await laboratoryService.getLaboratories({
       page,
       limit: 2,
     });

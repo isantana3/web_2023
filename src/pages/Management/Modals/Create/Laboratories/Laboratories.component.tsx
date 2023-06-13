@@ -27,7 +27,10 @@ export function Laboratories({
 
   async function onSubmit(newData: ILaboratory): Promise<void> {
     const { pavilion, label } = newData;
-    const { data, status } = await laboratoryService.createLaboratory({
+    const {
+      data: { data },
+      status,
+    } = await laboratoryService.createLaboratory({
       pavilion,
       label,
     });
@@ -43,7 +46,9 @@ export function Laboratories({
   }
 
   const getLocations = async (): Promise<void> => {
-    const { data } = await locationService.getLocationsNormal();
+    const {
+      data: { data },
+    } = await locationService.getLocationsNormal();
     setLocations(data);
   };
 

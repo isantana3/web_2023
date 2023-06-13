@@ -37,16 +37,18 @@ export function Booking(): JSX.Element {
   const { id } = useParams();
   const { user } = useAuth();
   const [laboratory, setLaboratory] = useState<ILaboratory[]>([]);
-  const navigate = useNavigate();
   const [booking, setBooking] = useState<IReservationList>();
   const [locations, setLocations] = useState<ILocation[]>();
   const [date, setDate] = useState<string>("");
   const [pavilion, setPavilion] = useState<string>("");
   const [startDate, setStartDate] = useState<string>("");
   const [endDate, setEndDate] = useState<string>("");
+  const navigate = useNavigate();
 
   const getBooking = async (): Promise<void> => {
-    const { data } = await reservationService.getReservation(id as string);
+    const {
+      data: { data },
+    } = await reservationService.getReservation(id as string);
     setBooking(data);
     setStartDate(
       new Date(data.endDate).toLocaleTimeString([], {
@@ -64,12 +66,16 @@ export function Booking(): JSX.Element {
   };
 
   const getPavilions = async (): Promise<void> => {
-    const { data } = await locationService.getLocations({});
+    const {
+      data: { data },
+    } = await locationService.getLocations({});
     setLocations(data);
   };
 
   const getLaboratories = async (): Promise<void> => {
-    const { data } = await reservationService.getAvailableReservations(
+    const {
+      data: { data },
+    } = await reservationService.getAvailableReservations(
       pavilion,
       helpers.toDateTime(date, startDate),
       helpers.toDateTime(date, endDate)

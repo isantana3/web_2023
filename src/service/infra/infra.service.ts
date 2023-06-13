@@ -11,7 +11,10 @@ export const infraService = {
     page = 1,
     limit = 10,
   }: IDefaultPaginated): Promise<IDefaultResponse<IInfra[]>> => {
-    const { status, data } = await api.get("/items", {
+    const {
+      status,
+      data: { data },
+    } = await api.get("/items", {
       params: { page, limit },
     });
     return {
@@ -21,7 +24,10 @@ export const infraService = {
   },
 
   getInfra: async (id: string): Promise<IDefaultResponse<IInfra>> => {
-    const { status, data } = await api.get(`/items/${id}`);
+    const {
+      status,
+      data: { data },
+    } = await api.get(`/items/${id}`);
     return {
       status,
       data,
@@ -32,7 +38,10 @@ export const infraService = {
     id: string,
     infra: Omit<IInfra, "_id">
   ): Promise<IDefaultResponse<IInfra>> => {
-    const { status, data } = await api.patch(`/items/${id}`, infra);
+    const {
+      status,
+      data: { data },
+    } = await api.patch(`/items/${id}`, infra);
     return {
       status,
       data,
@@ -40,7 +49,10 @@ export const infraService = {
   },
 
   deleteInfra: async (id: string): Promise<IDefaultResponse<IInfra>> => {
-    const { status, data } = await api.delete(`/items/${id}`);
+    const {
+      status,
+      data: { data },
+    } = await api.delete(`/items/${id}`);
     return {
       status,
       data,
@@ -50,7 +62,10 @@ export const infraService = {
   createInfra: async (
     infra: Omit<IInfra, "_id">
   ): Promise<IDefaultResponse<IInfra>> => {
-    const { status, data } = await api.post("/items", infra);
+    const {
+      status,
+      data: { data },
+    } = await api.post("/items", infra);
     return {
       status,
       data,

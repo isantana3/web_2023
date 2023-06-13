@@ -14,10 +14,17 @@ export const reservationService = {
   getReservations: async ({
     page = 1,
     limit = 10,
-  }: IDefaultPaginated): Promise<IDefaultResponse<IReservation[]>> => {
-    return await api.get("/reservations", {
+  }: IDefaultPaginated): Promise<IDefaultResponse<IReservationList[]>> => {
+    const {
+      status,
+      data: { data },
+    } = await api.get("/reservations", {
       params: { page, limit },
     });
+    return {
+      status,
+      data,
+    };
   },
 
   getReservationsNormal: async ({
@@ -26,15 +33,37 @@ export const reservationService = {
     id?: string;
   }): Promise<IDefaultResponse<IReservationList[]>> => {
     if (id) {
-      return await api.get(`/reservations/id=${id}`);
+      const {
+        status,
+        data: { data },
+      } = await api.get(`/reservations/id=${id}`);
+      return {
+        status,
+        ...data,
+      };
     }
-    return await api.get(`/reservations/`);
+
+    const {
+      status,
+      data: { data },
+    } = await api.get(`/reservations/`);
+    return {
+      status,
+      data,
+    };
   },
 
   getReservation: async (
     id: string
   ): Promise<IDefaultResponse<IReservationList>> => {
-    return await api.get(`/reservations/${id}`);
+    const {
+      status,
+      data: { data },
+    } = await api.get(`/reservations/${id}`);
+    return {
+      status,
+      data,
+    };
   },
 
   getAvailableReservations: async (
@@ -42,27 +71,55 @@ export const reservationService = {
     startDate: string,
     endDate: string
   ): Promise<IDefaultResponse<ILaboratory[]>> => {
-    return await api.get(
+    const {
+      status,
+      data: { data },
+    } = await api.get(
       `reservations/available-rooms/?pavilion=${pavilion}&startDate=${startDate}&endDate=${endDate}`
     );
+    return {
+      status,
+      data,
+    };
   },
 
   updateReservation: async (
     id: string,
-    data: Omit<IReservation, "_id" & "password">
+    user: Omit<IReservation, "_id" & "password">
   ): Promise<IDefaultResponse<IReservation>> => {
-    return await api.patch(`/reservations/${id}`, data);
+    const {
+      status,
+      data: { data },
+    } = await api.patch(`/reservations/${id}`, user);
+    return {
+      status,
+      data,
+    };
   },
 
   deleteReservation: async (
     id: string
   ): Promise<IDefaultResponse<IReservation>> => {
-    return await api.delete(`/reservations/${id}`);
+    const {
+      status,
+      data: { data },
+    } = await api.delete(`/reservations/${id}`);
+    return {
+      status,
+      data,
+    };
   },
 
   createReservation: async (
-    data: Omit<IReservation, "_id">
+    user: Omit<IReservation, "_id">
   ): Promise<IDefaultResponse<IReservation>> => {
-    return await api.post("/reservations", data);
+    const {
+      status,
+      data: { data },
+    } = await api.post("/reservations", user);
+    return {
+      status,
+      data,
+    };
   },
 };

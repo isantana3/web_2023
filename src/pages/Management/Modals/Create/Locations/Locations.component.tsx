@@ -20,7 +20,10 @@ export function Locations({
 }: ILaboratoriesProps): JSX.Element {
   async function onSubmit(newData: ILocation): Promise<void> {
     const { label, description, observation } = newData;
-    const { data, status } = await locationService.createLocation({
+    const {
+      data: { data },
+      status,
+    } = await locationService.createLocation({
       label,
       description,
       observation,

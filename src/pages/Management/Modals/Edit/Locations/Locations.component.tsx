@@ -23,14 +23,14 @@ export function Locations({
 
   async function onSubmit(newData: ILocation): Promise<void> {
     const { label, description, observation } = newData;
-    const { data, status } = await locationService.updateLocation(
-      locations._id,
-      {
-        label,
-        description,
-        observation,
-      }
-    );
+    const {
+      data: { data },
+      status,
+    } = await locationService.updateLocation(locations._id, {
+      label,
+      description,
+      observation,
+    });
 
     if (status !== 200) {
       toast.error("Erro ao editar Pavilhão");

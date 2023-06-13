@@ -32,7 +32,10 @@ export function Dashboard(): JSX.Element {
     // const { data } = await reservationService.getReservationsNormal({
     //   id: user._id,
     // });
-    const { data } = await reservationService.getReservationsNormal({});
+    const {
+      data: { data },
+    } = await reservationService.getReservationsNormal({});
+
     setBookings(data.filter((item) => item.responsible._id === user?._id));
     setIsLoading(false);
   };

@@ -26,7 +26,9 @@ export function Users(): IUseUser {
 
   // Lista dos itens da entidade
   const getUsers = async (page: number): Promise<void> => {
-    const { data } = await userService.getUsers({ page, limit: 2 });
+    const {
+      data: { data },
+    } = await userService.getUsers({ page, limit: 2 });
     setData(data);
     setIsLoading(false);
   };
