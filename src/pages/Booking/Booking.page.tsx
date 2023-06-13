@@ -202,6 +202,7 @@ export function Booking(): JSX.Element {
             }}
           />
           <SelectCustom
+            disabled={isDisabled as boolean}
             onChange={(value: IOptions) => {
               setPavilion(value.value as string);
             }}

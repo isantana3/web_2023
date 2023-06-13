@@ -21,6 +21,7 @@ export function CustomSelect({
   icon,
   placeholder,
   isMulti,
+  disabled,
 }: ISelectProps): JSX.Element {
   const Icon = icon ? Icons[icon] : undefined;
   const [valueLocal, setValue] = useState<ValueType>();
@@ -29,6 +30,7 @@ export function CustomSelect({
     <Container>
       {label && <Label>{label}</Label>}
       <Select
+        isDisabled={disabled}
         noOptionsMessage={() => <>Nenhum item para esses filtros ...</>}
         isMulti={isMulti}
         components={{
