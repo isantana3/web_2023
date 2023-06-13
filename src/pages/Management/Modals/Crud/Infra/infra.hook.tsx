@@ -89,7 +89,11 @@ export function Infra(): IUseInfra {
               );
               toast.success("Item deletado com sucesso!");
             } else {
-              setPage(1);
+              await getInfras({
+                page: 1,
+                totalPages: 1,
+                limit: 2,
+              });
             }
           }
         }}

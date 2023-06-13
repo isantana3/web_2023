@@ -91,7 +91,11 @@ export function Users(): IUseUser {
               );
               toast.success("Item deletado com sucesso!");
             } else {
-              setPage(1);
+              await getUsers({
+                page: 1,
+                limit: 2,
+                totalPages: 1,
+              });
             }
           }
         }}

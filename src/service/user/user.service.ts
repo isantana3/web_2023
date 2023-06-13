@@ -24,7 +24,7 @@ export const userService = {
     };
   },
 
-  getUser: async (id: string): Promise<IDefaultResponsePaginated<IUser>> => {
+  getUser: async (id: string): Promise<IDefaultResponse<IUser>> => {
     const { status, data } = await api.get(`/users/${id}`);
     return {
       status,

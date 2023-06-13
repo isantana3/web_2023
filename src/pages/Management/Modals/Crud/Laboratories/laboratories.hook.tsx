@@ -92,7 +92,11 @@ export function Laboratories(): IUseLaboratories {
               );
               toast.success("Laboratório deletado com sucesso!");
             } else {
-              setPage(1);
+              await getLaboratories({
+                page: 1,
+                limit: 2,
+                totalPages: 1,
+              });
             }
           }
         }}
