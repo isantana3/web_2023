@@ -1,10 +1,18 @@
 import { type Icons } from "global/icons.constants";
-import { type OptionsOrGroups } from "react-select";
+import {
+  type MultiValue,
+  type OptionsOrGroups,
+  type SingleValue,
+} from "react-select";
 
 export interface IOptions {
   value: string | number;
   label: string | number;
 }
+
+export type ValueType =
+  | MultiValue<string | number>
+  | SingleValue<string | number>;
 
 export interface ISelectProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

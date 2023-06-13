@@ -1,9 +1,9 @@
-export interface IDefaultResponse<T> {
+export interface IDefaultResponsePaginated<T> {
   data: {
     data: T;
     currentPage?: number;
     totalPages?: number;
-    lastPage?: number;
+    lastPage?: string;
   };
   status: number;
 }
@@ -13,7 +13,7 @@ export interface IDefaultPaginated {
   limit?: number;
 }
 
-export interface IDefaultResponseNormal<T> {
+export interface IDefaultResponse<T> {
   data: T;
   status: number;
 }

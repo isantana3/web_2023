@@ -27,10 +27,7 @@ export function Laboratories({
 
   async function onSubmit(newData: ILaboratory): Promise<void> {
     const { pavilion, label } = newData;
-    const {
-      data: { data },
-      status,
-    } = await laboratoryService.createLaboratory({
+    const { data, status } = await laboratoryService.createLaboratory({
       pavilion,
       label,
     });

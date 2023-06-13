@@ -4,13 +4,14 @@ import { type ILocation } from "global/location.types";
 import {
   type IDefaultPaginated,
   type IDefaultResponse,
+  type IDefaultResponsePaginated,
 } from "service/server.types";
 
 export const locationService = {
   getLocations: async ({
     page = 1,
     limit = 10,
-  }: IDefaultPaginated): Promise<IDefaultResponse<ILocation[]>> => {
+  }: IDefaultPaginated): Promise<IDefaultResponsePaginated<ILocation[]>> => {
     const {
       status,
       data: { data },
@@ -23,7 +24,9 @@ export const locationService = {
     };
   },
 
-  getLocationsNormal: async (): Promise<IDefaultResponse<ILocation[]>> => {
+  getLocationsNormal: async (): Promise<
+    IDefaultResponsePaginated<ILocation[]>
+  > => {
     const {
       status,
       data: { data },
@@ -34,7 +37,9 @@ export const locationService = {
     };
   },
 
-  getLocation: async (id: string): Promise<IDefaultResponse<ILocation>> => {
+  getLocation: async (
+    id: string
+  ): Promise<IDefaultResponsePaginated<ILocation>> => {
     const {
       status,
       data: { data },
@@ -49,10 +54,7 @@ export const locationService = {
     id: string,
     lab: Omit<ILocation, "_id">
   ): Promise<IDefaultResponse<ILocation>> => {
-    const {
-      status,
-      data: { data },
-    } = await api.patch(`/pavilions/${id}`, lab);
+    const { status, data } = await api.patch(`/pavilions/${id}`, lab);
     return {
       status,
       data,
@@ -60,10 +62,7 @@ export const locationService = {
   },
 
   deleteLocation: async (id: string): Promise<IDefaultResponse<ILocation>> => {
-    const {
-      status,
-      data: { data },
-    } = await api.delete(`/pavilions/${id}`);
+    const { status, data } = await api.delete(`/pavilions/${id}`);
     return {
       status,
       data,
@@ -73,10 +72,7 @@ export const locationService = {
   createLocation: async (
     lab: Omit<ILocation, "_id">
   ): Promise<IDefaultResponse<ILocation>> => {
-    const {
-      status,
-      data: { data },
-    } = await api.post("/pavilions", lab);
+    const { status, data } = await api.post("/pavilions", lab);
     return {
       status,
       data,

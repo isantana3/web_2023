@@ -9,7 +9,10 @@ import { useAuth } from "store/slices/auth/useAuth";
 
 import { Button } from "components/Button";
 import { LaboratoryTag } from "components/LaboratoryTag";
+import { Pagination } from "components/Pagination";
+import { type IPagination } from "components/Pagination/Pagination.types";
 import { Table } from "components/Table";
+import { helpers } from "utils/helpers";
 
 import { type IReservationList } from "global/reservations.types";
 
@@ -27,18 +30,30 @@ export function Dashboard(): JSX.Element {
   const { user } = useAuth();
   const [bookings, setBookings] = useState<IReservationList[]>([]);
   const [loading, setIsLoading] = useState<boolean>(true);
+  const [page, setPage] = useState<IPagination>({
+    page: 1,
+    totalPages: 1,
+    limit: 2,
+  });
 
-  const getBookings = async (): Promise<void> => {
-    // const { data } = await reservationService.getReservationsNormal({
-    //   id: user._id,
-    // });
+  const getBookings = async (page: IPagination): Promise<void> => {
+    setIsLoading(true);
     const {
       data: { data },
-    } = await reservationService.getReservationsNormal({});
-
+      data: { lastPage },
+    } = await reservationService.getReservations(page);
+    setPage({
+      page: page.page,
+      totalPages: helpers.getLastPage(lastPage),
+      limit: 2,
+    });
     setBookings(data.filter((item) => item.responsible._id === user?._id));
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    getBookings(page).catch((e) => {});
+  }, []);
 
   const navigate = useNavigate();
 
@@ -55,11 +70,6 @@ export function Dashboard(): JSX.Element {
       <Icons.DotsIcon />
     );
   };
-
-  useEffect(() => {
-    getBookings().catch(() => {});
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const generateRows = (): object[] => {
     return bookings.map((booking) => {
@@ -116,6 +126,7 @@ export function Dashboard(): JSX.Element {
         keys={["laboratory", "status"]}
         row={generateRows()}
       />
+      <Pagination page={page} setPage={getBookings} />
     </Wrapper>
   );
 }
