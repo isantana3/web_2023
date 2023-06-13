@@ -11,12 +11,13 @@ export function Login(): JSX.Element {
       <Navbar />
       <div id="all">
         <div id="leftSide">
-          <img src="src\assets\images\imgLogin.png" alt="Imagem com computadores dispostos em um laboratório">
+          <img id="labPic" src="src\assets\images\imgLogin.png" alt="Imagem com computadores dispostos em um laboratório">
           <div id="blue"></div>
       </div>
 
         <div id="rightSide">
-          <img src="src\assets\images\logo.png" alt="Logo do colegiado">
+          <img id="colcicLogo" src="src\assets\images\logo.png" alt="Logo do colegiado">
+          <h2 id="colcicTitle"></h2>
           <Form schema = {LoginSchema} onSubmit = {login}>
             <Input
               label = "Email"
@@ -31,7 +32,9 @@ export function Login(): JSX.Element {
               type = "password"
               name = "password"
             />
+            <h4 id="forgetPassword">Esqueci minha senha</h4>
             <Button center label="Entrar" type= "submit" />
+            <h4 id="newHere">Esqueci minha senha</h4>
             </Form>
         </div>
       </div>
