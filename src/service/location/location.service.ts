@@ -11,7 +11,10 @@ export const locationService = {
     page = 1,
     limit = 10,
   }: IDefaultPaginated): Promise<IDefaultResponse<ILocation[]>> => {
-    const { status, data } = await api.get("/pavilions", {
+    const {
+      status,
+      data: { data },
+    } = await api.get("/pavilions", {
       params: { page, limit },
     });
     return {
@@ -21,7 +24,10 @@ export const locationService = {
   },
 
   getLocationsNormal: async (): Promise<IDefaultResponse<ILocation[]>> => {
-    const { status, data } = await api.get("/pavilions");
+    const {
+      status,
+      data: { data },
+    } = await api.get("/pavilions");
     return {
       status,
       data,
@@ -29,7 +35,10 @@ export const locationService = {
   },
 
   getLocation: async (id: string): Promise<IDefaultResponse<ILocation>> => {
-    const { status, data } = await api.get(`/pavilions/${id}`);
+    const {
+      status,
+      data: { data },
+    } = await api.get(`/pavilions/${id}`);
     return {
       status,
       data,
@@ -40,7 +49,10 @@ export const locationService = {
     id: string,
     lab: Omit<ILocation, "_id">
   ): Promise<IDefaultResponse<ILocation>> => {
-    const { status, data } = await api.patch(`/pavilions/${id}`, lab);
+    const {
+      status,
+      data: { data },
+    } = await api.patch(`/pavilions/${id}`, lab);
     return {
       status,
       data,
@@ -48,7 +60,10 @@ export const locationService = {
   },
 
   deleteLocation: async (id: string): Promise<IDefaultResponse<ILocation>> => {
-    const { status, data } = await api.delete(`/pavilions/${id}`);
+    const {
+      status,
+      data: { data },
+    } = await api.delete(`/pavilions/${id}`);
     return {
       status,
       data,
@@ -58,7 +73,10 @@ export const locationService = {
   createLocation: async (
     lab: Omit<ILocation, "_id">
   ): Promise<IDefaultResponse<ILocation>> => {
-    const { status, data } = await api.post("/pavilions", lab);
+    const {
+      status,
+      data: { data },
+    } = await api.post("/pavilions", lab);
     return {
       status,
       data,

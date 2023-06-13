@@ -29,7 +29,9 @@ export function Laboratories(): IUseLaboratories {
 
   // Lista dos itens da entidade
   const getLaboratories = async (page: number): Promise<void> => {
-    const { data } = await laboratoryService.getLaboratories({
+    const {
+      data: { data },
+    } = await laboratoryService.getLaboratories({
       page,
       limit: 2,
     });

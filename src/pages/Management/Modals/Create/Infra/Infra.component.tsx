@@ -27,7 +27,10 @@ export function Infra({
 
   async function onSubmit(infra: IInfra): Promise<void> {
     const { code, label, room } = infra;
-    const { data, status } = await infraService.createInfra({
+    const {
+      data: { data },
+      status,
+    } = await infraService.createInfra({
       code,
       room,
       label,
@@ -44,7 +47,9 @@ export function Infra({
   }
 
   const getLaboratories = async (): Promise<void> => {
-    const { data } = await laboratoryService.getLaboratoriesNormal();
+    const {
+      data: { data },
+    } = await laboratoryService.getLaboratoriesNormal();
     setLaboratory(data);
   };
 

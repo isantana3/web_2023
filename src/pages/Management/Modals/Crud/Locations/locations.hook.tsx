@@ -27,7 +27,9 @@ export function Locations(): IUseLocations {
 
   // Lista dos itens da entidade
   const getLocations = async (page: number): Promise<void> => {
-    const { data } = await locationService.getLocations({ page, limit: 2 });
+    const {
+      data: { data },
+    } = await locationService.getLocations({ page, limit: 2 });
     setData(data);
     setIsLoading(false);
   };

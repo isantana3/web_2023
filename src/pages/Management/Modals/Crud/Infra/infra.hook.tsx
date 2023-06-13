@@ -27,7 +27,9 @@ export function Infra(): IUseInfra {
   // Lista dos itens da entidade
   const getInfras = async (page: number): Promise<void> => {
     setIsLoading(true);
-    const { data } = await infraService.getInfras({ page, limit: 2 });
+    const {
+      data: { data },
+    } = await infraService.getInfras({ page, limit: 2 });
     setData(data);
   };
 
