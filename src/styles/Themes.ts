@@ -16,6 +16,8 @@ const Sidebar = {
   headerIcon: "#314CA5",
   fontBlue: "#314CA5",
   backgroundBlue: "#D4E1F4",
+  fontRed: "#DC3545",
+  backgroundRed: "#F27985",
 };
 
 const Dashboard = {

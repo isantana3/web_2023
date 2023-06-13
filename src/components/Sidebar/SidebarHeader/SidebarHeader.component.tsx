@@ -4,14 +4,19 @@ import { useAuth } from "store/slices/auth/useAuth";
 
 import {
   Container,
-  EditButon,
   IconContainer,
   Label,
+  LogoutButton,
 } from "./SidebarHeader.styles";
 
 export function SidebarHeader(): JSX.Element {
-  const { user } = useAuth();
+  const { user, authenticate } = useAuth();
   const navigate = useNavigate();
+
+  function handleLogout(): void {
+    navigate("/");
+    authenticate({ user: undefined });
+  }
 
   return (
     <Container>
@@ -20,13 +25,7 @@ export function SidebarHeader(): JSX.Element {
       </IconContainer>
       <Label>{user.name}</Label>
       <Label>{user.role}</Label>
-      <EditButon
-        onClick={() => {
-          navigate("/configuracoes");
-        }}
-      >
-        <Icons.EditIcon /> Editar perfil
-      </EditButon>
+      <LogoutButton onClick={handleLogout}>Sair</LogoutButton>
     </Container>
   );
 }

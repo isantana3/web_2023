@@ -3,7 +3,7 @@ export interface IDefaultResponsePaginated<T> {
     data: T;
     currentPage?: number;
     totalPages?: number;
-    lastPage?: string;
+    lastPage?: number;
   };
   status: number;
 }

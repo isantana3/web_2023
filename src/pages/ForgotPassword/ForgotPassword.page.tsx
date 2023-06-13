@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import colcicLogo from "assets/images/logo.png";
 import { Button } from "components/Button";
 import { Form } from "components/Form/Form";
-import { Input } from "components/Input";
+import { Input } from "components/Form/Input";
 import { Navbar } from "components/Navbar";
 
 import { ForgotPasswordSchema } from "./ForgotPassword.schema";
@@ -38,10 +38,11 @@ export function ForgotPassword(): JSX.Element {
             Insira seu email institucional para renovar sua senha
           </SmallText>
           <Input
+            label=""
+            name="email"
             type="email"
             placeholder="Email"
             defaultValue={""}
-            onChange={(text) => {}}
           />
           <ButtonWrapper>
             <ButtonLink onClick={handleGoBack}>Voltar</ButtonLink>

@@ -5,6 +5,6 @@ export interface IPaginationProps {
 
 export interface IPagination {
   page: number;
-  totalPages: number;
+  totalPages?: number;
   limit?: number;
 }

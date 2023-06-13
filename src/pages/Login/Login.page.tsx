@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import { userService } from "service/user/user.service";
+import { useAuth } from "store/slices/auth/useAuth";
 
 import { Button } from "components/Button";
 import { Form } from "components/Form/Form";
@@ -13,9 +15,15 @@ import { SmallText } from "pages/ForgotPassword/ForgotPassword.styles";
 
 export function Login(): JSX.Element {
   const navigate = useNavigate();
-  function login(data: unknown): void {
-    navigate("/dashboard");
-  }
+  const { authenticate } = useAuth();
+
+  const login = async (): Promise<void> => {
+    const { data } = await userService.getUser("64623504921a64b1f6991cd1");
+    data.token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDYyMzUwNDkyMWE2NGIxZjY5OTFjZDEiLCJuYW1lIjoiUm9iZXJ0byBDYXJsb3MiLCJlbWFpbCI6InJvYmVydG8yQGVtYWlsLmNvbSIsInBhc3N3b3JkIjoiMTIzNDU2NzgiLCJyZWdpc3RyYXRpb24iOiIyMDIwMjAxNTQ1Iiwib2ZmaWNlIjoicHJvZmVzc29yIiwicm9sZSI6ImFkbWluIn0.bOR3z4xVkflHGonUQ6R-8g-saEPf1_op9oGD1yAfh88";
+    authenticate({ user: data });
+  };
+
   return (
     <Wrapper>
       <Navbar />
@@ -54,7 +62,7 @@ export function Login(): JSX.Element {
             >
               Esqueci minha senha
             </SmallText>
-            <Button center label="Entrar" type="submit" />
+            <Button callback={login} center label="Entrar" type="submit" />
             <SmallText
               onClick={() => {
                 navigate("/cadastro");
