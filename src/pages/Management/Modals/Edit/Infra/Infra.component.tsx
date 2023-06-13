@@ -30,10 +30,7 @@ export function Infra({
 
   async function onSubmit(newData: IInfra): Promise<void> {
     const { code, label, room } = newData;
-    const {
-      data: { data },
-      status,
-    } = await infraService.updateInfra(infra._id ?? "", {
+    const { data, status } = await infraService.updateInfra(infra._id ?? "", {
       code,
       room,
       label,
