@@ -23,8 +23,8 @@ export const IconContainer = styled.div`
   background-color: ${({ theme }) => theme.Sidebar.headerIcon};
 `;
 
-export const EditButon = styled.button`
-  border: 1px solid ${({ theme }) => theme.Sidebar.fontBlue};
+export const LogoutButton = styled.button`
+  border: 1px solid ${({ theme }) => theme.Sidebar.fontRed};
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
@@ -34,8 +34,8 @@ export const EditButon = styled.button`
   gap: 6px;
   background: #e6e9ec;
   border-radius: 6px;
-  color: ${({ theme }) => theme.Sidebar.fontBlue};
-  background-color: ${({ theme }) => theme.Sidebar.backgroundBlue};
+  color: ${({ theme }) => theme.Sidebar.fontRed};
+  background-color: ${({ theme }) => theme.Sidebar.backgroundRed};
 `;
 
 export const Label = styled.p`

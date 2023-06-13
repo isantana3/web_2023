@@ -31,8 +31,14 @@ const slice = createSlice({
   initialState,
   reducers: {
     authenticate: (state, action: { payload: IAuthUserSlice }) => {
+      const stateToken = action.payload?.user
+        ? action.payload?.user.token
+        : undefined;
       state.user = action.payload?.user;
-      localStorage.setItem("token", JSON.stringify(action.payload?.user.token));
+      localStorage.setItem(
+        "token",
+        stateToken ? JSON.stringify(action.payload?.user.token) : ""
+      );
     },
   },
 });

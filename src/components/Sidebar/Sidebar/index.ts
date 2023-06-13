@@ -1,1 +1,1 @@
-export { Sidebar } from './Sidebar.component';
+export { Sidebar } from "./Sidebar.component";
