@@ -70,7 +70,7 @@ export const reservationService = {
     pavilion: string,
     startDate: string,
     endDate: string
-  ): Promise<IDefaultResponsePaginated<ILaboratory[]>> => {
+  ): Promise<IDefaultResponse<ILaboratory[]>> => {
     const { status, data } = await api.get(
       `reservations/available-rooms/?pavilion=${pavilion}&startDate=${startDate}&endDate=${endDate}`
     );
