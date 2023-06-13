@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import colcicLogo from "assets/images/logo.png";
 import { Button } from "components/Button";
 import { Form } from "components/Form/Form";
@@ -7,6 +9,8 @@ import { Navbar } from "components/Navbar";
 import { ForgotPasswordSchema } from "./ForgotPassword.schema";
 
 import {
+  ButtonLink,
+  ButtonWrapper,
   CentralizedContent,
   Container,
   Header,
@@ -15,6 +19,12 @@ import {
 } from "./ForgotPassword.styles";
 
 export function ForgotPassword(): JSX.Element {
+  const navigate = useNavigate();
+
+  function handleGoBack(): void {
+    navigate("/");
+  }
+
   return (
     <Container>
       <Navbar />
@@ -33,7 +43,10 @@ export function ForgotPassword(): JSX.Element {
             defaultValue={""}
             onChange={(text) => {}}
           />
-          <Button label="Enviar Email" color="primary" type="submit" center />
+          <ButtonWrapper>
+            <ButtonLink onClick={handleGoBack}>Voltar</ButtonLink>
+            <Button label="Enviar Email" color="primary" type="submit" center />
+          </ButtonWrapper>
         </Form>
       </CentralizedContent>
     </Container>

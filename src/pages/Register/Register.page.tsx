@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import colcicLogo from "assets/images/logo.png";
 import { Button } from "components/Button";
 import { Form } from "components/Form/Form";
@@ -12,6 +14,8 @@ import { RegisterSchema } from "./example.schema";
 import { type IFormData } from "./Register.types";
 
 import {
+  ButtonLink,
+  ButtonLinkWrapper,
   ButtonRow,
   ButtonWrapper,
   Container,
@@ -27,7 +31,12 @@ import {
 } from "./Register.styles";
 
 export function Register(): JSX.Element {
+  const navigate = useNavigate();
   const [isStepOne, setIsStepOne] = useState(true);
+
+  function handleGoBack(): void {
+    navigate("/");
+  }
 
   function validateForm(data: IFormData): boolean {
     if (data) {
@@ -78,13 +87,14 @@ export function Register(): JSX.Element {
                   />
                 </InputContainer>
 
-                <ButtonWrapper>
+                <ButtonLinkWrapper>
+                  <ButtonLink onClick={handleGoBack}>Voltar</ButtonLink>
                   <Button
                     label="Continuar"
                     color="primary"
                     callback={handleStepOne}
                   />
-                </ButtonWrapper>
+                </ButtonLinkWrapper>
               </>
             ) : (
               <>

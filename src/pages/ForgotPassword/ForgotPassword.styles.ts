@@ -37,3 +37,19 @@ export const SmallText = styled.p`
   cursor: pointer;
   text-decoration: underline;
 `;
+
+export const ButtonLink = styled.a`
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  color: ${({ theme }) => theme.ForgotPassword.title};
+  text-align: center;
+  cursor: pointer;
+  text-decoration: underline;
+`;
+
+export const ButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
