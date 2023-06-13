@@ -7,8 +7,10 @@ import { useLaboratory } from "store/slices/laboratory/useLaboratory";
 
 import { Button } from "components/Button";
 import { Pagination } from "components/Pagination";
+import { type IPagination } from "components/Pagination/Pagination.types";
 import { Table } from "components/Table";
 import { useModal } from "hooks/modals.hook";
+import { helpers } from "utils/helpers";
 
 import { CreateLaboratoriesModal, EditLaboratoriesModal } from "../..";
 
@@ -16,7 +18,11 @@ import { type IUseLaboratories } from "./laboratories.types";
 import { type ILaboratory } from "global/laboratory.types";
 
 export function Laboratories(): IUseLaboratories {
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState<IPagination>({
+    page: 1,
+    totalPages: 1,
+    limit: 2,
+  });
   const [data, setData] = useState<ILaboratory[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { toggleModal: toggleLaboratory, isVisible: isVisibleLaboratory } =
@@ -28,14 +34,17 @@ export function Laboratories(): IUseLaboratories {
   const { setLaboratory } = useLaboratory();
 
   // Lista dos itens da entidade
-  const getLaboratories = async (page: number): Promise<void> => {
+  const getLaboratories = async (page: IPagination): Promise<void> => {
+    setIsLoading(true);
     const {
-      data: { data },
-    } = await laboratoryService.getLaboratories({
-      page,
+      data: { data, lastPage },
+    } = await laboratoryService.getLaboratories(page);
+    setData(data);
+    setPage({
+      page: page.page,
+      totalPages: helpers.getLastPage(lastPage),
       limit: 2,
     });
-    setData(data);
     setIsLoading(false);
   };
 
@@ -110,15 +119,15 @@ export function Laboratories(): IUseLaboratories {
           }}
           isLoading={isLoading}
         />
-        <Pagination currentPage={page} setPage={setPage} totalPages={2} />
+
+        <Pagination page={page} setPage={getLaboratories} />
       </div>
     );
   }
 
   useEffect(() => {
-    setIsLoading(true);
     getLaboratories(page).catch((e) => {});
-  }, [page]);
+  }, []);
 
   return {
     create: {

@@ -7,8 +7,10 @@ import { useInfra } from "store/slices/infra/useInfra";
 
 import { Button } from "components/Button";
 import { Pagination } from "components/Pagination";
+import { type IPagination } from "components/Pagination/Pagination.types";
 import { Table } from "components/Table";
 import { useModal } from "hooks/modals.hook";
+import { helpers } from "utils/helpers";
 
 import { CreateInfraModal, EditInfraModal } from "../..";
 
@@ -17,7 +19,11 @@ import { type IInfra } from "global/infra.types";
 
 export function Infra(): IUseInfra {
   const [data, setData] = useState<IInfra[]>([]);
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState<IPagination>({
+    page: 1,
+    totalPages: 1,
+    limit: 2,
+  });
   const { toggleModal: toggleInfra, isVisible: isVisibleInfra } = useModal();
   const { toggleModal: toggleEditInfra, isVisible: isVisibleEditInfra } =
     useModal();
@@ -25,12 +31,18 @@ export function Infra(): IUseInfra {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // Lista dos itens da entidade
-  const getInfras = async (page: number): Promise<void> => {
+  const getInfras = async (page: IPagination): Promise<void> => {
     setIsLoading(true);
     const {
-      data: { data },
-    } = await infraService.getInfras({ page, limit: 2 });
+      data: { data, lastPage },
+    } = await infraService.getInfras(page);
     setData(data);
+    setPage({
+      page: page.page,
+      totalPages: helpers.getLastPage(lastPage),
+      limit: 2,
+    });
+    setIsLoading(false);
   };
 
   // Modal de criação da entidade
@@ -103,17 +115,13 @@ export function Infra(): IUseInfra {
         }}
         isLoading={isLoading}
       />
-      <Pagination currentPage={page} setPage={setPage} totalPages={2} />
+      <Pagination page={page} setPage={getInfras} />
     </div>
   );
 
   useEffect(() => {
-    getInfras(page)
-      .catch((e) => {})
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [page]);
+    getInfras(page).catch((e) => {});
+  }, []);
 
   return {
     create: {

@@ -20,10 +20,7 @@ export function Users({
   onSuccess,
 }: IUserProps): JSX.Element {
   async function onSubmit(user: IUser): Promise<void> {
-    const {
-      data: { data },
-      status,
-    } = await userService.createUser(user);
+    const { data, status } = await userService.createUser(user);
 
     if (status !== 201) {
       toast.error("Erro ao criar usuário");

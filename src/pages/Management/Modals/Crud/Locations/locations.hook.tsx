@@ -7,8 +7,10 @@ import { useLocation } from "store/slices/location/useLocation";
 
 import { Button } from "components/Button";
 import { Pagination } from "components/Pagination";
+import { type IPagination } from "components/Pagination/Pagination.types";
 import { Table } from "components/Table";
 import { useModal } from "hooks/modals.hook";
+import { helpers } from "utils/helpers";
 
 import { CreateLocationsModal, EditLocationsModal } from "../..";
 
@@ -17,7 +19,11 @@ import { type ILocation } from "global/location.types";
 
 export function Locations(): IUseLocations {
   const [data, setData] = useState<ILocation[]>([]);
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState<IPagination>({
+    page: 1,
+    totalPages: 1,
+    limit: 2,
+  });
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { toggleModal: toggleLocation, isVisible: isVisibleLocation } =
     useModal();
@@ -26,11 +32,17 @@ export function Locations(): IUseLocations {
   const { setLocation } = useLocation();
 
   // Lista dos itens da entidade
-  const getLocations = async (page: number): Promise<void> => {
+  const getLocations = async (page: IPagination): Promise<void> => {
+    setIsLoading(true);
     const {
-      data: { data },
-    } = await locationService.getLocations({ page, limit: 2 });
+      data: { data, lastPage },
+    } = await locationService.getLocations(page);
     setData(data);
+    setPage({
+      page: page.page,
+      totalPages: helpers.getLastPage(lastPage),
+      limit: 2,
+    });
     setIsLoading(false);
   };
 
@@ -78,7 +90,11 @@ export function Locations(): IUseLocations {
               );
               toast.success("Localização deletada com sucesso!");
             } else {
-              setPage(1);
+              await getLocations({
+                page: 1,
+                limit: 2,
+                totalPages: 1,
+              });
             }
           }
         }}
@@ -105,15 +121,14 @@ export function Locations(): IUseLocations {
           }}
           isLoading={isLoading}
         />
-        <Pagination currentPage={page} setPage={setPage} totalPages={2} />
+        <Pagination page={page} setPage={getLocations} />
       </div>
     );
   }
 
   useEffect(() => {
-    setIsLoading(true);
     getLocations(page).catch((e) => {});
-  }, [page]);
+  }, []);
 
   return {
     create: {
