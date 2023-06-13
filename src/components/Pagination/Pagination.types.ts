@@ -1,5 +1,10 @@
 export interface IPaginationProps {
-  currentPage: number;
+  page: IPagination;
+  setPage: (page: IPagination) => void;
+}
+
+export interface IPagination {
+  page: number;
   totalPages: number;
-  setPage: (page: number) => void;
+  limit?: number;
 }

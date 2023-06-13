@@ -7,8 +7,10 @@ import { useUser } from "store/slices/user/useUser";
 
 import { Button } from "components/Button";
 import { Pagination } from "components/Pagination";
+import { type IPagination } from "components/Pagination/Pagination.types";
 import { Table } from "components/Table";
 import { useModal } from "hooks/modals.hook";
+import { helpers } from "utils/helpers";
 
 import { CreateUsersModal, EditUsersModal } from "../..";
 
@@ -16,7 +18,11 @@ import { type IUseUser } from "./user.types";
 import { type IUser } from "global/user.types";
 
 export function Users(): IUseUser {
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState<IPagination>({
+    page: 1,
+    totalPages: 1,
+    limit: 2,
+  });
   const [data, setData] = useState<IUser[]>([]);
   const { toggleModal: toggleUsers, isVisible: isVisibleUsers } = useModal();
   const { toggleModal: toggleEditUsers, isVisible: isVisibleEditUsers } =
@@ -25,10 +31,16 @@ export function Users(): IUseUser {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // Lista dos itens da entidade
-  const getUsers = async (page: number): Promise<void> => {
+  const getUsers = async (page: IPagination): Promise<void> => {
+    setIsLoading(true);
     const {
-      data: { data },
-    } = await userService.getUsers({ page, limit: 2 });
+      data: { data, lastPage },
+    } = await userService.getUsers(page);
+    setPage({
+      page: page.page,
+      totalPages: helpers.getLastPage(lastPage),
+      limit: 2,
+    });
     setData(data);
     setIsLoading(false);
   };
@@ -79,7 +91,11 @@ export function Users(): IUseUser {
               );
               toast.success("Item deletado com sucesso!");
             } else {
-              setPage(1);
+              await getUsers({
+                page: 1,
+                limit: 2,
+                totalPages: 1,
+              });
             }
           }
         }}
@@ -106,15 +122,14 @@ export function Users(): IUseUser {
           }}
           isLoading={isLoading}
         />
-        <Pagination currentPage={page} setPage={setPage} totalPages={2} />
+        <Pagination page={page} setPage={getUsers} />
       </div>
     );
   }
 
   useEffect(() => {
-    setIsLoading(true);
     getUsers(page).catch((e) => {});
-  }, [page]);
+  }, []);
 
   return {
     create: {

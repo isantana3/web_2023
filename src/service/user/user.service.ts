@@ -4,14 +4,14 @@ import { type IUser } from "global/user.types";
 import {
   type IDefaultPaginated,
   type IDefaultResponse,
-  type IDefaultResponseNormal,
+  type IDefaultResponsePaginated,
 } from "service/server.types";
 
 export const userService = {
   getUsers: async ({
     page = 1,
     limit = 10,
-  }: IDefaultPaginated): Promise<IDefaultResponse<IUser[]>> => {
+  }: IDefaultPaginated): Promise<IDefaultResponsePaginated<IUser[]>> => {
     const {
       status,
       data: { data },
@@ -24,7 +24,7 @@ export const userService = {
     };
   },
 
-  getUser: async (id: string): Promise<IDefaultResponseNormal<IUser>> => {
+  getUser: async (id: string): Promise<IDefaultResponse<IUser>> => {
     const { status, data } = await api.get(`/users/${id}`);
     return {
       status,

@@ -8,13 +8,16 @@ import {
 import {
   type IDefaultPaginated,
   type IDefaultResponse,
+  type IDefaultResponsePaginated,
 } from "service/server.types";
 
 export const reservationService = {
   getReservations: async ({
     page = 1,
     limit = 10,
-  }: IDefaultPaginated): Promise<IDefaultResponse<IReservationList[]>> => {
+  }: IDefaultPaginated): Promise<
+    IDefaultResponsePaginated<IReservationList[]>
+  > => {
     const {
       status,
       data: { data },
@@ -31,7 +34,7 @@ export const reservationService = {
     id = "",
   }: {
     id?: string;
-  }): Promise<IDefaultResponse<IReservationList[]>> => {
+  }): Promise<IDefaultResponsePaginated<IReservationList[]>> => {
     if (id) {
       const {
         status,
@@ -55,11 +58,8 @@ export const reservationService = {
 
   getReservation: async (
     id: string
-  ): Promise<IDefaultResponse<IReservationList>> => {
-    const {
-      status,
-      data: { data },
-    } = await api.get(`/reservations/${id}`);
+  ): Promise<IDefaultResponsePaginated<IReservationList>> => {
+    const { status, data } = await api.get(`/reservations/${id}`);
     return {
       status,
       data,
@@ -70,11 +70,8 @@ export const reservationService = {
     pavilion: string,
     startDate: string,
     endDate: string
-  ): Promise<IDefaultResponse<ILaboratory[]>> => {
-    const {
-      status,
-      data: { data },
-    } = await api.get(
+  ): Promise<IDefaultResponsePaginated<ILaboratory[]>> => {
+    const { status, data } = await api.get(
       `reservations/available-rooms/?pavilion=${pavilion}&startDate=${startDate}&endDate=${endDate}`
     );
     return {
@@ -85,12 +82,9 @@ export const reservationService = {
 
   updateReservation: async (
     id: string,
-    user: Omit<IReservation, "_id" & "password">
+    booking: Omit<IReservation, "_id" & "password">
   ): Promise<IDefaultResponse<IReservation>> => {
-    const {
-      status,
-      data: { data },
-    } = await api.patch(`/reservations/${id}`, user);
+    const { status, data } = await api.patch(`/reservations/${id}`, booking);
     return {
       status,
       data,
@@ -100,10 +94,7 @@ export const reservationService = {
   deleteReservation: async (
     id: string
   ): Promise<IDefaultResponse<IReservation>> => {
-    const {
-      status,
-      data: { data },
-    } = await api.delete(`/reservations/${id}`);
+    const { status, data } = await api.delete(`/reservations/${id}`);
     return {
       status,
       data,
@@ -111,12 +102,9 @@ export const reservationService = {
   },
 
   createReservation: async (
-    user: Omit<IReservation, "_id">
+    booking: Omit<IReservation, "_id">
   ): Promise<IDefaultResponse<IReservation>> => {
-    const {
-      status,
-      data: { data },
-    } = await api.post("/reservations", user);
+    const { status, data } = await api.post("/reservations", booking);
     return {
       status,
       data,
