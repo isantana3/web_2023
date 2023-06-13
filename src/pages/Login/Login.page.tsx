@@ -4,6 +4,8 @@ import { LoginSchema } from "src\pages\Login\Login.schema.ts";
 import { Input } from "components/Input";
 import { Button } from "components/Button";
 import { Form } from "components/Form/Form";
+import { SmallText } from "pages/ForgotPassword/ForgotPassword.styles";
+import { Title } from "components/Navbar/Navbar.styles";
 
 export function Login(): JSX.Element {
   return (
@@ -17,7 +19,7 @@ export function Login(): JSX.Element {
 
         <div id="rightSide">
           <img id="colcicLogo" src="src\assets\images\logo.png" alt="Logo do colegiado">
-          <h2 id="colcicTitle"></h2>
+          <Title id="colcicTitle"></Title>
           <Form schema = {LoginSchema} onSubmit = {login}>
             <Input
               label = "Email"
@@ -32,9 +34,9 @@ export function Login(): JSX.Element {
               type = "password"
               name = "password"
             />
-            <h4 id="forgetPassword">Esqueci minha senha</h4>
+            <SmallText>Esqueci minha senha</SmallText>
             <Button center label="Entrar" type= "submit" />
-            <h4 id="newHere">Esqueci minha senha</h4>
+            <SmallText id="newHere">Esqueci minha senha</SmallText>
             </Form>
         </div>
       </div>
