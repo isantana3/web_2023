@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 import { ForgotPassword } from "pages/ForgotPassword";
 import { Login } from "pages/Login/Login.page";
+import { NewAccess } from "pages/NewAccess";
 import { Register } from "pages/Register";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { userService } from "service/user/user.service";
@@ -51,6 +52,7 @@ export function AppRoutes(): JSX.Element {
           <Route path="/" element={<Login />} />
           <Route path="/cadastro" element={<Register />} />
           <Route path="/recuperar-senha" element={<ForgotPassword />} />
+          <Route path="/novo-acesso" element={<NewAccess />} />
         </Routes>
       )}
     </Router>

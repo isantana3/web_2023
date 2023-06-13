@@ -4,7 +4,7 @@ import { Form } from "components/Form/Form";
 import { Input } from "components/Input";
 import { Navbar } from "components/Navbar";
 
-import { ForgotPasswordSchema } from "./ForgotPassword.schema";
+import { NewAccessSchema } from "./NewAccess.schema";
 
 import {
   CentralizedContent,
@@ -12,28 +12,33 @@ import {
   Header,
   SmallText,
   Title,
-} from "./ForgotPassword.styles";
+} from "./NewAccess.styles";
 
-export function ForgotPassword(): JSX.Element {
+export function NewAccess(): JSX.Element {
   return (
     <Container>
       <Navbar />
       <CentralizedContent>
-        <Form onSubmit={(data) => {}} schema={ForgotPasswordSchema}>
+        <Form onSubmit={(data) => {}} schema={NewAccessSchema}>
           <Header>
             <img src={colcicLogo} />
             <Title>COLCIC</Title>
           </Header>
-          <SmallText>
-            Insira seu email institucional para renovar sua senha
-          </SmallText>
+          <SmallText>Atualize suas credenciais antes de continuar</SmallText>
           <Input
-            type="email"
-            placeholder="Email"
+            type="password"
+            placeholder="Nova senha"
             defaultValue={""}
             onChange={(text) => {}}
           />
-          <Button label="Enviar Email" color="primary" type="submit" center />
+          <Input
+            type="password"
+            placeholder="Confirme a senha"
+            defaultValue={""}
+            onChange={(text) => {}}
+          />
+
+          <Button label="Continuar" color="primary" type="submit" center />
         </Form>
       </CentralizedContent>
     </Container>

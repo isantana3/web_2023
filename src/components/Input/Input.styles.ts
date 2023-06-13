@@ -13,6 +13,7 @@ export const Container = styled.div<InputStylesType>`
   border: 1px solid ${({ theme }) => theme.Components.input.stroke};
   box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.15);
   border-radius: 8px;
+  background-color: ${({ theme }) => theme.Dashboard.background};
 `;
 
 export const InputComponent = styled.input`

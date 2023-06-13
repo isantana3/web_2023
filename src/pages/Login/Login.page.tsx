@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import { Button } from "components/Button";
 import { Form } from "components/Form/Form";
 import { Input } from "components/Form/Input";
@@ -10,7 +12,10 @@ import { Content, LeftSide, RightSide, Wrapper } from "./Login.styles";
 import { SmallText } from "pages/ForgotPassword/ForgotPassword.styles";
 
 export function Login(): JSX.Element {
-  function login(data: unknown): void {}
+  const navigate = useNavigate();
+  function login(data: unknown): void {
+    navigate("/dashboard");
+  }
   return (
     <Wrapper>
       <Navbar />
@@ -42,9 +47,21 @@ export function Login(): JSX.Element {
               type="password"
               name="password"
             />
-            <SmallText>Esqueci minha senha</SmallText>
+            <SmallText
+              onClick={() => {
+                navigate("/recuperar-senha");
+              }}
+            >
+              Esqueci minha senha
+            </SmallText>
             <Button center label="Entrar" type="submit" />
-            <SmallText>Novo aqui? Faça o seu cadastro</SmallText>
+            <SmallText
+              onClick={() => {
+                navigate("/cadastro");
+              }}
+            >
+              Novo aqui? Faça o seu cadastro
+            </SmallText>
           </Form>
         </RightSide>
       </Content>
