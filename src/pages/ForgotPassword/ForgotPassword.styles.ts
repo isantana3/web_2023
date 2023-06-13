@@ -31,7 +31,9 @@ export const Title = styled.h2`
 
 export const SmallText = styled.p`
   font-family: "Montserrat", sans-serif;
-  font-size: 16px;
-  color: ${({ theme }) => theme.ForgotPassword.text};
+  font-size: 14px;
+  color: ${({ theme }) => theme.ForgotPassword.title};
   text-align: center;
+  cursor: pointer;
+  text-decoration: underline;
 `;
