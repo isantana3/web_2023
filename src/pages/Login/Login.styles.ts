@@ -26,7 +26,7 @@ export const LeftSide = styled.div`
   justify-content: center;
 
   img {
-    max-height: calc(715px - 10vh);
+    max-height: calc(715px - 20vh);
     width: auto;
     z-index: 99;
   }
