@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { authService } from "service/auth/auth.service";
 import { userService } from "service/user/user.service";
 import { useAuth } from "store/slices/auth/useAuth";
 
@@ -12,6 +13,8 @@ import { Title } from "components/Navbar/Navbar.styles";
 
 import { LoginSchema } from "./Login.schema";
 
+import { type IAuthLogin } from "global/auth.types";
+
 import { Content, LeftSide, RightSide, Wrapper } from "./Login.styles";
 import { SmallText } from "pages/ForgotPassword/ForgotPassword.styles";
 
@@ -19,12 +22,14 @@ export function Login(): JSX.Element {
   const navigate = useNavigate();
   const { authenticate } = useAuth();
 
-  const login = async (): Promise<void> => {
-    const { data } = await userService.getUser("64623504921a64b1f6991cd1");
-    data.token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDYyMzUwNDkyMWE2NGIxZjY5OTFjZDEiLCJuYW1lIjoiUm9iZXJ0byBDYXJsb3MiLCJlbWFpbCI6InJvYmVydG8yQGVtYWlsLmNvbSIsInBhc3N3b3JkIjoiMTIzNDU2NzgiLCJyZWdpc3RyYXRpb24iOiIyMDIwMjAxNTQ1Iiwib2ZmaWNlIjoicHJvZmVzc29yIiwicm9sZSI6ImFkbWluIn0.bOR3z4xVkflHGonUQ6R-8g-saEPf1_op9oGD1yAfh88";
-    authenticate({ user: data });
-  };
+  async function handleSubmit(userLogin: IAuthLogin): Promise<void> {
+    const { data } = await authService.login(userLogin);
+    const { token } = data;
+
+    const response = await userService.getUser(data.user._id);
+
+    authenticate({ user: { ...response.data, token } });
+  }
 
   return (
     <Wrapper>
@@ -40,18 +45,20 @@ export function Login(): JSX.Element {
         <RightSide>
           <img id="colcicLogo" src={ColcicLogo} alt="Logo do colegiado" />
           <Title>COLCIC</Title>
-          <Form schema={LoginSchema} onSubmit={login}>
+          <Form schema={LoginSchema} onSubmit={handleSubmit}>
             <Input
               label="Email"
               placeholder="email@uesc.br"
               type="text"
               name="email"
+              defaultValue={"roberto12345@3email.com"}
             />
             <Input
               label="Senha"
               placeholder="*********"
               type="password"
               name="password"
+              defaultValue={"123456789"}
             />
             <SmallText
               onClick={() => {
@@ -60,7 +67,7 @@ export function Login(): JSX.Element {
             >
               Esqueci minha senha
             </SmallText>
-            <Button callback={login} center label="Entrar" type="submit" />
+            <Button center label="Entrar" type="submit" />
             <SmallText
               onClick={() => {
                 navigate("/cadastro");
