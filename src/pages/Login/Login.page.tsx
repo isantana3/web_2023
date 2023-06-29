@@ -51,14 +51,12 @@ export function Login(): JSX.Element {
               placeholder="email@uesc.br"
               type="text"
               name="email"
-              defaultValue={"roberto12345@3email.com"}
             />
             <Input
               label="Senha"
               placeholder="*********"
               type="password"
               name="password"
-              defaultValue={"123456789"}
             />
             <SmallText
               onClick={() => {

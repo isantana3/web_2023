@@ -4,6 +4,7 @@ import {
   type IAuthLogin,
   type IAuthUser,
   type IForgotPassword,
+  type IForgotPasswordResponse,
 } from "global/auth.types";
 import { type IDefaultResponse } from "service/server.types";
 
@@ -20,13 +21,13 @@ export const authService = {
     return response;
   },
 
-  forgotPassword: async ({
-    email,
-  }: IForgotPassword): Promise<IDefaultResponse<any>> => {
+  forgotPassword: async (
+    email: IForgotPassword
+  ): Promise<IDefaultResponse<IForgotPasswordResponse>> => {
     const {
       status,
       data: { data },
-    } = await api.post("/authentications/forgot-password", { email });
+    } = await api.post("/authentications/forgot-password", email);
 
     return {
       status,

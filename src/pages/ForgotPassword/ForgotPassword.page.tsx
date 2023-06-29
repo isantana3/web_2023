@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { authService } from "service/auth/auth.service";
 
 import colcicLogo from "assets/images/logo.png";
 import { Button } from "components/Button";
@@ -7,6 +8,8 @@ import { Input } from "components/Form/Input";
 import { Navbar } from "components/Navbar";
 
 import { ForgotPasswordSchema } from "./ForgotPassword.schema";
+
+import { type IForgotPassword } from "global/auth.types";
 
 import {
   ButtonLink,
@@ -25,11 +28,19 @@ export function ForgotPassword(): JSX.Element {
     navigate("/");
   }
 
+  async function handleSubmit(data: IForgotPassword): Promise<void> {
+    try {
+      await authService.forgotPassword({ ...data });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <Container>
       <Navbar />
       <CentralizedContent>
-        <Form onSubmit={(data) => {}} schema={ForgotPasswordSchema}>
+        <Form onSubmit={handleSubmit} schema={ForgotPasswordSchema}>
           <Header>
             <img src={colcicLogo} />
             <Title>COLCIC</Title>

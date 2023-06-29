@@ -8,6 +8,11 @@ export interface IAuthLogin {
 export interface IForgotPassword {
   email: string;
 }
+
+export interface IForgotPasswordResponse {
+  message: string;
+}
+
 export interface IAuthUser {
   token: string;
   user: IUser;
