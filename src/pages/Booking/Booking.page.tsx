@@ -72,9 +72,7 @@ export function Booking(): JSX.Element {
   };
 
   const getLaboratories = async (): Promise<void> => {
-    const {
-      data: { data },
-    } = await reservationService.getAvailableReservations(
+    const { data } = await reservationService.getAvailableReservations(
       pavilion,
       helpers.toDateTime(date, startDate),
       helpers.toDateTime(date, endDate)
@@ -202,6 +200,7 @@ export function Booking(): JSX.Element {
             }}
           />
           <SelectCustom
+            disabled={isDisabled as boolean}
             onChange={(value: IOptions) => {
               setPavilion(value.value as string);
             }}

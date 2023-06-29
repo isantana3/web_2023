@@ -23,4 +23,5 @@ export interface ISelectProps {
   icon?: keyof typeof Icons;
   placeholder?: string;
   isMulti?: boolean;
+  disabled?: boolean;
 }

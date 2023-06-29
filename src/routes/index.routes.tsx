@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from "react";
 
 import { ForgotPassword } from "pages/ForgotPassword";
 import { Login } from "pages/Login/Login.page";
@@ -15,9 +16,18 @@ import { AdminRoutes } from "./admin.routes";
 import { UserRoutes } from "./user.routes";
 
 export function AppRoutes(): JSX.Element {
-  const { user } = useAuth();
+  const { user, authenticate } = useAuth();
 
   const isUserValid = helpers.validToken();
+
+  useEffect(() => {
+    if (!isUserValid) {
+      localStorage.setItem("token", "");
+    } else {
+      authenticate({ user: isUserValid });
+    }
+    console.log(localStorage.getItem("token"));
+  }, []);
 
   return (
     <Router>
