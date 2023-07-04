@@ -11,6 +11,7 @@ export interface IDefaultResponsePaginated<T> {
 export interface IDefaultPaginated {
   page?: number;
   limit?: number;
+  id?: string;
 }
 
 export interface IDefaultResponse<T> {

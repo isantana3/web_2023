@@ -40,13 +40,13 @@ export function Dashboard(): JSX.Element {
     const {
       data: { data },
       data: { lastPage },
-    } = await reservationService.getReservations(page);
+    } = await reservationService.getReservations({ ...page, id: user._id });
     setPage({
       page: page.page,
       totalPages: lastPage,
       limit: 2,
     });
-    setBookings(data.filter((item) => item.responsible._id === user?._id));
+    setBookings(data);
     setIsLoading(false);
   };
 
@@ -79,7 +79,7 @@ export function Dashboard(): JSX.Element {
           <LaboratoryItem>
             <Icons.LaboratoryIcon />
             <div>
-              <LaboratoryItemTitle>{booking.room.label}</LaboratoryItemTitle>
+              <LaboratoryItemTitle>{booking.label}</LaboratoryItemTitle>
               <LaboratoryItemSubTitle>
                 <span>{dateStart.toLocaleDateString()}</span>
                 <span>

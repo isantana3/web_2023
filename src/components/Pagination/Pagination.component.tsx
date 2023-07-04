@@ -3,7 +3,6 @@ import { useMemo } from "react";
 import { Icons } from "global/icons.constants";
 
 import { Button } from "components/Button";
-import { Select } from "components/Select";
 import { type IOptions } from "components/Select/Select.types";
 
 import { type IPaginationProps } from "./Pagination.types";
@@ -11,6 +10,7 @@ import { type IPaginationProps } from "./Pagination.types";
 import { Container } from "./Pagination.styles";
 
 export function Pagination({ page, setPage }: IPaginationProps): JSX.Element {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const options = useMemo(() => {
     const arr: IOptions[] = [];
     for (let i = 1; i <= (page.totalPages as number); i++) {
@@ -34,7 +34,8 @@ export function Pagination({ page, setPage }: IPaginationProps): JSX.Element {
         label="Anterior"
         icon={<Icons.LeftArrowIcon width={20} height={20} />}
       />
-      <Select
+      {/* <Select
+        disabled
         defaultValue={{
           label: page.page,
           value: page.page,
@@ -47,7 +48,7 @@ export function Pagination({ page, setPage }: IPaginationProps): JSX.Element {
           });
         }}
         options={options}
-      />
+      /> */}
       <Button
         iconStroke
         callback={() => {

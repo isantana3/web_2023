@@ -80,7 +80,50 @@ export function Booking(): JSX.Element {
     setLaboratory(data);
   };
 
+  const edit = async (data: IBookingUnique): Promise<void> => {
+    const { label, observation, dateStart, hourEnd, hourStart, laboratory } =
+      data;
+
+    if (hourEnd <= hourStart) {
+      toast.warning("O horario de termino deve ser maior do que o inicial.");
+      return;
+    }
+
+    await reservationService
+      .updateReservation(booking?._id ?? "", {
+        label: label ?? booking?.label,
+        previousObservation: "default",
+        laterObservation: observation ?? booking?.laterObservation,
+        responsible: user._id,
+        room: laboratory ?? booking?.room,
+        startDate:
+          helpers.toDateTime(dateStart, hourStart) ?? booking?.startDate,
+        endDate: helpers.toDateTime(dateStart, hourEnd) ?? booking?.endDate,
+        status: booking?.status ?? "reserved",
+      })
+      .then(({ status }) => {
+        if (status !== 200) {
+          toast.error("Erro ao editar reserva");
+          return;
+        }
+        toast.success("Reserva editada com sucesso.");
+        navigate("/");
+      })
+      .catch(({ response }) => {
+        if (response.status === 412) {
+          toast.warning("Já existe uma reserva neste horario e data.");
+          return;
+        }
+        toast.error("Erro ao editar reserva");
+      });
+  };
+
   const onSubmit = async (data: IBookingUnique): Promise<void> => {
+    if (id) {
+      await edit(data);
+      return;
+    }
+
     const { label, observation, dateStart, hourEnd, hourStart, laboratory } =
       data;
 
