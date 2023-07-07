@@ -15,13 +15,14 @@ export const reservationService = {
   getReservations: async ({
     page = 1,
     limit = 10,
+    id = "",
   }: IDefaultPaginated): Promise<
     IDefaultResponsePaginated<IReservationList[]>
   > => {
     const {
       status,
       data: { data },
-    } = await api.get("/reservations", {
+    } = await api.get(`/reservations?id=${id}`, {
       params: { page, limit },
     });
     return {

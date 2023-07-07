@@ -21,5 +21,5 @@ export const FirstStepSchema = yup.object().shape({
 export const SecondStepSchema = yup.object().shape({
   name: yup.string().required("Este campo é obrigatório."),
   registration: yup.string().required("Este campo é obrigatório."),
-  position: yup.string().required("Este campo é obrigatório."),
+  office: yup.string().required("Este campo é obrigatório."),
 });

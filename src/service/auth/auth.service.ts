@@ -3,8 +3,10 @@ import { api } from "service/server";
 import {
   type IAuthLogin,
   type IAuthUser,
+  type ICreateAccount,
   type IForgotPassword,
   type IForgotPasswordResponse,
+  type INewAccess,
 } from "global/auth.types";
 import { type IDefaultResponse } from "service/server.types";
 
@@ -28,6 +30,34 @@ export const authService = {
       status,
       data: { data },
     } = await api.post("/authentications/forgot-password", email);
+
+    return {
+      status,
+      data,
+    };
+  },
+
+  createAccount: async (
+    user: ICreateAccount
+  ): Promise<IDefaultResponse<ICreateAccount>> => {
+    const {
+      status,
+      data: { data },
+    } = await api.post("/authentications", user);
+
+    return {
+      status,
+      data,
+    };
+  },
+
+  newAccess: async (
+    newAccessData: INewAccess
+  ): Promise<IDefaultResponse<INewAccess>> => {
+    const {
+      status,
+      data: { data },
+    } = await api.post("/authentications/active-account", newAccessData);
 
     return {
       status,
