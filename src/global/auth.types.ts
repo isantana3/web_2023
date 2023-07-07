@@ -24,3 +24,8 @@ export interface ICreateAccount {
   registration: string;
   office: string;
 }
+
+export interface INewAccess {
+  token: string;
+  password: string;
+}

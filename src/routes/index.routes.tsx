@@ -26,7 +26,7 @@ export function AppRoutes(): JSX.Element {
     } else {
       authenticate({ user: isUserValid });
     }
-    console.log(localStorage.getItem("token"));
+    console.log(`token: ${localStorage.getItem("token") as string}`);
   }, []);
 
   return (
