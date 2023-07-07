@@ -1,6 +1,8 @@
 import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { authService } from "service/auth/auth.service";
 
 import colcicLogo from "assets/images/logo.png";
 import { Button } from "components/Button";
@@ -36,7 +38,12 @@ import {
 export function Register(): JSX.Element {
   const navigate = useNavigate();
   const [isStepOne, setIsStepOne] = useState(true);
-  const [user, setUser] = useState<IFormData>({} as IFormData);
+  const [user, setUser] = useState<IFormData>({
+    email: "",
+    name: "",
+    registration: "",
+    office: "",
+  } as IFormData);
 
   function handleGoBack(): void {
     navigate("/");
@@ -47,10 +54,20 @@ export function Register(): JSX.Element {
     setUser((state) => ({ ...state, email: data.email }));
   }
 
-  function handleSubmitStepTwo(data: IStepTwoFormData): void {
-    setUser((state) => ({ ...state, data }));
-    // TODO: adicionar token
-    console.log({ user });
+  async function handleSubmitStepTwo(data: IStepTwoFormData): Promise<void> {
+    try {
+      const userData: IFormData = { ...user, ...data };
+      const response = await authService.createAccount(userData);
+      if (response.status === 201) {
+        toast.success("Usuário criado com sucesso!");
+        navigate("/");
+        setUser({} as IFormData);
+      }
+    } catch (error) {
+      toast.error(
+        "Ocorreu um erro ao realizar o cadastro. Tente novamente mais tarde"
+      );
+    }
   }
 
   function handleBackButton(): void {
@@ -89,28 +106,19 @@ export function Register(): JSX.Element {
             </Form>
           ) : (
             <Form onSubmit={handleSubmitStepTwo} schema={SecondStepSchema}>
-              <Input
-                label="Nome"
-                name="name"
-                type="text"
-                placeholder="Nome"
-                defaultValue={""}
-              />
+              <Input label="Nome" name="name" type="text" placeholder="Nome" />
               <InputRow>
                 <Input
                   label="Matricula"
                   name="registration"
                   type="text"
                   placeholder="Matricula"
-                  defaultValue={""}
                 />
-
                 <Input
                   label="Cargo"
-                  name="position"
+                  name="office"
                   type="text"
                   placeholder="Cargo"
-                  defaultValue={""}
                 />
               </InputRow>
 

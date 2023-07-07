@@ -17,3 +17,10 @@ export interface IAuthUser {
   token: string;
   user: IUser;
 }
+
+export interface ICreateAccount {
+  name: string;
+  email: string;
+  registration: string;
+  office: string;
+}
