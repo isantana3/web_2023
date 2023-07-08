@@ -6,6 +6,7 @@ import { ForgotPassword } from "pages/ForgotPassword";
 import { Login } from "pages/Login/Login.page";
 import { NewAccess } from "pages/NewAccess";
 import { Register } from "pages/Register";
+import { useSelector } from "react-redux";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useAuth } from "store/slices/auth/useAuth";
 
@@ -23,10 +24,14 @@ export function AppRoutes(): JSX.Element {
   useEffect(() => {
     if (!isUserValid) {
       localStorage.setItem("token", "");
+      localStorage.setItem("userData", "");
     } else {
-      authenticate({ user: isUserValid });
+      const token = localStorage.getItem("token") as string;
+      const serializedUserData = localStorage.getItem("userData") as string;
+
+      const userData = JSON.parse(serializedUserData);
+      authenticate({ user: { ...userData, token } });
     }
-    console.log(`token: ${localStorage.getItem("token") as string}`);
   }, []);
 
   return (

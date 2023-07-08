@@ -15,6 +15,8 @@ export function SidebarHeader(): JSX.Element {
 
   function handleLogout(): void {
     navigate("/");
+    localStorage.setItem("token", "");
+    localStorage.setItem("userData", "");
     window.location.reload();
   }
 

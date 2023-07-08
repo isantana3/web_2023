@@ -1,6 +1,4 @@
-import jwt_decode from "jwt-decode";
-
-import { type IUser } from "global/user.types";
+import jwtDecode from "jwt-decode";
 
 export const helpers = {
   isObjectEmpty: (objectName: object) => {
@@ -13,12 +11,14 @@ export const helpers = {
   validToken: () => {
     const token = localStorage.getItem("token");
     if (token) {
-      const jwtDecoded = jwt_decode<IUser>(token);
-      // const currentDate = new Date();
-      // return (jwtDecoded.exp as number) * 1000 < currentDate.getTime();
-      return jwtDecoded;
-      // return !!token;
+      const decodedToken = jwtDecode<any>(token);
+      if (decodedToken.exp < Date.now() / 1000) {
+        localStorage.setItem("token", "");
+        localStorage.setItem("userData", "");
+        return false;
+      }
+      return true;
     }
-    // return true;
+    return false;
   },
 };
