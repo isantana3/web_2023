@@ -17,11 +17,13 @@ if (token) {
     if (timeToExpire > 0) {
       setTimeout(() => {
         localStorage.setItem("token", "");
+        localStorage.setItem("userData", "");
       }, timeToExpire);
       initialState.user.token = token;
     }
   } catch (error) {
     localStorage.setItem("token", "");
+    localStorage.setItem("userData", "");
     // console.log("error parsing token", error);
   }
 }
