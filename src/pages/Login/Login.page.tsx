@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { authService } from "service/auth/auth.service";
-import { userService } from "service/user/user.service";
 import { useAuth } from "store/slices/auth/useAuth";
 
 import Logo from "assets/images/imgLogin.png";
@@ -24,12 +23,11 @@ export function Login(): JSX.Element {
 
   async function handleSubmit(userLogin: IAuthLogin): Promise<void> {
     const { data } = await authService.login(userLogin);
-    const { token } = data;
+    const { token, user } = data;
 
-    const response = await userService.getUser(data.user._id);
-    localStorage.setItem("userData", JSON.stringify({ ...response.data }));
+    localStorage.setItem("userData", JSON.stringify(user));
 
-    authenticate({ user: { ...response.data, token } });
+    authenticate({ user: { ...user, token } });
   }
 
   return (

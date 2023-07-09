@@ -6,7 +6,6 @@ import { ForgotPassword } from "pages/ForgotPassword";
 import { Login } from "pages/Login/Login.page";
 import { NewAccess } from "pages/NewAccess";
 import { Register } from "pages/Register";
-import { useSelector } from "react-redux";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useAuth } from "store/slices/auth/useAuth";
 

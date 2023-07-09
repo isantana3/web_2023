@@ -9,12 +9,13 @@ import { Button } from "components/Button";
 import { Pagination } from "components/Pagination";
 import { type IPagination } from "components/Pagination/Pagination.types";
 import { Table } from "components/Table";
+import { userOffice, usersType } from "components/UserType/UserType.component";
 import { useModal } from "hooks/modals.hook";
 
 import { CreateUsersModal, EditUsersModal } from "../..";
 
 import { type IUseUser } from "./user.types";
-import { type IUser } from "global/user.types";
+import { type IUser, type UserType } from "global/user.types";
 
 export function Users(): IUseUser {
   const [page, setPage] = useState<IPagination>({
@@ -40,7 +41,13 @@ export function Users(): IUseUser {
       totalPages: lastPage,
       limit: 2,
     });
-    setData(data);
+    setData(
+      data.map((data) => {
+        data.role = usersType[data.role] as UserType;
+        data.office = userOffice[data.office];
+        return data;
+      })
+    );
     setIsLoading(false);
   };
 
@@ -49,6 +56,8 @@ export function Users(): IUseUser {
     return (
       <CreateUsersModal
         onSuccess={(data: IUser) => {
+          data.role = usersType[data.role] as UserType;
+          data.office = userOffice[data.office];
           setData((prev) => [...prev, data]);
         }}
         isVisible={isVisibleUsers}
@@ -62,6 +71,8 @@ export function Users(): IUseUser {
     return (
       <EditUsersModal
         onSuccess={(data: IUser) => {
+          data.role = usersType[data.role] as UserType;
+          data.office = userOffice[data.office];
           setData((prev) => [...prev.filter((i) => i._id !== data._id), data]);
         }}
         isVisible={isVisibleEditUsers}

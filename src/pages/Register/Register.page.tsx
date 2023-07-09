@@ -9,15 +9,13 @@ import { Button } from "components/Button";
 import { Form } from "components/Form/Form";
 import { Input } from "components/Form/Input";
 import { Navbar } from "components/Navbar";
+import { UserTypeSelect } from "components/UserType/UserType.component";
 
 import { StepIndicator } from "./StepIndicator/StepIndicator.component";
 import { FirstStepSchema, SecondStepSchema } from "./Register.schema";
 
-import {
-  type IFormData,
-  type IStepOneFormData,
-  type IStepTwoFormData,
-} from "./Register.types";
+import { type IStepOneFormData, type IStepTwoFormData } from "./Register.types";
+import { type IUser } from "global/user.types";
 
 import {
   ButtonLink,
@@ -38,12 +36,13 @@ import {
 export function Register(): JSX.Element {
   const navigate = useNavigate();
   const [isStepOne, setIsStepOne] = useState(true);
-  const [user, setUser] = useState<IFormData>({
+  const [user, setUser] = useState<Omit<IUser, "_id">>({
     email: "",
     name: "",
-    registration: "",
+    registration: 0,
     office: "",
-  } as IFormData);
+    role: "user",
+  });
 
   function handleGoBack(): void {
     navigate("/");
@@ -56,12 +55,12 @@ export function Register(): JSX.Element {
 
   async function handleSubmitStepTwo(data: IStepTwoFormData): Promise<void> {
     try {
-      const userData: IFormData = { ...user, ...data };
+      const userData: IUser = { ...user, ...data };
       const response = await authService.createAccount(userData);
       if (response.status === 201) {
         toast.success("Usuário criado com sucesso!");
         navigate("/");
-        setUser({} as IFormData);
+        setUser({} as IUser);
       }
     } catch (error) {
       toast.error(
@@ -114,12 +113,7 @@ export function Register(): JSX.Element {
                   type="text"
                   placeholder="Matricula"
                 />
-                <Input
-                  label="Cargo"
-                  name="office"
-                  type="text"
-                  placeholder="Cargo"
-                />
+                <UserTypeSelect />
               </InputRow>
 
               <ButtonRow>

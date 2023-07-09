@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { userService } from "service/user/user.service";
+import { authService } from "service/auth/auth.service";
 
 import { Button } from "components/Button";
 import { Form } from "components/Form/Form";
@@ -20,7 +20,7 @@ export function Users({
   onSuccess,
 }: IUserProps): JSX.Element {
   async function onSubmit(user: IUser): Promise<void> {
-    const { data, status } = await userService.createUser(user);
+    const { data, status } = await authService.createAccount(user);
 
     if (status !== 201) {
       toast.error("Erro ao criar usuário");
@@ -64,12 +64,6 @@ export function Users({
           label="Matricula"
           name="registration"
           type="text"
-        />
-        <Input
-          placeholder="******"
-          label="Senha"
-          name="password"
-          type="password"
         />
         <Select
           label="Tipo de Usuário"
