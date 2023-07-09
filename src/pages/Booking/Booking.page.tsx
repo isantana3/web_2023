@@ -17,8 +17,8 @@ import { Tabs } from "components/Tabs";
 import { Tooltip } from "components/Tooltip";
 import { helpers } from "utils/helpers";
 
-import CreateForm from "./Forms/Booking.create";
-import EditForm from "./Forms/Booking.edit";
+import CreateForm from "./Forms/booking.create";
+import EditForm from "./Forms/booking.edit";
 import { BookingUniqueSchema } from "./Booking.schema";
 
 import { type IBookingUnique } from "./Booking.types";
