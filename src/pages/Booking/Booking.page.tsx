@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import { utfOffset } from "global/constants";
 import { times } from "global/hours.constant";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -53,14 +54,21 @@ export function Booking(): JSX.Element {
   const getBooking = async (): Promise<void> => {
     const { data } = await reservationService.getReservation(id as string);
     setBooking(data);
+    const dateStart = new Date(data.startDate);
+    const dateEnd = new Date(data.endDate);
+
+    // convert to local UTC
+    dateStart.setHours(dateStart.getHours() + utfOffset);
+    dateEnd.setHours(dateEnd.getHours() + utfOffset);
+
     setStartDate(
-      new Date(data.startDate).toLocaleTimeString([], {
+      dateStart.toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
       })
     );
     setEndDate(
-      new Date(data.endDate).toLocaleTimeString([], {
+      dateEnd.toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
       })
@@ -184,9 +192,22 @@ export function Booking(): JSX.Element {
     getPavilions().catch((e) => {});
   }, []);
 
+  useEffect(() => {
+    if (id && booking) {
+      setDate(
+        new Date(booking.startDate)
+          .toLocaleDateString()
+          .toString()
+          .split("/")
+          .reverse()
+          .join("-")
+      );
+    }
+  }, [id, booking]);
+
   const uniqueReservation = (
     <Content>
-      {id && booking && locations ? (
+      {id && booking && locations && laboratory && pavilion ? (
         <EditForm
           id={id}
           booking={booking}
