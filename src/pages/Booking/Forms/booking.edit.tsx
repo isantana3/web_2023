@@ -107,17 +107,20 @@ const EditForm: React.FC<IEditFormProps> = ({
           }
           label="Pavilhão"
           defaultValue={
-            locations?.map((item): IOptions | undefined => {
-              if (item._id === pavilion) {
-                return {
-                  label: item.label,
-                  value: item._id,
-                };
-              }
-              return undefined;
-            })[0] ?? undefined
+            locations
+              .map((item): IOptions | undefined => {
+                if (item._id === pavilion) {
+                  return {
+                    label: item.label,
+                    value: item._id,
+                  };
+                }
+                return undefined;
+              })
+              .filter((element) => element !== undefined)[0] ?? undefined
           }
         />
+
         <Select
           label="Laboratório"
           name="laboratory"
