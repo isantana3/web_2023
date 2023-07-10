@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import { paginationLimit } from "global/constants";
 import { Icons } from "global/icons.constants";
 import { toast } from "react-toastify";
 import { infraService } from "service/infra/infra.service";
@@ -21,7 +22,7 @@ export function Infra(): IUseInfra {
   const [page, setPage] = useState<IPagination>({
     page: 1,
     totalPages: 1,
-    limit: 2,
+    limit: paginationLimit,
   });
   const { toggleModal: toggleInfra, isVisible: isVisibleInfra } = useModal();
   const { toggleModal: toggleEditInfra, isVisible: isVisibleEditInfra } =
@@ -39,7 +40,7 @@ export function Infra(): IUseInfra {
     setPage({
       page: page.page,
       totalPages: lastPage,
-      limit: 2,
+      limit: paginationLimit,
     });
     setIsLoading(false);
   };
@@ -91,7 +92,7 @@ export function Infra(): IUseInfra {
               await getInfras({
                 page: 1,
                 totalPages: 1,
-                limit: 2,
+                limit: paginationLimit,
               });
             }
           }

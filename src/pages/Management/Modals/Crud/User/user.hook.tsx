@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import { paginationLimit } from "global/constants";
 import { Icons } from "global/icons.constants";
 import { toast } from "react-toastify";
 import { userService } from "service/user/user.service";
@@ -21,7 +22,7 @@ export function Users(): IUseUser {
   const [page, setPage] = useState<IPagination>({
     page: 1,
     totalPages: 1,
-    limit: 2,
+    limit: paginationLimit,
   });
   const [data, setData] = useState<IUser[]>([]);
   const { toggleModal: toggleUsers, isVisible: isVisibleUsers } = useModal();
@@ -39,7 +40,7 @@ export function Users(): IUseUser {
     setPage({
       page: page.page,
       totalPages: lastPage,
-      limit: 2,
+      limit: paginationLimit,
     });
     setData(
       data.map((data) => {
@@ -103,7 +104,7 @@ export function Users(): IUseUser {
             } else {
               await getUsers({
                 page: 1,
-                limit: 2,
+                limit: paginationLimit,
                 totalPages: 1,
               });
             }

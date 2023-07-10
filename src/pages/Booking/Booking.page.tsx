@@ -54,7 +54,7 @@ export function Booking(): JSX.Element {
     const { data } = await reservationService.getReservation(id as string);
     setBooking(data);
     setStartDate(
-      new Date(data.endDate).toLocaleTimeString([], {
+      new Date(data.startDate).toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
       })

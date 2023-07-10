@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 
+import { paginationLimit } from "global/constants";
 import { Icons } from "global/icons.constants";
 
 import { Button } from "components/Button";
@@ -27,7 +28,7 @@ export function Pagination({ page, setPage }: IPaginationProps): JSX.Element {
           setPage({
             page: page.page - 1,
             totalPages: page.totalPages,
-            limit: 2,
+            limit: paginationLimit,
           });
         }}
         disabled={page.page - 1 === 0}
@@ -44,7 +45,7 @@ export function Pagination({ page, setPage }: IPaginationProps): JSX.Element {
           setPage({
             page: val.value as number,
             totalPages: page.totalPages,
-            limit: 2,
+            limit: paginationLimit,
           });
         }}
         options={options}
@@ -55,7 +56,7 @@ export function Pagination({ page, setPage }: IPaginationProps): JSX.Element {
           setPage({
             page: page.page + 1,
             totalPages: page.totalPages,
-            limit: 2,
+            limit: paginationLimit,
           });
         }}
         label="Próximo"
