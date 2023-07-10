@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import { paginationLimit, utfOffset } from "global/constants";
 import { Icons } from "global/icons.constants";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -28,7 +29,7 @@ export const Bookings = (): JSX.Element => {
   const [page, setPage] = useState<IPagination>({
     page: 1,
     totalPages: 1,
-    limit: 2,
+    limit: paginationLimit,
   });
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ export const Bookings = (): JSX.Element => {
     setPage({
       page: page.page,
       totalPages: lastPage,
-      limit: 2,
+      limit: paginationLimit,
     });
     setBookings(data);
     setIsLoading(false);
@@ -75,7 +76,7 @@ export const Bookings = (): JSX.Element => {
     await getBookings({
       page: 1,
       totalPages: 1,
-      limit: 2,
+      limit: paginationLimit,
     });
   };
 
@@ -114,6 +115,11 @@ export const Bookings = (): JSX.Element => {
     return bookings.map((booking) => {
       const dateStart = new Date(booking.startDate);
       const dateEnd = new Date(booking.endDate);
+
+      // convert to local UTC
+      dateStart.setHours(dateStart.getHours() + utfOffset);
+      dateEnd.setHours(dateEnd.getHours() + utfOffset);
+
       const data = {
         description: <div>{booking.label}</div>,
         laboratory: (
@@ -138,7 +144,7 @@ export const Bookings = (): JSX.Element => {
             </div>
           </LaboratoryItem>
         ),
-        name: booking.responsible.name,
+        name: booking.responsible?.name ?? "",
         status: <LaboratoryTag status={booking.status} label="Pendente" />,
       };
       return data;

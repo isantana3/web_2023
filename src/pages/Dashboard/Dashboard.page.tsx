@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { paginationLimit, utfOffset } from "global/constants";
 import { Icons } from "global/icons.constants";
 import { useNavigate } from "react-router-dom";
 import { reservationService } from "service/reservation/reservation.service";
@@ -32,7 +33,7 @@ export function Dashboard(): JSX.Element {
   const [page, setPage] = useState<IPagination>({
     page: 1,
     totalPages: 1,
-    limit: 2,
+    limit: paginationLimit,
   });
 
   const getBookings = async (page: IPagination): Promise<void> => {
@@ -44,7 +45,7 @@ export function Dashboard(): JSX.Element {
     setPage({
       page: page.page,
       totalPages: lastPage,
-      limit: 2,
+      limit: paginationLimit,
     });
     setBookings(data);
     setIsLoading(false);
@@ -74,6 +75,10 @@ export function Dashboard(): JSX.Element {
     return bookings.map((booking) => {
       const dateStart = new Date(booking.startDate);
       const dateEnd = new Date(booking.endDate);
+
+      // convert to local UTC
+      dateStart.setHours(dateStart.getHours() + utfOffset);
+      dateEnd.setHours(dateEnd.getHours() + utfOffset);
       const data = {
         laboratory: (
           <LaboratoryItem>
@@ -86,6 +91,7 @@ export function Dashboard(): JSX.Element {
                   {dateStart.toLocaleTimeString([], {
                     hour: "2-digit",
                     minute: "2-digit",
+                    timeZone: "America/Sao_Paulo",
                   })}
                   {" - "}
                   {dateEnd.toLocaleTimeString([], {

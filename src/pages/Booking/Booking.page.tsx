@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { days, times } from "global/hours.constant";
+import { times } from "global/hours.constant";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { locationService } from "service/location/location.service";
@@ -11,7 +11,10 @@ import { Button } from "components/Button";
 import { Form } from "components/Form/Form";
 import { Input } from "components/Form/Input";
 import { Select } from "components/Form/Select";
+import { Select as SelectCustom } from "components/Select";
+import { type IOptions } from "components/Select/Select.types";
 import { Tabs } from "components/Tabs";
+import { Tooltip } from "components/Tooltip";
 import { helpers } from "utils/helpers";
 
 import CreateForm from "./Forms/booking.create";
@@ -41,6 +44,7 @@ export function Booking(): JSX.Element {
   const [locations, setLocations] = useState<ILocation[]>();
   const [date, setDate] = useState<string>("");
   const [pavilion, setPavilion] = useState<string>("");
+  const [pavilion2, setPavilion2] = useState<string>("");
   const [startDate, setStartDate] = useState<string>("");
   const [endDate, setEndDate] = useState<string>("");
   const navigate = useNavigate();
@@ -50,7 +54,7 @@ export function Booking(): JSX.Element {
     const { data } = await reservationService.getReservation(id as string);
     setBooking(data);
     setStartDate(
-      new Date(data.endDate).toLocaleTimeString([], {
+      new Date(data.startDate).toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
       })
@@ -218,76 +222,181 @@ export function Booking(): JSX.Element {
     </Content>
   );
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const semestralReservation = (
     <Content>
       <Form schema={BookingUniqueSchema} onSubmit={onSubmit}>
         <h1>Primeiro Dia</h1>
         <InputRow>
-          <Select
-            options={days}
-            name="day_1"
-            label={"Dia da Semana"}
-            placeholder="Sabado"
-            defaultValue={{
-              label: "Segunda-Feira",
-              value: 0,
+          <Input
+            disabled={isDisabled as boolean}
+            onChange={(val: KeyboardEvent) => {
+              setDate((val.currentTarget as HTMLInputElement).value);
             }}
+            width={50}
+            name="dateStart"
+            type="date"
+            label="Data Inicial"
+            placeholder="09/12/1998"
           />
           <Select
+            disabled={isDisabled as boolean}
             options={times}
-            name="hour_start_1"
+            name="hourStart"
             label={"Horario de Inicio"}
             placeholder="07:30"
+            onClick={(val: string | undefined | number) => {
+              setStartDate(val as string);
+            }}
+            defaultValue={
+              startDate
+                ? {
+                    label: startDate,
+                    value: startDate,
+                  }
+                : undefined
+            }
           />
+
           <Select
+            disabled={isDisabled as boolean}
             options={times}
-            name="hour_end_2"
+            name="hourEnd"
             label={"Horario de Termino"}
             placeholder="08:20"
+            onClick={(val: string | undefined | number) => {
+              setEndDate(val as string);
+            }}
+            defaultValue={
+              endDate
+                ? {
+                    label: endDate,
+                    value: endDate,
+                  }
+                : undefined
+            }
+          />
+          <SelectCustom
+            disabled={isDisabled as boolean}
+            onChange={(value: IOptions) => {
+              setPavilion(value.value as string);
+            }}
+            options={
+              locations?.map((item) => {
+                return {
+                  label: item.label,
+                  value: item._id,
+                };
+              }) ?? []
+            }
+            label="Pavilhão"
+            defaultValue={
+              locations?.map((item): IOptions | undefined => {
+                if (item._id === pavilion) {
+                  return {
+                    label: item.label,
+                    value: item._id,
+                  };
+                }
+                return undefined;
+              })[0] ?? undefined
+            }
           />
           <Select
             label="Laboratório"
             name="laboratory"
+            disabled={laboratory.length === 0}
             options={laboratory.map((item) => {
               return {
                 value: item._id,
-                label: `${item.label} - ${item.pavilion.label}`,
+                label: item.label,
               };
             })}
           />
         </InputRow>
         <h1>Segundo Dia</h1>
         <InputRow>
-          <Select
-            options={days}
-            name="days"
-            label={"Dia da Semana"}
-            placeholder="Sabado"
-            defaultValue={{
-              label: "Segunda-Feira",
-              value: 0,
+          <Input
+            disabled={isDisabled as boolean}
+            onChange={(val: KeyboardEvent) => {
+              setDate((val.currentTarget as HTMLInputElement).value);
             }}
+            width={50}
+            name="dateStart2"
+            type="date"
+            label="Data Inicial"
+            placeholder="09/12/1998"
           />
           <Select
+            disabled={isDisabled as boolean}
             options={times}
-            name="hour_start"
+            name="hourStart2"
             label={"Horario de Inicio"}
             placeholder="07:30"
+            onClick={(val: string | undefined | number) => {
+              setStartDate(val as string);
+            }}
+            defaultValue={
+              startDate
+                ? {
+                    label: startDate,
+                    value: startDate,
+                  }
+                : undefined
+            }
           />
+
           <Select
+            disabled={isDisabled as boolean}
             options={times}
-            name="hour_end"
+            name="hourEnd2"
             label={"Horario de Termino"}
             placeholder="08:20"
+            onClick={(val: string | undefined | number) => {
+              setEndDate(val as string);
+            }}
+            defaultValue={
+              endDate
+                ? {
+                    label: endDate,
+                    value: endDate,
+                  }
+                : undefined
+            }
+          />
+          <SelectCustom
+            disabled={isDisabled as boolean}
+            onChange={(value: IOptions) => {
+              setPavilion2(value.value as string);
+            }}
+            options={
+              locations?.map((item) => {
+                return {
+                  label: item.label,
+                  value: item._id,
+                };
+              }) ?? []
+            }
+            label="Pavilhão"
+            defaultValue={
+              locations?.map((item): IOptions | undefined => {
+                if (item._id === pavilion2) {
+                  return {
+                    label: item.label,
+                    value: item._id,
+                  };
+                }
+                return undefined;
+              })[0] ?? undefined
+            }
           />
           <Select
             label="Laboratório"
-            name="laboratory"
+            name="laboratory2"
+            disabled={laboratory.length === 0}
             options={laboratory.map((item) => {
               return {
                 value: item._id,
-                label: `${item.label} - ${item.pavilion.label}`,
+                label: item.label,
               };
             })}
           />
@@ -308,7 +417,10 @@ export function Booking(): JSX.Element {
               navigate("/reservas");
             }}
           />
-          <Button label="Salvar" color="primary" type="submit" />
+          {/* <Button label="Salvar" color="primary" type="submit" /> */}
+          <Tooltip label="Necessário integrar" position="right">
+            <Button label="Salvar" color="primary" disabled />
+          </Tooltip>
         </ButtonWrapper>
       </Form>
     </Content>
@@ -326,8 +438,8 @@ export function Booking(): JSX.Element {
         </SubTitle>
       </Header>
       <Tabs
-        headers={["Reserva Única"]}
-        items={[uniqueReservation]}
+        headers={["Reserva Única", "Reserva Semestral (Aulas)"]}
+        items={[uniqueReservation, semestralReservation]}
         defaultTab={0}
       />
     </Wrapper>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import { paginationLimit } from "global/constants";
 import { Icons } from "global/icons.constants";
 import { toast } from "react-toastify";
 import { locationService } from "service/location/location.service";
@@ -21,7 +22,7 @@ export function Locations(): IUseLocations {
   const [page, setPage] = useState<IPagination>({
     page: 1,
     totalPages: 1,
-    limit: 2,
+    limit: paginationLimit,
   });
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { toggleModal: toggleLocation, isVisible: isVisibleLocation } =
@@ -40,7 +41,7 @@ export function Locations(): IUseLocations {
     setPage({
       page: page.page,
       totalPages: lastPage,
-      limit: 2,
+      limit: paginationLimit,
     });
     setIsLoading(false);
   };
@@ -91,7 +92,7 @@ export function Locations(): IUseLocations {
             } else {
               await getLocations({
                 page: 1,
-                limit: 2,
+                limit: paginationLimit,
                 totalPages: 1,
               });
             }

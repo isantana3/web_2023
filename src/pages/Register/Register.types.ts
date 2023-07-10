@@ -1,10 +1,5 @@
-export interface IStepOneFormData extends Pick<IFormData, "email"> {}
+import { type IUser } from "global/user.types";
 
-export interface IStepTwoFormData extends Omit<IFormData, "email"> {}
+export interface IStepOneFormData extends Pick<IUser, "email"> {}
 
-export interface IFormData {
-  email: string;
-  name: string;
-  registration: string;
-  office: string;
-}
+export interface IStepTwoFormData extends Omit<IUser, "email"> {}

@@ -13,12 +13,20 @@ export const api = axios.create({
   },
 });
 
+function logout(): void {
+  localStorage.setItem("token", "");
+  localStorage.setItem("userData", "");
+  window.location.replace(window.location.origin);
+}
+
 api.interceptors.request.use(async (config) => {
   const token = localStorage.getItem("token");
 
   if (token) {
     if (helpers.validToken()) {
       config.headers.Authorization = `Bearer ${token}`;
+    } else {
+      logout();
     }
   }
   return config;

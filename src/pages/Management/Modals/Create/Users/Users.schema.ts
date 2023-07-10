@@ -20,5 +20,4 @@ export const UsersSchema = yup.object().shape({
     .required("Este campo é obrigatório."),
   registration: yup.string().required("Este campo é obrigatório"),
   office: yup.string().required("Este campo é obrigatório"),
-  password: yup.string().required("Este campo é obrigatório"),
 });

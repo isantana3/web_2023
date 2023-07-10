@@ -6,6 +6,7 @@ import { useLanguage } from "store/slices/lang/useLang";
 import { Button } from "components/Button";
 import { Form } from "components/Form/Form";
 import { Input } from "components/Form/Input";
+import { UserTypeSelect } from "components/UserType/UserType.component";
 
 import { AdminSchema } from "./Admin.schema";
 
@@ -80,13 +81,7 @@ export function Admin(): JSX.Element {
               defaultValue={user.registration.toString()}
               width={90}
             />
-            <Input
-              label="Cargo"
-              type="text"
-              name="office"
-              placeholder="Professor"
-              defaultValue={user.office}
-            />
+            <UserTypeSelect defaultValue={user.office} />
           </InputRow>
           <Footer>
             <Button color="warning" label={"Cancelar"} />

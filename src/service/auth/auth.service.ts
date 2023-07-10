@@ -3,11 +3,11 @@ import { api } from "service/server";
 import {
   type IAuthLogin,
   type IAuthUser,
-  type ICreateAccount,
   type IForgotPassword,
   type IForgotPasswordResponse,
   type INewAccess,
 } from "global/auth.types";
+import { type IUser } from "global/user.types";
 import { type IDefaultResponse } from "service/server.types";
 
 export const authService = {
@@ -37,13 +37,8 @@ export const authService = {
     };
   },
 
-  createAccount: async (
-    user: ICreateAccount
-  ): Promise<IDefaultResponse<ICreateAccount>> => {
-    const {
-      status,
-      data: { data },
-    } = await api.post("/authentications", user);
+  createAccount: async (user: IUser): Promise<IDefaultResponse<IUser>> => {
+    const { status, data } = await api.post("/authentications", user);
 
     return {
       status,

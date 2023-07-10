@@ -50,7 +50,7 @@ export function Bookings(): JSX.Element {
   //     data: { data },
   //   } = await laboratoryService.getLaboratories({
   //     page,
-  //     limit: 2,
+  //     limit: paginationLimit,
   //   });
   //   setLaboratories(data);
   //   setIsLoading(false);
