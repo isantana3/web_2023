@@ -46,3 +46,9 @@ O SGL também conta com uma interface de usuário amigável que se encontra em o
   - Melhoria na cobertura dos testes unitários
   - Acrescentar filtros na parte de gestão
   - Melhorar o feedback dos erros das requests
+
+# Deploy
+
+ - URL : https://master.d2rj730dup0i6g.amplifyapp.com/
+ - Usuário de teste : serra.henrique3@uesc.br
+ - senha: 12345678
