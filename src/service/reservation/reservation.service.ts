@@ -22,7 +22,7 @@ export const reservationService = {
     const {
       status,
       data: { data },
-    } = await api.get(`/reservations?id=${id}`, {
+    } = await api.get(`/reservations?responsible=${id}`, {
       params: { page, limit },
     });
     return {
