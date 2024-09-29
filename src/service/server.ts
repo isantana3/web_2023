@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { helpers } from "utils/helpers";
 
 export const api = axios.create({
-  baseURL: "https://sgl-uesc-backend.onrender.com:3333/api/v1",
+  baseURL: "https://sgl-uesc-backend.onrender.com/api/v1",
   // baseURL: "http://localhost:3333/api/v1",
   timeout: 5000,
   headers: {
