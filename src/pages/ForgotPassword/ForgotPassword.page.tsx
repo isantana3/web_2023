@@ -34,6 +34,7 @@ export function ForgotPassword(): JSX.Element {
     } catch (error) {
       console.error(error);
     }
+    navigate("/");
   }
 
   return (

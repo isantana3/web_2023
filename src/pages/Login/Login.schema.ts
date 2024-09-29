@@ -16,5 +16,5 @@ export const LoginSchema = yup.object().shape({
     .string()
     .email("Email deve ser institucional.")
     .required("Este campo é obrigatório."),
-  password: yup.string().min(8).max(10).required("Este campo é obrigatório"),
+  password: yup.string().min(8).max(100).required("Este campo é obrigatório"),
 });
