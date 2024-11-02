@@ -1,6 +1,5 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-
 import { helpers } from "utils/helpers";
 
 export const api = axios.create({
@@ -14,6 +13,9 @@ export const api = axios.create({
   },
 });
 
+// Adicionando suporte para cookies
+axios.defaults.withCredentials = true; // Isso permite que cookies sejam enviados com as requisições
+
 function logout(): void {
   localStorage.setItem("token", "");
   localStorage.setItem("userData", "");
@@ -21,6 +23,7 @@ function logout(): void {
 }
 
 api.interceptors.request.use(async (config) => {
+  // Obtém o token de autenticação
   const token = localStorage.getItem("token");
 
   if (token) {
@@ -30,10 +33,22 @@ api.interceptors.request.use(async (config) => {
       logout();
     }
   }
+
+  // Obtém o valor do cookie XSRF-TOKEN
+  const csrfToken = document.cookie
+    .split('; ')
+    .find(row => row.startsWith('XSRF-TOKEN='))
+    ?.split('=')[1];
+
+  // Adiciona o token CSRF no cabeçalho da requisição, se existir
+  if (csrfToken) {
+    config.headers['X-XSRF-TOKEN'] = csrfToken;
+  }
+
   return config;
 });
 
-axios.interceptors.response.use(
+api.interceptors.response.use(
   (response) => response,
   async (error) => {
     if (error.code === "ECONNABORTED" && error.message.includes("timeout")) {
