@@ -21,7 +21,7 @@ let csrfToken = ''; // Variável para armazenar o token CSRF
 // Função para obter o token CSRF
 async function fetchCsrfToken() {
   try {
-    const response = await axios.get("https://sgl-uesc-backend.onrender.com/api/v1/get-csrf-token", { withCredentials: true });
+    const response = await axios.get("https://sgl-uesc-backend.onrender.com/api/v1/authentications/csrf-token", { withCredentials: true });
     csrfToken = response.data.csrfToken; // Armazenar o token CSRF
   } catch (error) {
     console.error("Erro ao obter o token CSRF", error);
