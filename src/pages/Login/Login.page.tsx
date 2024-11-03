@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { authService } from "service/auth/auth.service";
 import { useAuth } from "store/slices/auth/useAuth";
@@ -21,23 +20,6 @@ import { SmallText } from "pages/ForgotPassword/ForgotPassword.styles";
 export function Login(): JSX.Element {
   const navigate = useNavigate();
   const { authenticate } = useAuth();
-
-  // Função para obter o CSRF token
-  const fetchCsrfToken = async () => {
-    try {
-      const response = await authService.getCsrfToken(); // Assumindo que você tem um método para obter o CSRF token
-      const { csrfToken } = response.data;
-      // Armazenar o CSRF token em um cookie
-      document.cookie = `XSRF-TOKEN=${csrfToken}; path=/;`;
-    } catch (error) {
-      console.error("Erro ao obter CSRF token:", error);
-    }
-  };
-
-  // UseEffect para obter o CSRF token ao carregar o componente
-  useEffect(() => {
-    fetchCsrfToken();
-  }, []);
 
   async function handleSubmit(userLogin: IAuthLogin): Promise<void> {
     const { data } = await authService.login(userLogin);
