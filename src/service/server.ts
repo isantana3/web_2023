@@ -68,7 +68,7 @@ api.interceptors.request.use(async (config) => {
     config.headers['XSRF-TOKEN'] = csrfToken; // O cabeçalho pode variar dependendo da configuração do backend
   }
   else{
-    config.headers['XSRF-TOKEN'] = 'csrf token não foi salvo'; // O cabeçalho pode variar dependendo da configuração do backend
+    config.headers['XSRF-TOKEN'] = testcsrfToken; // O cabeçalho pode variar dependendo da configuração do backend
   }
 
   return config;
