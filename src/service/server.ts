@@ -16,6 +16,25 @@ export const api = axios.create({
 // Adicionando suporte para cookies
 axios.defaults.withCredentials = true; // Isso permite que cookies sejam enviados com as requisições
 
+let csrfToken = ''; // Variável para armazenar o token CSRF
+
+// Função para obter o token CSRF
+async function fetchCsrfToken() {
+  try {
+    const response = await axios.get("https://sgl-uesc-backend.onrender.com/api/v1/get-csrf-token", { withCredentials: true });
+    csrfToken = response.data.csrfToken; // Armazenar o token CSRF
+  } catch (error) {
+    console.error("Erro ao obter o token CSRF", error);
+  }
+}
+
+// Inicializar a aplicação e obter o token CSRF após o login ou no carregamento
+async function initialize() {
+  await fetchCsrfToken(); // Chame essa função após o login ou no carregamento
+}
+
+initialize();
+
 function logout(): void {
   localStorage.setItem("token", "");
   localStorage.setItem("userData", "");
@@ -23,7 +42,6 @@ function logout(): void {
 }
 
 api.interceptors.request.use(async (config) => {
-  // Obtém o token de autenticação
   const token = localStorage.getItem("token");
 
   if (token) {
@@ -34,21 +52,15 @@ api.interceptors.request.use(async (config) => {
     }
   }
 
-  // Obtém o valor do cookie XSRF-TOKEN
-  const csrfToken = document.cookie
-    .split('; ')
-    .find(row => row.startsWith('XSRF-TOKEN='))
-    ?.split('=')[1];
-
-  // Adiciona o token CSRF no cabeçalho da requisição, se existir
+  // Adicionando o token CSRF nos cabeçalhos das requisições
   if (csrfToken) {
-    config.headers['X-XSRF-TOKEN'] = csrfToken;
+    config.headers['X-CSRFToken'] = csrfToken; // O cabeçalho pode variar dependendo da configuração do backend
   }
 
   return config;
 });
 
-api.interceptors.response.use(
+axios.interceptors.response.use(
   (response) => response,
   async (error) => {
     if (error.code === "ECONNABORTED" && error.message.includes("timeout")) {
