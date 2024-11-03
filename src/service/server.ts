@@ -41,6 +41,13 @@ function logout(): void {
   window.location.replace(window.location.origin);
 }
 
+function getCsrfTokenFromCookies() {
+  const csrfCookie = document.cookie
+    .split('; ')
+    .find((row) => row.startsWith('XSRF-TOKEN='));
+  return csrfCookie ? csrfCookie.split('=')[1] : '';
+}
+
 api.interceptors.request.use(async (config) => {
   const token = localStorage.getItem("token");
 
@@ -51,6 +58,9 @@ api.interceptors.request.use(async (config) => {
       logout();
     }
   }
+
+  
+  csrfToken = getCsrfTokenFromCookies();
 
   // Adicionando o token CSRF nos cabeçalhos das requisições
   if (csrfToken) {

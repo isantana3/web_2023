@@ -60,9 +60,4 @@ export const authService = {
     };
   },
 
-  // Novo método para obter o CSRF token
-  getCsrfToken: async (): Promise<IDefaultResponse<{ csrfToken: string }>> => {
-    const response = await api.get("/authentications/csrf-token"); // Ajuste a URL conforme necessário
-    return response;
-  },
 };
