@@ -16,37 +16,21 @@ export const api = axios.create({
 axios.defaults.withCredentials = true; // Isso permite que cookies sejam enviados com as requisições
 
 let csrfToken = ''; // Variável para armazenar o token CSRF
-let testcsrfToken = ''; // Variável para armazenar o token CSRF
+
 // Função para obter o token CSRF
 async function fetchCsrfToken() {
   try {
     const response = await axios.get("https://sgl-uesc-backend.onrender.com/api/v1/authentications/csrf-token", { withCredentials: true });
-    // armazena o token nos cookies
-    // document.cookie = `XSRF-TOKEN=${response.data.csrfToken}; path=/; samesite=strict`;
-    testcsrfToken = response.data.csrfToken; // Armazenar o token CSRF
+    csrfToken = response.data.csrfToken; // Armazenar o token CSRF
   } catch (error) {
     console.error("Erro ao obter o token CSRF", error);
   }
 }
 
-// Inicializar a aplicação e obter o token CSRF após o login ou no carregamento
-async function initialize() {
-  await fetchCsrfToken(); // Chame essa função após o login ou no carregamento
-}
-
-initialize();
-
-function logout(): void {
-  localStorage.setItem("token", "");
-  localStorage.setItem("userData", "");
-  window.location.replace(window.location.origin);
-}
-
-function getCsrfTokenFromCookies() {
-  const csrfCookie = document.cookie
-    .split('; ')
-    .find((row) => row.startsWith('XSRF-TOKEN='));
-  return csrfCookie ? csrfCookie.split('=')[1] : '';
+// Função para obter e adicionar o token CSRF a cada requisição
+async function getAndSetCsrfToken(config: any) {
+  await fetchCsrfToken(); // Pede um novo token CSRF
+  config.headers['XSRF-TOKEN'] = csrfToken; // Adiciona o novo token ao cabeçalho da requisição
 }
 
 api.interceptors.request.use(async (config) => {
@@ -60,16 +44,8 @@ api.interceptors.request.use(async (config) => {
     }
   }
 
-  
-  csrfToken = getCsrfTokenFromCookies();
-
-  // Adicionando o token CSRF nos cabeçalhos das requisições
-  if (csrfToken) {
-    config.headers['XSRF-TOKEN'] = csrfToken; // O cabeçalho pode variar dependendo da configuração do backend
-  }
-  else{
-    config.headers['XSRF-TOKEN'] = testcsrfToken; // O cabeçalho pode variar dependendo da configuração do backend
-  }
+  // Obtenha e adicione o token CSRF antes de prosseguir com a requisição
+  await getAndSetCsrfToken(config);
 
   return config;
 });
@@ -83,3 +59,10 @@ axios.interceptors.response.use(
     return await Promise.reject(error);
   }
 );
+
+function logout(): void {
+  localStorage.setItem("token", "");
+  localStorage.setItem("userData", "");
+  window.location.replace(window.location.origin);
+}
+
