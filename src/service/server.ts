@@ -54,7 +54,7 @@ api.interceptors.request.use(async (config) => {
 
   // Adicionando o token CSRF nos cabeçalhos das requisições
   if (csrfToken) {
-    config.headers['X-CSRFToken'] = csrfToken; // O cabeçalho pode variar dependendo da configuração do backend
+    config.headers['XSRF-TOKEN'] = csrfToken; // O cabeçalho pode variar dependendo da configuração do backend
   }
 
   return config;
