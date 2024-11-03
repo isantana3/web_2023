@@ -7,7 +7,6 @@ export const api = axios.create({
   // baseURL: "http://localhost:3333/api/v1",
   timeout: 5000,
   headers: {
-    "Access-Control-Allow-Origin": "*",
     Accept: "application/json",
     "Content-Type": "application/json",
   },
@@ -22,7 +21,8 @@ let csrfToken = ''; // Variável para armazenar o token CSRF
 async function fetchCsrfToken() {
   try {
     const response = await axios.get("https://sgl-uesc-backend.onrender.com/api/v1/authentications/csrf-token", { withCredentials: true });
-    csrfToken = response.data.csrfToken; // Armazenar o token CSRF
+    // armazena o token nos cookies
+    document.cookie = `XSRF-TOKEN=${response.data.csrfToken}; path=/; samesite=strict`;
   } catch (error) {
     console.error("Erro ao obter o token CSRF", error);
   }
