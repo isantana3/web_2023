@@ -41,9 +41,10 @@ api.interceptors.request.use(async (config) => {
   }
 
   // Garante que o token CSRF esteja disponível antes de prosseguir
-  await fetchCsrfTokenIfNeeded();
-  config.headers['Xsrf-Token'] = csrfToken;
-
+  if (!csrfToken) {
+    await fetchCsrfTokenIfNeeded();  // Obtém o token CSRF, se ainda não estiver carregado
+  }
+  config.headers['Xsrf-Token'] = csrfToken;  // Adiciona o token CSRF ao cabeçalho
   return config;
 });
 
