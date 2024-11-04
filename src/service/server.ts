@@ -57,10 +57,8 @@ api.interceptors.request.use(async (config) => {
   await fetchCsrfTokenIfNeeded(); // Obtém os tokens CSRF, se ainda não estiverem carregados
 
   // Adiciona os tokens CSRF aos headers
-  if (csrfToken && csrf) { // Somente adiciona os cookies se estiverem definidos
-    config.headers["Xsrf-Token"] = csrfToken;
-    config.headers["Cookie"] = `Xsrf-Token=${csrfToken}; _csrf=${csrf}`;
-  }
+  config.headers["Xsrf-Token"] = csrfToken;
+  config.headers["Cookie"] = `Xsrf-Token=${csrfToken}; _csrf=${csrf}`;
 
   return config;
 });
