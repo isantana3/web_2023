@@ -31,15 +31,15 @@ async function fetchCsrfTokenIfNeeded() {
           csrf = csrfCookie.split(";")[0].split("=")[1];
         }
         else {
-          csrf = "";
+          csrf = "teste";
         }
       }
       else{
-        csrf = "";
+        csrf = "teste";
       }
     } catch (error) {
       csrfToken = "";
-      csrf = "";
+      csrf = "teste";
       console.error("Erro ao obter o token CSRF", error);
     }
   }
