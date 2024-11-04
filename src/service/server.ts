@@ -30,7 +30,7 @@ async function fetchCsrfToken() {
 // Função para obter e adicionar o token CSRF a cada requisição
 async function getAndSetCsrfToken(config: any) {
   await fetchCsrfToken(); // Pede um novo token CSRF
-  config.headers['XSRF-TOKEN'] = csrfToken; // Adiciona o novo token ao cabeçalho da requisição
+  config.headers['Xsrf-Token'] = csrfToken; // Adiciona o novo token ao cabeçalho da requisição
 }
 
 api.interceptors.request.use(async (config) => {
