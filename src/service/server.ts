@@ -12,16 +12,25 @@ export const api = axios.create({
 });
 
 // Habilita envio de cookies nas requisições
-axios.defaults.withCredentials = true;
+api.defaults.withCredentials = true;
 
-let csrfToken = ''; // Armazena o token CSRF
+let csrfToken = ""; // Armazena o token Xsrf-Token
+let csrf = ""; // Armazena o token _csrf
 
-// Função para buscar o token CSRF se não estiver armazenado
+// Função para buscar o token CSRF
 async function fetchCsrfTokenIfNeeded() {
-  if (!csrfToken) {
+  if (!csrfToken || !csrf) {
     try {
-      const response = await axios.get("https://sgl-uesc-backend.onrender.com/api/v1/authentications/csrf-token", { withCredentials: true });
-      csrfToken = response.data.csrfToken; // Armazena o token CSRF
+      const response = await api.get("/authentications/csrf-token", { withCredentials: true });
+      csrfToken = response.data.csrfToken; // Armazena o Xsrf-Token vindo do JSON
+      // Extrai o _csrf token do header Set-Cookie
+      const cookies = response.headers["set-cookie"];
+      if (cookies) {
+        const csrfCookie = cookies.find(cookie => cookie.startsWith("_csrf"));
+        if (csrfCookie) {
+          csrf = csrfCookie.split(";")[0].split("=")[1];
+        }
+      }
     } catch (error) {
       console.error("Erro ao obter o token CSRF", error);
     }
@@ -41,15 +50,19 @@ api.interceptors.request.use(async (config) => {
   }
 
   // Garante que o token CSRF esteja disponível antes de prosseguir
-  if (!csrfToken) {
-    await fetchCsrfTokenIfNeeded();  // Obtém o token CSRF, se ainda não estiver carregado
+  if (!csrfToken || !csrf) {
+    await fetchCsrfTokenIfNeeded(); // Obtém os tokens CSRF, se ainda não estiverem carregados
   }
-  config.headers['Xsrf-Token'] = csrfToken;  // Adiciona o token CSRF ao cabeçalho
+
+  // Adiciona os tokens CSRF aos headers
+  config.headers["Xsrf-Token"] = csrfToken;
+  config.headers["Cookie"] = `Xsrf-Token=${csrfToken}; _csrf=${csrf}`;
+
   return config;
 });
 
 // Interceptor de resposta para lidar com erros
-axios.interceptors.response.use(
+api.interceptors.response.use(
   (response) => response,
   async (error) => {
     if (error.code === "ECONNABORTED" && error.message.includes("timeout")) {
@@ -57,7 +70,9 @@ axios.interceptors.response.use(
     }
     // Caso o erro seja por token CSRF inválido, tentar buscar um novo token
     if (error.response && error.response.status === 403 && error.response.data.message === "invalid csrf token") {
-      csrfToken = ''; // Limpa o token CSRF para buscar novamente na próxima requisição
+      csrfToken = ""; // Limpa o token CSRF para buscar novamente na próxima requisição
+      csrf = "";
+      await fetchCsrfTokenIfNeeded(); // Atualiza o token CSRF
     }
     return Promise.reject(error);
   }
