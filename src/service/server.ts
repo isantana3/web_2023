@@ -30,16 +30,8 @@ async function fetchCsrfTokenIfNeeded() {
         if (csrfCookie) {
           csrf = csrfCookie.split(";")[0].split("=")[1];
         }
-        else {
-          csrf = "teste";
-        }
-      }
-      else{
-        csrf = "teste";
       }
     } catch (error) {
-      csrfToken = "";
-      csrf = "teste";
       console.error("Erro ao obter o token CSRF", error);
     }
   }
@@ -58,7 +50,7 @@ api.interceptors.request.use(async (config) => {
   }
 
   // Garante que o token CSRF esteja disponível antes de prosseguir
-  if (!csrfToken || !csrf) {
+  if (!csrfToken) {
     await fetchCsrfTokenIfNeeded(); // Obtém os tokens CSRF, se ainda não estiverem carregados
   }
 
