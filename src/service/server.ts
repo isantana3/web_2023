@@ -19,9 +19,9 @@ let csrf = ""; // Armazena o token _csrf
 
 // Função para buscar o token CSRF
 async function fetchCsrfTokenIfNeeded() {
-  if (!csrfToken || !csrf) {
+  if (!csrfToken) {
     try {
-      const response = await api.get("/authentications/csrf-token", { withCredentials: true });
+      const response = await api.get("https://sgl-uesc-backend.onrender.com/api/v1/authentications/csrf-token", { withCredentials: true });
       csrfToken = response.data.csrfToken; // Armazena o Xsrf-Token vindo do JSON
       // Extrai o _csrf token do header Set-Cookie
       const cookies = response.headers["set-cookie"];
@@ -49,10 +49,7 @@ api.interceptors.request.use(async (config) => {
     }
   }
 
-  // Garante que o token CSRF esteja disponível antes de prosseguir
-  if (!csrfToken) {
-    await fetchCsrfTokenIfNeeded(); // Obtém os tokens CSRF, se ainda não estiverem carregados
-  }
+  await fetchCsrfTokenIfNeeded(); // Obtém os tokens CSRF, se ainda não estiverem carregados
 
   // Adiciona os tokens CSRF aos headers
   config.headers["Xsrf-Token"] = csrfToken;
