@@ -20,24 +20,24 @@ let isFetchingCsrfToken = false; // Controla o estado da requisição de token C
 
 // Função para buscar o token CSRF
 async function fetchCsrfTokenIfNeeded() {
-  if (!csrfToken && !isFetchingCsrfToken) { // Adiciona controle para evitar chamadas simultâneas
-    isFetchingCsrfToken = true; // Marca o início da busca
+  if (!csrfToken && !isFetchingCsrfToken) { // Evita chamadas simultâneas
+    isFetchingCsrfToken = true;
     try {
       const response = await api.get("/authentications/csrf-token", { withCredentials: true });
       csrfToken = response.data.csrfToken; // Armazena o Xsrf-Token vindo do JSON
-      
+
       // Extrai o _csrf token do header Set-Cookie
       const cookies = response.headers["set-cookie"];
       if (cookies) {
-        const csrfCookie = cookies.find(cookie => cookie.startsWith("_csrf"));
+        const csrfCookie = cookies.find(cookie => cookie.startsWith("_csrf="));
         if (csrfCookie) {
-          csrf = csrfCookie.split(";")[0].split("=")[1];
+          csrf = csrfCookie.split(";")[0].split("=")[1]; // Extrai o valor do _csrf
         }
       }
     } catch (error) {
       console.error("Erro ao obter o token CSRF", error);
     } finally {
-      isFetchingCsrfToken = false; // Marca o término da busca
+      isFetchingCsrfToken = false;
     }
   }
 }
@@ -69,17 +69,29 @@ api.interceptors.request.use(async (config) => {
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
+    const originalRequest = error.config;
+
     if (error.code === "ECONNABORTED" && error.message.includes("timeout")) {
       toast.error("Sistema indisponível");
     }
-    // Caso o erro seja por token CSRF inválido, tentar buscar um novo token
-    if (error.response && error.response.status === 403 && error.response.data.message === "invalid csrf token") {
+
+    // Limita a atualização do token CSRF a uma única vez por requisição
+    if (
+      error.response &&
+      error.response.status === 403 &&
+      error.response.data.message === "invalid csrf token" &&
+      !originalRequest._retry
+    ) {
+      originalRequest._retry = true; // Marca a requisição como já tentada uma vez
+
       csrfToken = ""; // Limpa o token CSRF para buscar novamente na próxima requisição
       csrf = "";
       await fetchCsrfTokenIfNeeded(); // Atualiza o token CSRF
-      // Tenta refazer a requisição original com o novo token
-      return api.request(error.config);
+
+      // Refaz a requisição original com o novo token
+      return api.request(originalRequest);
     }
+
     return Promise.reject(error);
   }
 );
