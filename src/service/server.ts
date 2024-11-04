@@ -16,13 +16,16 @@ api.defaults.withCredentials = true;
 
 let csrfToken = ""; // Armazena o token Xsrf-Token
 let csrf = ""; // Armazena o token _csrf
+let isFetchingCsrfToken = false; // Controla o estado da requisição de token CSRF
 
 // Função para buscar o token CSRF
 async function fetchCsrfTokenIfNeeded() {
-  if (!csrfToken) {
+  if (!csrfToken && !isFetchingCsrfToken) { // Adiciona controle para evitar chamadas simultâneas
+    isFetchingCsrfToken = true; // Marca o início da busca
     try {
-      const response = await api.get("https://sgl-uesc-backend.onrender.com/api/v1/authentications/csrf-token", { withCredentials: true });
+      const response = await api.get("/authentications/csrf-token", { withCredentials: true });
       csrfToken = response.data.csrfToken; // Armazena o Xsrf-Token vindo do JSON
+      
       // Extrai o _csrf token do header Set-Cookie
       const cookies = response.headers["set-cookie"];
       if (cookies) {
@@ -33,6 +36,8 @@ async function fetchCsrfTokenIfNeeded() {
       }
     } catch (error) {
       console.error("Erro ao obter o token CSRF", error);
+    } finally {
+      isFetchingCsrfToken = false; // Marca o término da busca
     }
   }
 }
@@ -52,8 +57,10 @@ api.interceptors.request.use(async (config) => {
   await fetchCsrfTokenIfNeeded(); // Obtém os tokens CSRF, se ainda não estiverem carregados
 
   // Adiciona os tokens CSRF aos headers
-  config.headers["Xsrf-Token"] = csrfToken;
-  config.headers["Cookie"] = `Xsrf-Token=${csrfToken}; _csrf=${csrf}`;
+  if (csrfToken && csrf) { // Somente adiciona os cookies se estiverem definidos
+    config.headers["Xsrf-Token"] = csrfToken;
+    config.headers["Cookie"] = `Xsrf-Token=${csrfToken}; _csrf=${csrf}`;
+  }
 
   return config;
 });
@@ -70,6 +77,8 @@ api.interceptors.response.use(
       csrfToken = ""; // Limpa o token CSRF para buscar novamente na próxima requisição
       csrf = "";
       await fetchCsrfTokenIfNeeded(); // Atualiza o token CSRF
+      // Tenta refazer a requisição original com o novo token
+      return api.request(error.config);
     }
     return Promise.reject(error);
   }
