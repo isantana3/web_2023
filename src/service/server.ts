@@ -25,15 +25,6 @@ async function fetchCsrfTokenIfNeeded() {
     try {
       const response = await api.get("/authentications/csrf-token", { withCredentials: true });
       csrfToken = response.data.csrfToken; // Armazena o Xsrf-Token vindo do JSON
-
-      // Extrai o _csrf token do header Set-Cookie
-      const cookies = response.headers["set-cookie"];
-      if (cookies) {
-        const csrfCookie = cookies.find(cookie => cookie.startsWith("_csrf="));
-        if (csrfCookie) {
-          csrf = csrfCookie.split(";")[0].split("=")[1]; // Extrai o valor do _csrf
-        }
-      }
     } catch (error) {
       console.error("Erro ao obter o token CSRF", error);
     } finally {
@@ -58,7 +49,6 @@ api.interceptors.request.use(async (config) => {
 
   // Adiciona os tokens CSRF aos headers
   config.headers["Xsrf-Token"] = csrfToken;
-  config.headers["Cookie"] = `Xsrf-Token=${csrfToken}; _csrf=${csrf}`;
 
   return config;
 });
