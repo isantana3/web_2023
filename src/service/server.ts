@@ -20,12 +20,12 @@ api.interceptors.request.use(async (config) => {
 
   if (token) {
     if (helpers.validToken()) {
-      config.headers.Authorization = `Bearer ${token}`;
+      // Certifique-se de que o token não tenha caracteres extras
+      config.headers.Authorization = `Bearer ${token.replace(/"/g, '')}`;
     } else {
       logout();
     }
   }
-
   const csrfToken = document.cookie
   .split('; ')
   .find((row) => row.startsWith('XSRF-TOKEN='))
